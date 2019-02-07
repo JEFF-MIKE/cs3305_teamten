@@ -6,12 +6,23 @@
 .navbar-custom .navbar-text {
     color: rgba(255,255,255,.8);
 }
-/* change the link color */
+/* To change the link colour. */
 .navbar-custom .navbar-nav .nav-link {
     color: rgba(255,255,255,.5);
 }
-/* change the color of active or hovered links */
+/* To change the colour of the hovered links */
 .navbar-custom .nav-item.active .nav-link,
 .navbar-custom .nav-item:hover .nav-link {
     color: #ffffff;
+}
+
+/* To add texture to the header. */
+header {
+    background: url(45degreee_fabric.png) repeat 0 0;
+}
+
+/* To stop the paper plane icon 
+ *from moving out of the button's boundaries. */
+.row i { 
+    margin-right: 8px;  
 }

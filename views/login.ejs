@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Login Page</title>
+    <style>
+        p {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <form id="loginform" role="form" method="post" action="/login">
+            <input id="login-username" type="text" name="user_name" value="" placeholder="username"/>                                       
+            <input id="login-password" type="password" name="password" placeholder="password"/>
+            <button id="login-button" type="submit">Login</button>
+        </form>
+        <% if (status.length > 0) { %>
+            <p> <%=status%></p>
+        <% } %>
+    </main>
+</body>
+</html>

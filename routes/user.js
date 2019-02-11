@@ -89,14 +89,15 @@ exports.register=(req,res) =>{
         let mob_noErr="";
         let password=post.password;
         let passwordErr="";
-        let errorFlag=false
-        if (fname.length < 2 && fname.length > 32){
-            fname.err+="First name must have a length between 2 and 32\n";
+        let errorFlag=false;
+        console.log(fname);
+        if (fname.length < 3 || fname.length > 32){
+            fnameErr+="First name must have a length between 2 and 32\n";
             errorFlag = true;
         }
         if (lname.length < 2 && lname.length > 32){
-            lname.err+="Last name must have a length between 2 and 32\n";
-            errorFlag=true;
+            lnameErr+="Last name must have a length between 2 and 32\n";
+            errorFlag = true;
         }
         if(errorFlag === false){
             var sql = "INSERT INTO users(first_name,last_name,mob_no,user_name,password) VALUES ("  + '\'' + fname + "','" +  lname + "','" + mob_no + "','" + username + "','" + password + "')";

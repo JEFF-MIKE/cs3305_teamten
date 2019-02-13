@@ -1,6 +1,32 @@
 /*
 -------------------------- When profile link is clicked, call this. -----------------------
 */
+
+function queryRoles(number){
+    /* A function which takes an input
+    "id" and returns an object containing roles
+    e.g. researcher:"Y"
+         reviewer: "N" etc
+    otherwise object returns null
+    */
+   console.log(number);
+    var returnObject = {};
+    let roleSelect="SELECT * FROM `roles` WHERE `id`='"+number+"'";
+    db.query(roleSelect,(err,result) => {
+        if (result.length){
+            // now make object
+            // shorthand if else: var = condition ? true : false
+            result[0].admin === "YES" ? returnObject.admin = "Y" : returnObject.admin = "N";
+            result[0].researcher === "YES" ? returnObject.researcher = "Y" : returnObject.researcher = "N";
+            result[0].reviewer === "YES" ? returnObject.reviewer = "Y" : returnObject.reviewer = "N";
+            result[0].funder === "YES" ? returnObject.funder = "Y" : returnObject.funder = "N";
+            console.log(returnObject);
+            return returnObject;
+        } else{
+            return null;
+        }
+        });
+}
 exports.profile=(req,res) =>{
     var userID = req.session.userId;
     // user must be logged in to view their own profile.
@@ -13,11 +39,22 @@ exports.profile=(req,res) =>{
         let sql="SELECT first_name, last_name, user_name, mob_no FROM `users` WHERE `id`='"+userID+"'";
         db.query(sql, (err,results) => {      
             if(results.length){
+                // basic results.
                let fname = results[0].first_name;
                let lname = results[0].last_name;
                let user_name = results[0].user_name;
                let mobile = results[0].mob_no;
-               res.render("profile.ejs",{fname:fname,lname:lname,user_name:user_name,mobile:mobile});
+               let roles = queryRoles(req.session.userId);
+               console.log(roles);
+               res.render("profile.ejs", {  fname:fname,
+                                            lname:lname,
+                                            user_name:user_name,
+                                            mobile:mobile,
+                                            researcher:roles.researcher,
+                                            admin: roles.admin,
+                                            reviewer: roles.reviewer,
+                                            funder: roles.funder
+                                        });
             } else {
                 // details could not be retrieved. display error message.
                 let string=encodeURIComponent("2");
@@ -50,18 +87,18 @@ exports.login=(req,res) => {
         db.query(sql, (err,results) => {      
            if(results.length){
               req.session.userId = results[0].id;
+              let x = results[0].id; // need this for the sql query
               req.session.first_name = results[0].first_name;
               req.session.last_name = results[0].last_name;
               console.log(results[0].id);
-              console.log(results[0].first_name);
-              res.redirect("/");
-           }
-           else{
-              status = 'Error! Either your username or password are incorrect';
-              res.render('login.ejs',{status:status});
-           }
-        }); 
-    } else {
+              console.log(results[0].first_name + " Logged in!");
+                res.redirect("/");
+              }
+              else{
+                status = 'Error! Either your username or password are incorrect';
+                res.render('login.ejs',{status:status});
+             }
+    });} else {
         // it's a get. Render normally
         res.render("login.ejs",{status:status});
     }

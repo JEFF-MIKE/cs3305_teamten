@@ -3,6 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <title>Profile</title>
+    <style>
+    ul li {
+        color: blue;
+    }</style>
 </head>
 <body>
     <header><h1>Profile Details<h1></header>
@@ -11,6 +15,12 @@
         <h4>First Name: <%= fname%></h4>
         <h4>Last Name: <%= lname%></h4>
         <h4>Mobile Number: <%= mobile%></h4>
+        <ul>
+            <% if(admin==="Y"){%><li>Admin</li><% } %>
+            <% if(researcher==="Y"){%><li>researcher</li><% } %>
+            <% if(funder==="Y"){%><li>funder</li><% } %>
+            <% if(reviewer==="Y"){%><li>reviewer</li><% } %>
+        </ul>
     </main>
     <nav>
         <a href="/">Return to home page</a>

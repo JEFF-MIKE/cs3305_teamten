@@ -1,22 +1,32 @@
 /*
 -------------------------- When profile link is clicked, call this. -----------------------
 */
-
+/*
 function queryRoles(number){
-    /* A function which takes an input
-    "id" and returns an object containing roles
-    e.g. researcher:"Y"
-         reviewer: "N" etc
-    otherwise object returns null
-    */
-   console.log(number);
-    var returnObject = {};
-    let roleSelect="SELECT * FROM `roles` WHERE `id`='"+number+"'";
+    // A function which takes an input
+    // "id" and returns an object containing roles
+    //e.g. researcher:"Y"
+    //     reviewer: "N" etc
+    //otherwise object returns null
+    let roleSelect=`SELECT * FROM roles WHERE id = ${number}`;
     db.query(roleSelect,(err,result) => {
+        console.log(result);
+        let admin = "";
+        let researcher = "";
+        let reviewer = "";
+        let funder = ""; 
+        let returnObject = {};
+        console.log("Entering query function");
         if (result.length){
             // now make object
             // shorthand if else: var = condition ? true : false
-            result[0].admin === "YES" ? returnObject.admin = "Y" : returnObject.admin = "N";
+            //result[0].admin === "YES" ? returnObject.admin = "Y" : returnObject.admin = "N";
+            if (result[0].admin === "YES"){
+                returnObject.admin = "Y";
+            } else {
+                returnObject.admin = "N";
+            }
+            console.log(returnObject.admin);
             result[0].researcher === "YES" ? returnObject.researcher = "Y" : returnObject.researcher = "N";
             result[0].reviewer === "YES" ? returnObject.reviewer = "Y" : returnObject.reviewer = "N";
             result[0].funder === "YES" ? returnObject.funder = "Y" : returnObject.funder = "N";
@@ -27,8 +37,10 @@ function queryRoles(number){
         }
         });
 }
+*/
 exports.profile=(req,res) =>{
     var userID = req.session.userId;
+
     // user must be logged in to view their own profile.
     if (userID === undefined){
         let string = encodeURIComponent('0');
@@ -36,29 +48,56 @@ exports.profile=(req,res) =>{
         return;
     } else{
         // they are logged in, display their profile details.
-        let sql="SELECT first_name, last_name, user_name, mob_no FROM `users` WHERE `id`='"+userID+"'";
-        db.query(sql, (err,results) => {      
-            if(results.length){
-                // basic results.
-               let fname = results[0].first_name;
-               let lname = results[0].last_name;
-               let user_name = results[0].user_name;
-               let mobile = results[0].mob_no;
-               let roles = queryRoles(req.session.userId);
-               console.log(roles);
-               res.render("profile.ejs", {  fname:fname,
-                                            lname:lname,
-                                            user_name:user_name,
-                                            mobile:mobile,
-                                            researcher:roles.researcher,
-                                            admin: roles.admin,
-                                            reviewer: roles.reviewer,
-                                            funder: roles.funder
-                                        });
+        // first, escape with array, sub with question marks
+        console.log("ID is " + typeof(userID));
+        var sql="SELECT first_name, last_name, user_name, mob_no FROM users WHERE id=?;SELECT * FROM roles WHERE id=?;"
+        db.query(sql,[userID,userID], (err,results) => {
+            // declare variables and return inside this function
+            let errorFlag = false;
+            let fname = "";
+            let lname = "";
+            let user_name = "";
+            let mobile = "";
+            let admin = "";
+            let researcher = "";
+            let reviewer = "";
+            let funder = "";
+            if (err) throw err;     
+            if(results[0].length){
+                // grabs data from users table
+               console.log(results[0][0].first_name); 
+               fname = results[0][0].first_name;
+               lname = results[0][0].last_name;
+               user_name = results[0][0].user_name;
+               mobile = results[0][0].mob_no;
+               console.log(mobile + "In scope");
             } else {
-                // details could not be retrieved. display error message.
-                let string=encodeURIComponent("2");
-                res.redirect("/?errorStatus" + string);
+                errorFlag = true;
+            }
+            if (results[1].length){
+                // grabs data from roles table
+                console.log(results[1][0].researcher);
+                results[1][0].researcher === "YES" ? researcher = "Y" : researcher = "N";
+                results[1][0].reviewer === "YES" ? reviewer = "Y" : reviewer = "N";
+                results[1][0].funder === "YES" ? funder = "Y" : funder = "N";
+                results[1][0].admin === "YES" ? admin = "Y" : admin = "N";
+            } else {
+                errorFlag = true;
+            }
+        if (errorFlag === false) {
+            console.log(mobile + "Out of scope: this is mobile number out of scope");
+            res.render("profile.ejs",{ 
+                                    fname: fname,
+                                    lname: lname,
+                                    user_name: user_name,
+                                    mobile: mobile,
+                                    admin: admin,
+                                    researcher: researcher,
+                                    reviewer: reviewer,
+                                    funder: funder });
+        } else {
+            let string = encodeURIComponent('2');
+            res.redirect("/?errorStatus=" + string);
             }
         });
     }

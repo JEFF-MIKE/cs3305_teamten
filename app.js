@@ -15,7 +15,8 @@ var connection = mysql.createConnection({
     host     : 'mysql.netsoc.co',
     user     : 'mj',
     password : 'JCDQcTNBknX',
-    database : 'mj_a_klaas_database'
+    database : 'mj_a_klaas_database',
+    multipleStatements: true
   });
 
   connection.connect((err) => {

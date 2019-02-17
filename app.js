@@ -3,12 +3,14 @@ var express = require('express'),
     routes = require('./routes'),
     http = require('http'),
     user = require('./routes/user'),
+    upload = require('./routes/upload'),
     path = require('path');
 
 var session = require('express-session') // cookie handler
 var app = express(); // initialise express object.
 var mysql = require("mysql"); // sql library
 var bodyParser = require("body-parser");
+var fileUpload = require('express-fileupload');
 
 // my personal database connection.
 var connection = mysql.createConnection({
@@ -35,10 +37,10 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: false })); // I actually have no idea what this does.
 app.use(bodyParser.json()); // json datatype.
-
 // I really don't know what body parser does.
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(fileUpload()); // creates object from import.
 
 // session stuff
 app.use(express.static(path.join(__dirname, 'public')));
@@ -61,4 +63,6 @@ app.post('/register',user.register);
 
 app.get('/logout',user.logout);
 
+app.get("/submission",upload.uploadFile);
+app.post("/submission",upload.uploadFile);
 app.listen('3001');

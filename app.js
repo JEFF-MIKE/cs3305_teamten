@@ -42,8 +42,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(fileUpload()); // creates object from import.
 
-// session stuff
-app.use(express.static(path.join(__dirname, 'public')));
+// express.static is used for frontend css and javascript
+app.use('/public',express.static(path.join(__dirname, 'public')));
 app.use(session({
               secret: 'keyboard cat',
               resave: false,

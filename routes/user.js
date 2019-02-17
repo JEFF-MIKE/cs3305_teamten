@@ -120,15 +120,17 @@ exports.login=(req,res) => {
         // get the body
         let post  = req.body;
         // grab form data
-        let name= post.user_name;
+        let email= post.email;
         let pass= post.password;
-        let sql="SELECT id, first_name, last_name, user_name FROM `users` WHERE `user_name`='"+name+"' and password = '"+pass+"'";                           
-        db.query(sql, (err,results) => {      
+        let sql="SELECT id, first_name, last_name, user_name FROM `users` WHERE `email`=? and password = ?;";                           
+        db.query(sql, [email,pass],(err,results) => {      
            if(results.length){
-              req.session.userId = results[0].id;
+              req.session.userId = results[0].id; // set their userID here.
               let x = results[0].id; // need this for the sql query
+              //session data used for cosmetic stuff.
               req.session.first_name = results[0].first_name;
               req.session.last_name = results[0].last_name;
+              req.session.user_name= results[0].user_name
               console.log(results[0].id);
               console.log(results[0].first_name + " Logged in!");
                 res.redirect("/");
@@ -152,20 +154,32 @@ exports.register=(req,res) =>{
         res.redirect("/?errorStatus="+string);
         return;
     }
-    let status = "";
+    let username="";
+    let email="";
+    let fname="";
+    let lname="";
+    let mob_no="";
+    let generalErr = "";
+    let fnameErr = "";
+    let lnameErr="";
+    let usernameError="";
+    let emailError = "";
+    let passwordErr="";
+    let mob_noErr = "";
     if (req.method=="POST"){
         let post = req.body;
-        let username = post.user_name;
-        let usernameError = "";
-        let fname=post.fname;
-        let fnameErr="";
-        let lname=post.lname;
-        let lnameErr="";
-        let mob_no=post.mobile;
-        let mob_noErr="";
+        // each variable will need to be checked before added to the database.
+        username = post.user_name;
+        email = post.email;
+        fname=post.fname;
+        lname=post.lname;
+        mob_no=post.mobile;
+        // declare password for this if block.
         let password=post.password;
+        let otherPassword=post.otherPassword;
         let passwordErr="";
         let errorFlag=false;
+        let regexp = new RegExp("[0-9+]");
         console.log(fname);
         if (fname.length < 3 || fname.length > 32){
             fnameErr+="First name must have a length between 2 and 32\n";
@@ -175,9 +189,17 @@ exports.register=(req,res) =>{
             lnameErr+="Last name must have a length between 2 and 32\n";
             errorFlag = true;
         }
+        if (regexp.test(mob_no) === false){
+            mob_noErr += "Please only enter digits for phone number\n";
+            errorFlag = true;
+        }
+        if (password != otherPassword){
+            passwordErr += "Your passwords did not match, please re-enter them!\n";
+            errorFlag = true;
+        }
         if(errorFlag === false){
-            var sql = "INSERT INTO users(first_name,last_name,mob_no,user_name,password) VALUES ("  + '\'' + fname + "','" +  lname + "','" + mob_no + "','" + username + "','" + password + "')";
-            var query = db.query(sql,(err, result) => {
+            var sql = "INSERT INTO users(first_name,last_name,email,mob_no,user_name,password) VALUES (?,?,?,?,?,?)";
+            var query = db.query(sql,[fname,lname,email,mob_no,username,password],(err, result) => {
                if (err) throw err;
                message = "Your account has been created! Please login now." ;
                var string =encodeURIComponent('1');
@@ -185,29 +207,36 @@ exports.register=(req,res) =>{
                return;
             });
         } else{
-            status="Error! You appear to have mistyped something in.";
-            res.render("register.ejs",{status:status,
-                                       user_name:username,
-                                       fname: fname,
-                                       lname: lname,
-                                       mob_no: mob_no,
-                                       fnameErr:fnameErr});
+            generalErr="Errors detected!";
+            res.render("register.ejs",{ generalErr:generalErr,
+                                        user_name:username,
+                                        fname: fname,
+                                        lname: lname,
+                                        email: email,
+                                        mob_no: mob_no,
+                                        fnameErr:fnameErr,
+                                        lnameErr:lnameErr,
+                                        usernameError:usernameError,
+                                        emailError:emailError,
+                                        passwordErr:passwordErr,
+                                        mob_noErr: mob_noErr
+                                    });
         }
     } else {
         // it's a Get. Render normally.
-        let fname="";
-        let lname="";
-        let mob_no="";
-        let username="";
-        let fnameErr = "";
-        status = "Please enter in your details below...";
-        res.render("register.ejs",{ status:status, 
-                                    user_name: username, 
-                                    fname:fname, 
-                                    lname:lname,
-                                    mob_no:mob_no,
-                                    fnameErr:fnameErr
-                                });
+        res.render("register.ejs",{ generalErr:generalErr,
+            user_name:username,
+            fname: fname,
+            lname: lname,
+            email:email,
+            mob_no: mob_no,
+            fnameErr:fnameErr,
+            lnameErr:lnameErr,
+            usernameError:usernameError,
+            emailError:emailError,
+            passwordErr:passwordErr,
+            mob_noErr: mob_noErr
+        });
     }
 }
 

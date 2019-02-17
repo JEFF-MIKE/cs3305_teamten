@@ -1,24 +1,43 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Login Page</title>
-    <style>
-        p {
-            color: red;
-        }
-    </style>
-</head>
-<body>
-    <main>
-        <form id="loginform" role="form" method="post" action="/login">
-            <input id="login-username" type="text" name="user_name" value="" placeholder="username"/>                                       
-            <input id="login-password" type="password" name="password" placeholder="password"/>
-            <button id="login-button" type="submit">Login</button>
-        </form>
-        <% if (status.length > 0) { %>
-            <p> <%=status%></p>
-        <% } %>
-    </main>
-</body>
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <title>Log in</title>
+    <!-- Bootstrap core CSS -->
+
+    <!-- Custom styles for this template -->
+    <link href="/public/login.css" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+  </div>
+  <div class="column">
+      <form class="form-signin" method="post" action="/login" role="form">
+      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input name = "email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus/>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input name= "password" type="password" id="inputPassword" class="form-control" placeholder="Password" required/>
+      <!--
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+    -->
+      <button class="btn btn-lg btn-primary btn-block p2" type="submit">Sign in</button>
+      <br>
+      <!-- Maybe find a way to remove the brs -->
+    </form>
+    <p class="p mb-1 text-primary">No account? Click below to register.</p>
+    <a class="btn btn-lg btn-info btn-block" role="button" href="/register">Register!</a>
+    <br>
+    <a class="btn btn-lg btn-info btn-block" role="button" href="/">Home</a>
+   </div>
+  </body>
 </html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Page Title</title>
+    <style>
+        #error {
+            color:red;
+        }
+        #user {
+            color: darkblue;
+            size:1.5em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the website!</h1>
+        <h3>Choose an action below</h3>
+        <% if(message.length !=0 ) { %>
+        <p id="error"><%=message %></p>
+        <% } %>
+        <% if (userName.length != 0) { %>
+        <p id ='user'><%=userName %></p>
+        <% } %>
+    </header>
+    <main>
+        <% include links %>
+    </main>
+</body>
+</html>

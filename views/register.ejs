@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Register</title>
+</head>
+<body>
+    <main>
+        <form id="registerform" method="post" role = "form" action="/register">
+        <input id="login-user_name" type="text" name="username" value="<%= user_name %>" placeholder="Username"/>
+        <% if(fnameErr.length > 0){ %><p class="error"> First name must have a length of 2-32 characters.</p><% } %>
+        <input id="login-fname" type="text" name="fname" value="<%= fname %>" placeholder="First name"/>
+        <input id="login-lname" type="text" name="lname" value="<%= lname %>" placeholder="Last Name"/>                                       
+        <input id="login-mob" type="text" name="mobile" value="<%= mob_no %>" placeholder="Mobile Number"/>                                                                              
+        <input id="login-password" type="password" name="password" placeholder="password"/>
+        <button id="registration_button" type="submit">Register</button>
+        </form>
+    </main>
+</body>
+</html>

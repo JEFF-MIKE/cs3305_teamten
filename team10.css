@@ -6,23 +6,56 @@
 .navbar-custom .navbar-text {
     color: rgba(255,255,255,.8);
 }
-/* To change the link colour. */
+/* change the link color */
 .navbar-custom .navbar-nav .nav-link {
     color: rgba(255,255,255,.5);
 }
-/* To change the colour of the hovered links */
+/* change the color of active or hovered links */
 .navbar-custom .nav-item.active .nav-link,
 .navbar-custom .nav-item:hover .nav-link {
     color: #ffffff;
 }
 
-/* To add texture to the header. */
-header {
+.jumbotron { 
     background: url(45degreee_fabric.png) repeat 0 0;
 }
 
-/* To stop the paper plane icon 
- *from moving out of the button's boundaries. */
-.row i { 
-    margin-right: 8px;  
+.jumbotron h1 {
+    font-family: 'Dosis', cursive;
+}
+
+.jumbotron  {
+    font-family: 'cabin', cursive;
+}
+ .nav {
+    text-align: right;
+}
+
+.nav a[href=""]{
+    color: black;
+    background-color:white;
+    width: 100%;
+}
+
+.container a {
+color: #ffffff !important;
+}
+
+
+/*
+input[type="file"] {
+    display: none;
+    color: transparent;
+}
+
+.file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+*/
+#msg {
+    width: 300px;
+    height:100px;
 }

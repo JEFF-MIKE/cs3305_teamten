@@ -1,0 +1,11 @@
+#error {
+    color:red;
+}
+#user {
+    color: darkblue;
+    size:1.5em;
+}
+
+body{
+    background-color:skyblue;
+}

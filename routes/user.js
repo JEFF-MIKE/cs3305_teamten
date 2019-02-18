@@ -39,7 +39,9 @@ function queryRoles(number){
 }
 */
 exports.profile=(req,res) =>{
-    var userID = req.session.userId;
+    // session details.
+    let userID = req.session.userId;
+    let userName = req.session.user_name;
 
     // user must be logged in to view their own profile.
     if (userID === undefined){
@@ -49,8 +51,8 @@ exports.profile=(req,res) =>{
     } else{
         // they are logged in, display their profile details.
         // first, escape with array, sub with question marks
-        console.log("ID is " + typeof(userID));
-        var sql="SELECT first_name, last_name, user_name, mob_no FROM users WHERE id=?;SELECT * FROM roles WHERE id=?;"
+        console.log("ID is " + userID);
+        var sql="SELECT first_name, last_name, user_name, email, mob_no FROM users WHERE id=?;SELECT * FROM roles WHERE id=?;"
         db.query(sql,[userID,userID], (err,results) => {
             // declare variables and return inside this function
             let errorFlag = false;
@@ -58,6 +60,7 @@ exports.profile=(req,res) =>{
             let lname = "";
             let user_name = "";
             let mobile = "";
+            let email = "";
             let admin = "";
             let researcher = "";
             let reviewer = "";
@@ -91,10 +94,12 @@ exports.profile=(req,res) =>{
                                     lname: lname,
                                     user_name: user_name,
                                     mobile: mobile,
+                                    email: email,
                                     admin: admin,
                                     researcher: researcher,
                                     reviewer: reviewer,
-                                    funder: funder });
+                                    funder: funder,
+                                    userName: userName });
         } else {
             let string = encodeURIComponent('2');
             res.redirect("/?errorStatus=" + string);
@@ -109,13 +114,13 @@ exports.profile=(req,res) =>{
 exports.login=(req,res) => {
     // first,check to see if they are logged in.
     let userID = req.session.userId;
+    let status = "";
     if (userID !== undefined){
         var string =encodeURIComponent('1');
         res.redirect("/?errorStatus="+string);
         return;
     }
     // now check if the request was GET or POST
-    let status = ""; // Will be used for error messages.
     if (req.method == "POST") {
         // get the body
         let post  = req.body;
@@ -136,6 +141,7 @@ exports.login=(req,res) => {
                 res.redirect("/");
               }
               else{
+                console.log("Yep, this error message came up!");
                 status = 'Error! Either your username or password are incorrect';
                 res.render('login.ejs',{status:status});
              }

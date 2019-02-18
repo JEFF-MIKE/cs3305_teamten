@@ -21,6 +21,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/news">News Updates</a>
                     </li>
+                <% if (userName.length !== 0) { %>
+                    <li class="nav-item">
+                        <a class ="nav-link" href="/logout">Logout</a>
+                    </li>
+                <% } %>
                     <input type="text" placeholder="Search..">
                 </ul>
             </div>

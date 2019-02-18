@@ -17,7 +17,12 @@
   <body class="text-center">
   </div>
   <div class="column">
+
       <form class="form-signin" method="post" action="/login" role="form">
+      <% if (status.length > 0) { %>
+      <!-- Error message in this p -->
+      <p class="d-inline p mb-2"><%= status %><p>
+      <% } %>
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
       <label for="inputEmail" class="sr-only">Email address</label>
       <input name = "email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus/>

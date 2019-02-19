@@ -263,3 +263,30 @@ exports.logout=(req,res)=>{
         return;
     });
 }
+
+/**************************** apply for founding ********************************/
+exports.apply=(req, res) => {
+
+    if (req.method=="POST"){
+        let applicant_id = req.session.userId;
+        let cover_note = req.comment;
+        var time_of_submission  = myDate.toLocaleString();
+        let application = {cover_note:`${cover_note}`, time_of_submission:`${time_of_submission}`, applicant_id:`${applicant_id}`};
+        let sql = 'insert into posts set ?';
+        connection.query(sql, application, (err, result) => {
+            if(err) throw err;
+            console.log(result);
+            res.send('database for application created');
+        });
+
+    } else {
+        var userID = req.session.userId;
+        if (userID === undefined){
+            res.send('You need to login first...');
+            return
+        }
+        else {
+            return res.render("apply.ejs");
+        }
+    }
+}

@@ -38,6 +38,56 @@ function queryRoles(number){
         });
 }
 */
+
+function fetchId(data,callback){
+    // callback function for grabbing ID from table when creating user account.
+    let sql = "SELECT id FROM users where email = ?;"
+    db.query(sql,data.email, (err,rows) => {
+        if (err){
+            callback(err,null);
+        } else {
+            console.log(rows[0]);
+            console.log("This is id from table:" + rows[0].id);
+            callback(null,rows[0].id);
+        }
+    });
+}
+
+function insertRoles(data,callback){
+    // callback function for inserting into roles table on account creation.
+    let sql = "INSERT INTO `roles` (id,researcher,reviewer,funder,admin) VALUES (?,?,?,?,?);";
+    // data is an object of roles mapped to yes or no
+    db.query(sql,[data.tempUserID, data.researcher ,data.reviewer, data.funder, data.admin],(err,rows) => {
+        if (err){
+            callback(err,null);
+        } else {
+            // it's an insert, it's completed.
+            callback(null,"Completed");
+        }
+    });
+}
+
+function selectRoles(data,callback){
+    /* 
+    Callback function for checking to see if the user should be able
+    to view a certain website or not. Data is id.
+    */
+   let sql = "SELECT * FROM `roles` where id = ?";
+   db.query(sql,data,(err,rows) => {
+       if (err){
+           callback(err,null);
+       } else{
+           let retObj = {
+               admin: rows[0].admin,
+               reviewer: rows[0].reviewer,
+               researcher: rows[0].researcher,
+               funder: rows[0].funder
+           };
+           callback(null,retObj);
+       }
+   });
+}
+
 exports.profile=(req,res) =>{
     // session details.
     let userID = req.session.userId;
@@ -173,6 +223,7 @@ exports.register=(req,res) =>{
     let passwordErr="";
     let mob_noErr = "";
     if (req.method=="POST"){
+        // PASSWORD WILL BE LOOKED AT ONCE OTHER WEBSITE FEATURES ARE DONE.
         let post = req.body;
         // each variable will need to be checked before added to the database.
         username = post.user_name;
@@ -204,17 +255,63 @@ exports.register=(req,res) =>{
             errorFlag = true;
         }
         if(errorFlag === false){
-            var sql = "INSERT INTO users(first_name,last_name,email,mob_no,user_name,password) VALUES (?,?,?,?,?,?)";
+            var sql = "INSERT INTO users(first_name,last_name,email,mob_no,user_name,password) VALUES (?,?,?,?,?,?);";
+            // role by default is currently being done.
+            // sql += "INSERT INTO roles(admin,researcher,funder,reviewer) VALUES('NO','YES','NO','NO');"
             var query = db.query(sql,[fname,lname,email,mob_no,username,password],(err, result) => {
                if (err) throw err;
+               //var tempUserID = null;
                message = "Your account has been created! Please login now." ;
+               let idData = {email: email};
+               fetchId(idData,(err,id_num) => {
+                if (err){
+                    console.log(err);
+                    res.send(err);
+                } else {
+                    let rolesData = {
+                        admin:"NO",
+                        researcher: "YES",
+                        reviewer: "NO",
+                        funder: "NO",
+                        tempUserID: id_num
+                    };
+                    insertRoles(rolesData,(err,content) => {
+                        if (err){
+                            console.log("Error occured in roles data!");
+                            return res.render(err);
+                        } else {
+                         console.log("Successfully inserted roles into database");
+                        }
+                    });
+                }
+              //console.log("Temp user ID is: " + tempUserID);
+               });
+               /*
+               let rolesData = {
+                   admin:"NO",
+                   researcher: "YES",
+                   reviewer: "NO",
+                   funder: "NO",
+                   tempUserID: tempUserID
+               };
+               */
+               /*
+               insertRoles(rolesData,(err,content) => {
+                   if (err){
+                       console.log("Error occured in roles data!");
+                       return res.render(err);
+                   } else {
+                    console.log("Successfully inserted roles into database");
+                   }
+               });
+               */
+               //console.log("This is temp user ID: " + tempUserID);
                var string =encodeURIComponent('1');
-               res.redirect("/?successStatus="+string);
-               return;
+               return res.redirect("/?successStatus="+string);
             });
         } else{
             generalErr="Errors detected!";
-            res.render("register.ejs",{ generalErr:generalErr,
+            return res.render("register.ejs",{ generalErr:generalErr,
                                         user_name:username,
                                         fname: fname,
                                         lname: lname,
@@ -230,7 +327,7 @@ exports.register=(req,res) =>{
         }
     } else {
         // it's a Get. Render normally.
-        res.render("register.ejs",{ generalErr:generalErr,
+        return res.render("register.ejs",{ generalErr:generalErr,
             user_name:username,
             fname: fname,
             lname: lname,

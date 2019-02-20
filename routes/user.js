@@ -39,7 +39,9 @@ function queryRoles(number){
 }
 */
 exports.profile=(req,res) =>{
-    var userID = req.session.userId;
+    // session details.
+    let userID = req.session.userId;
+    let userName = req.session.user_name;
 
     // user must be logged in to view their own profile.
     if (userID === undefined){
@@ -49,8 +51,8 @@ exports.profile=(req,res) =>{
     } else{
         // they are logged in, display their profile details.
         // first, escape with array, sub with question marks
-        console.log("ID is " + typeof(userID));
-        var sql="SELECT first_name, last_name, user_name, mob_no FROM users WHERE id=?;SELECT * FROM roles WHERE id=?;"
+        console.log("ID is " + userID);
+        var sql="SELECT first_name, last_name, user_name, email, mob_no FROM users WHERE id=?;SELECT * FROM roles WHERE id=?;"
         db.query(sql,[userID,userID], (err,results) => {
             // declare variables and return inside this function
             let errorFlag = false;
@@ -58,6 +60,7 @@ exports.profile=(req,res) =>{
             let lname = "";
             let user_name = "";
             let mobile = "";
+            let email = "";
             let admin = "";
             let researcher = "";
             let reviewer = "";
@@ -91,10 +94,12 @@ exports.profile=(req,res) =>{
                                     lname: lname,
                                     user_name: user_name,
                                     mobile: mobile,
+                                    email: email,
                                     admin: admin,
                                     researcher: researcher,
                                     reviewer: reviewer,
-                                    funder: funder });
+                                    funder: funder,
+                                    userName: userName });
         } else {
             let string = encodeURIComponent('2');
             res.redirect("/?errorStatus=" + string);
@@ -109,31 +114,34 @@ exports.profile=(req,res) =>{
 exports.login=(req,res) => {
     // first,check to see if they are logged in.
     let userID = req.session.userId;
+    let status = "";
     if (userID !== undefined){
         var string =encodeURIComponent('1');
         res.redirect("/?errorStatus="+string);
         return;
     }
     // now check if the request was GET or POST
-    let status = ""; // Will be used for error messages.
     if (req.method == "POST") {
         // get the body
         let post  = req.body;
         // grab form data
-        let name= post.user_name;
+        let email= post.email;
         let pass= post.password;
-        let sql="SELECT id, first_name, last_name, user_name FROM `users` WHERE `user_name`='"+name+"' and password = '"+pass+"'";                           
-        db.query(sql, (err,results) => {      
+        let sql="SELECT id, first_name, last_name, user_name FROM `users` WHERE `email`=? and password = ?;";                           
+        db.query(sql, [email,pass],(err,results) => {      
            if(results.length){
-              req.session.userId = results[0].id;
+              req.session.userId = results[0].id; // set their userID here.
               let x = results[0].id; // need this for the sql query
+              //session data used for cosmetic stuff.
               req.session.first_name = results[0].first_name;
               req.session.last_name = results[0].last_name;
+              req.session.user_name= results[0].user_name
               console.log(results[0].id);
               console.log(results[0].first_name + " Logged in!");
                 res.redirect("/");
               }
               else{
+                console.log("Yep, this error message came up!");
                 status = 'Error! Either your username or password are incorrect';
                 res.render('login.ejs',{status:status});
              }
@@ -152,20 +160,32 @@ exports.register=(req,res) =>{
         res.redirect("/?errorStatus="+string);
         return;
     }
-    let status = "";
+    let username="";
+    let email="";
+    let fname="";
+    let lname="";
+    let mob_no="";
+    let generalErr = "";
+    let fnameErr = "";
+    let lnameErr="";
+    let usernameError="";
+    let emailError = "";
+    let passwordErr="";
+    let mob_noErr = "";
     if (req.method=="POST"){
         let post = req.body;
-        let username = post.user_name;
-        let usernameError = "";
-        let fname=post.fname;
-        let fnameErr="";
-        let lname=post.lname;
-        let lnameErr="";
-        let mob_no=post.mobile;
-        let mob_noErr="";
+        // each variable will need to be checked before added to the database.
+        username = post.user_name;
+        email = post.email;
+        fname=post.fname;
+        lname=post.lname;
+        mob_no=post.mobile;
+        // declare password for this if block.
         let password=post.password;
+        let otherPassword=post.otherPassword;
         let passwordErr="";
         let errorFlag=false;
+        let regexp = new RegExp("[0-9+]");
         console.log(fname);
         if (fname.length < 3 || fname.length > 32){
             fnameErr+="First name must have a length between 2 and 32\n";
@@ -175,9 +195,17 @@ exports.register=(req,res) =>{
             lnameErr+="Last name must have a length between 2 and 32\n";
             errorFlag = true;
         }
+        if (regexp.test(mob_no) === false){
+            mob_noErr += "Please only enter digits for phone number\n";
+            errorFlag = true;
+        }
+        if (password != otherPassword){
+            passwordErr += "Your passwords did not match, please re-enter them!\n";
+            errorFlag = true;
+        }
         if(errorFlag === false){
-            var sql = "INSERT INTO users(first_name,last_name,mob_no,user_name,password) VALUES ("  + '\'' + fname + "','" +  lname + "','" + mob_no + "','" + username + "','" + password + "')";
-            var query = db.query(sql,(err, result) => {
+            var sql = "INSERT INTO users(first_name,last_name,email,mob_no,user_name,password) VALUES (?,?,?,?,?,?)";
+            var query = db.query(sql,[fname,lname,email,mob_no,username,password],(err, result) => {
                if (err) throw err;
                message = "Your account has been created! Please login now." ;
                var string =encodeURIComponent('1');
@@ -185,29 +213,36 @@ exports.register=(req,res) =>{
                return;
             });
         } else{
-            status="Error! You appear to have mistyped something in.";
-            res.render("register.ejs",{status:status,
-                                       user_name:username,
-                                       fname: fname,
-                                       lname: lname,
-                                       mob_no: mob_no,
-                                       fnameErr:fnameErr});
+            generalErr="Errors detected!";
+            res.render("register.ejs",{ generalErr:generalErr,
+                                        user_name:username,
+                                        fname: fname,
+                                        lname: lname,
+                                        email: email,
+                                        mob_no: mob_no,
+                                        fnameErr:fnameErr,
+                                        lnameErr:lnameErr,
+                                        usernameError:usernameError,
+                                        emailError:emailError,
+                                        passwordErr:passwordErr,
+                                        mob_noErr: mob_noErr
+                                    });
         }
     } else {
         // it's a Get. Render normally.
-        let fname="";
-        let lname="";
-        let mob_no="";
-        let username="";
-        let fnameErr = "";
-        status = "Please enter in your details below...";
-        res.render("register.ejs",{ status:status, 
-                                    user_name: username, 
-                                    fname:fname, 
-                                    lname:lname,
-                                    mob_no:mob_no,
-                                    fnameErr:fnameErr
-                                });
+        res.render("register.ejs",{ generalErr:generalErr,
+            user_name:username,
+            fname: fname,
+            lname: lname,
+            email:email,
+            mob_no: mob_no,
+            fnameErr:fnameErr,
+            lnameErr:lnameErr,
+            usernameError:usernameError,
+            emailError:emailError,
+            passwordErr:passwordErr,
+            mob_noErr: mob_noErr
+        });
     }
 }
 
@@ -227,4 +262,31 @@ exports.logout=(req,res)=>{
         res.redirect("/?successStatus="+string);
         return;
     });
+}
+
+/**************************** apply for founding ********************************/
+exports.apply=(req, res) => {
+
+    if (req.method=="POST"){
+        let applicant_id = req.session.userId;
+        let cover_note = req.comment;
+        var time_of_submission  = myDate.toLocaleString();
+        let application = {cover_note:`${cover_note}`, time_of_submission:`${time_of_submission}`, applicant_id:`${applicant_id}`};
+        let sql = 'insert into posts set ?';
+        connection.query(sql, application, (err, result) => {
+            if(err) throw err;
+            console.log(result);
+            res.send('database for application created');
+        });
+
+    } else {
+        var userID = req.session.userId;
+        if (userID === undefined){
+            res.send('You need to login first...');
+            return
+        }
+        else {
+            return res.render("apply.ejs");
+        }
+    }
 }

@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-sm bg-info navbar-custom">
+            <a class="navbar-brand" href="/">Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                <% if (userName.length === 0) {%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                <% } %>
+                <% if (userName.length !== 0) {%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile">My Profile</a>
+                    </li>
+                <% } %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">User Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/news">News Updates</a>
+                    </li>
+                <% if (userName.length !== 0) { %>
+                    <li class="nav-item">
+                        <a class ="nav-link" href="/logout">Logout</a>
+                    </li>
+                <% } %>
+                    <input type="text" placeholder="Search..">
+                </ul>
+            </div>
+        </nav>

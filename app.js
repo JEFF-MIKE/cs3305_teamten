@@ -50,6 +50,7 @@ app.use(session({
               saveUninitialized: true,
               cookie: { maxAge: 60000 }
             }));
+// cookie age is currently 1 minute
 
 // navigate to routes folder and run index.js file
 app.get('/',routes.index);
@@ -65,4 +66,6 @@ app.get('/logout',user.logout);
 
 app.get("/submission",upload.uploadFile);
 app.post("/submission",upload.uploadFile);
+
+
 app.listen('3001');

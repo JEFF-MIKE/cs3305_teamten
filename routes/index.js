@@ -27,4 +27,4 @@ exports.index = (req, res) => {
         message = "You have been successfully logged out!";
     }
     res.render('index.ejs',{message: message,userName:userName});
-    };
+};

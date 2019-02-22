@@ -54,6 +54,7 @@ app.use(session({
 
 // navigate to routes folder and run index.js file
 app.get('/',routes.index);
+app.get('/index',routes.index);
 app.get('/profile',user.profile);
 
 app.get('/login',user.login);
@@ -68,4 +69,15 @@ app.get("/submission",upload.uploadFile);
 app.post("/submission",upload.uploadFile);
 
 
-app.listen('3001');
+app.get("/apply",user.apply);
+app.post("/apply",user.apply);
+
+app.get("/group_members_add",user.group_members_add);
+app.post("/group_members_add",user.group_members_add);
+ 
+app.get("/group_members_delete",user.group_members_delete);
+app.post("/group_members_delete",user.group_members_delete);
+
+app.listen('3001', () => {
+  console.log("Server started on port 3001");
+});

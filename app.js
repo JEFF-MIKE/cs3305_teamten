@@ -4,6 +4,7 @@ var express = require('express'),
     http = require('http'),
     user = require('./routes/user'),
     upload = require('./routes/upload'),
+    passwordReset = require('./routes/passwordReset'),
     path = require('path');
 
 var session = require('express-session') // cookie handler
@@ -11,6 +12,30 @@ var app = express(); // initialise express object.
 var mysql = require("mysql"); // sql library
 var bodyParser = require("body-parser");
 var fileUpload = require('express-fileupload');
+/*
+// below three variables set up the emailing system
+var hbs = require('nodemailer-express-handlebars'),
+    email = process.env.PROGRAM_EMAIL,
+    pass = process.env.PROGRAM_EMAIL_PASSWORD,
+    nodemailer = require('nodemailer');
+
+var emailer = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: email,
+    pass,pass
+  }
+});
+// set the view Engine specifically for emailer
+var handlebarsOptions = {
+  viewEngine: 'handlebars',
+  viewPath: path.resolve('./emails/'),
+  extName: '.html'
+};
+
+emailer.use('compile',hbs(handlebarsOptions));
+
+*/
 
 // my personal database connection.
 var connection = mysql.createConnection({
@@ -77,6 +102,13 @@ app.post("/group_members_add",user.group_members_add);
  
 app.get("/group_members_delete",user.group_members_delete);
 app.post("/group_members_delete",user.group_members_delete);
+
+app.get("/resetPassword",passwordReset.resetPassword);
+app.post("/resetPassword",passwordReset.resetPassword);
+
+// not posting anything to the success page for password
+app.get("/passwordSuccess",);
+
 
 app.listen('3001', () => {
   console.log("Server started on port 3001");

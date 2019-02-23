@@ -2,7 +2,7 @@
 exports.index = (req, res) => {
     // below are personal details
     let message = '';
-    let userName = req.session.user_name;
+    let userName = (req.session.user_name === undefined ? "" : req.session.user_name);
     // below are roles for nav
     if (req.query.errorStatus==='0'){
         // set in user.js

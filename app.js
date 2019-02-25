@@ -5,6 +5,7 @@ var express = require('express'),
     user = require('./routes/user'),
     upload = require('./routes/upload'),
     passwordReset = require('./routes/passwordReset'),
+    reviewApplication = require('./routes/reviewApplication'),
     path = require('path');
 
 var session = require('express-session') // cookie handler
@@ -109,7 +110,12 @@ app.post("/resetPassword",passwordReset.resetPassword);
 // not posting anything to the success page for password
 app.get("/passwordSuccess",);
 
+app.get("/viewSubmittedApplications",reviewApplication.viewSubmittedApplications);
 
+app.get("/reviewSingleApplication",reviewApplication.reviewSubmittedApplication);
+app.post("/reviewSingleApplication",reviewApplication.reviewSubmittedApplication);
+
+app.post("/saveReview",reviewApplication.saveReviewDraft);
 app.listen('3001', () => {
   console.log("Server started on port 3001");
 });

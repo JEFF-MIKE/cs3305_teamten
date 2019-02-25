@@ -19,7 +19,7 @@ exports.index = (req, res) => {
     if (req.session.user_name !== undefined) {
         // display that a user is currently logged in.
         userName = "Welcome, " + req.session.user_name;
-    }
+    } 
     if (req.query.successStatus==="1"){
         message = "Account registered, please login now.";
     }

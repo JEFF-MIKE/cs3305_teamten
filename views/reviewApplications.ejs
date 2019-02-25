@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Review Applications</title>
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"/>
+<link rel="stylesheet" href="/public/index.css"/>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Khand');
+</style>
+<style>
+    .application {
+        border:2px solid black;
+    }
+
+</style>
+<body>
+    <% include mainNav %>
+    <main>
+        <% for (let i = 0;i<resultList.length;i++){ %>
+            <div id = "<%= resultList[i].application_id %>" class="application">
+                <p> <%= resultList[i].applicant_id %></p>
+                <a href ="<%= '/reviewSingleApplication?application_id='+resultList[i].application_id %>" class="btn btn-primary"/>Review</a>        
+            </div>
+        <% } %>
+    </main>
+    <% include mainFooter %>
+</body>
+</html>

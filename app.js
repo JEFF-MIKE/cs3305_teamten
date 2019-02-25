@@ -4,7 +4,8 @@ var express = require('express'),
     http = require('http'),
     user = require('./routes/user'),
     upload = require('./routes/upload'),
-    path = require('path');
+    path = require('path'),
+    apply = require('./routes/apply');
 
 var session = require('express-session') // cookie handler
 var app = express(); // initialise express object.
@@ -65,4 +66,8 @@ app.get('/logout',user.logout);
 
 app.get("/submission",upload.uploadFile);
 app.post("/submission",upload.uploadFile);
+
+app.get("/apply", apply.storeApplications);
+app.post("/apply", apply.storeApplications);
+
 app.listen('3001');

@@ -14,7 +14,7 @@ exports = changeProfileDetails = (req,res) => {
         let sql = "SELECT hobby,animal FROM test_profile WHERE id = ?";
         db.query(sql,[1],(err,result) => {
             if (result.length);
-
+            
         }
         );
     } else {

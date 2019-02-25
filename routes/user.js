@@ -90,7 +90,7 @@ function selectRoles(data,callback){
 
 exports.profile=(req,res) =>{
     // session details.
-    let userID = req.session.userId;
+    let userID = req.session.user_id;
     let userName = req.session.user_name;
 
     // user must be logged in to view their own profile.
@@ -180,7 +180,7 @@ exports.login=(req,res) => {
         let sql="SELECT id, first_name, last_name, user_name FROM `users` WHERE `email`=? and password = ?;";                           
         db.query(sql, [email,pass],(err,results) => {      
            if(results.length){
-              req.session.userId = results[0].id; // set their userID here.
+              req.session.user_id = results[0].id; // set their userID here.
               let x = results[0].id; // need this for the sql query
               //session data used for cosmetic stuff.
               req.session.first_name = results[0].first_name;
@@ -203,7 +203,7 @@ exports.login=(req,res) => {
 
 /* ---------------------------- Register Tab *****************************/
 exports.register=(req,res) =>{
-    let userID = req.session.userId;
+    let userID = req.session.user_ID;
     if (userID !== undefined){
         // already logged in, see above
         var string =encodeURIComponent('1');
@@ -346,7 +346,7 @@ exports.register=(req,res) =>{
 
 /****************************  logout block ********************************/
 exports.logout=(req,res)=>{
-    var userID = req.session.userId;
+    var userID = req.session.user_id;
     // user must be logged in to view their own profile.
     if (userID === undefined){
         let string = encodeURIComponent('4');

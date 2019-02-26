@@ -113,7 +113,10 @@ app.get("/passwordSuccess",);
 app.get("/viewSubmittedApplications",reviewApplication.viewSubmittedApplications);
 
 app.get("/reviewSingleApplication",reviewApplication.reviewSubmittedApplication);
-app.post("/reviewSingleApplication",reviewApplication.reviewSubmittedApplication);
+
+app.post("/saveReviewDraft",reviewApplication.saveReviewDraft);
+
+app.post("/finalizeReview",reviewApplication.finalizeReview);
 
 app.post("/saveReview",reviewApplication.saveReviewDraft);
 app.listen('3001', () => {

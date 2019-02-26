@@ -99,8 +99,8 @@ app.post("/submission",upload.uploadFile);
 app.get("/apply",user.apply);
 app.post("/apply",user.apply);
 
-app.get("/funding",user.funding);
-app.post("/funding",user.funding);
+//app.get("/funding",user.funding);
+//app.post("/funding",user.funding);
 
 
 app.get("/group_members_add",user.group_members_add);
@@ -123,7 +123,13 @@ app.post("/saveReviewDraft",reviewApplication.saveReviewDraft);
 
 app.post("/finalizeReview",reviewApplication.finalizeReview);
 
+app.get("/proposals", funding.fetchCalls);
+
+//app.get("/createProposal", funding.createProposal);
+//app.post("/createProposal", funding.createProposal);
+
 app.post("/saveReview",reviewApplication.saveReviewDraft);
+
 app.listen('3001', () => {
   console.log("Server started on port 3001");
 });

@@ -101,7 +101,7 @@ exports.viewSubmittedApplications = (req,res) => {
             } else {
                 // perform a GET on the data.
                 // passes through the array of results to the ejs render
-                let sql = "SELECT * FROM applications WHERE `is_draft` = 0;";
+                let sql = "SELECT * FROM applications WHERE `is_draft` = 1;";
                 db.query(sql,(err,result) => {
                     res.render("reviewApplications.ejs",{ resultList: result,userName:req.session.user_name });
                 });

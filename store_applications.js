@@ -1,4 +1,5 @@
-
+/*
+Will go over with David Fox
 const express = require('express')
 const app = express()
 
@@ -42,3 +43,4 @@ con.connect(function(err) {
     console.log("1 record inserted");
   });
 });
+*/

@@ -9,8 +9,9 @@ exports.uploadFile = (req,res) => {
             status = "Error! No files were uploaded!"
             return res.render("upload.ejs",{status: status,success:success});
         }
+        console.log(req.body);
         console.log(req.files);
-        let file = req.files.sampleFile;
+        let file = req.files.sampleFile; // name of file from the object
         let filename = file.name;
         console.log(filename);
         console.log(__dirname + "/../documents/"+filename);

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Upload files</title>
+    <style>
+        h1,h2 {
+            text-align: center;
+            size: 0.8em;
+            color: whitesmoke
+        }
+        body{
+            background-color: skyblue;
+            margin-left:10%;
+            margin-right:10%;
+            padding-left:3%;
+            padding-right:3%;
+        }
+        .error{
+            color: red;
+        }
+        #success{
+            color:green;
+        }
+        #uploadDocumentForm {
+            background color: green;
+            margin: auto;
+            padding: 3em;
+            width: 80%;
+            height:35%;
+            color:green;
+            border:2px solid black;
+        }
+        form {
+            margin:5%;
+        }
+    </style>
+<script src = "/public/dropzone.js"></script>
+</head>
+<body>
+<!--
+    <h1>Drag and drop to upload files.</h1>
+-->
+    <h2>Or select "Upload" to upload the files.</h2>
+    <% if (status==="Error! No files were uploaded!"){%><p class="error">File could not be uploaded!</p><% } %>
+    <% if (status==="An error has occured!") {%><p class="error">File coud not be moved</p><% }%>
+    <% if (success.length !== 0){ %><p id = "success">Success!</p> <% } %>
+    <form method = "post" action="/submission" id="uploadDocumentForm" enctype="multipart/form-data">
+        <input type = "file" name="sampleFile"/>
+        <button id ="uploadFile" type = "submit">Upload File</button>
+    </form>
+</body>
+</html>

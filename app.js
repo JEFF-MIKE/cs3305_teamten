@@ -141,6 +141,18 @@ app.get("/proposals", funding.fetchCalls);
 
 app.post("/saveReview",reviewApplication.saveReviewDraft);
 
+
+
+app.get("/HeldProposal",user.heldProposal);
+app.post("/HeldProposal",user.heldProposal);
+
+app.get("/displayAllProposal",user.displayAllProposal);
+
+app.get("/displayAllProposal/:id",user.displayAllProposal_self);
+app.delete("/displayAllProposal/:id",user.displayAllProposal_delete);
+// app.put("/displayAllProposal/:id",user.displayAllProposal_update);
+
+
 app.listen('3001', () => {
   console.log("Server started on port 3001");
 });

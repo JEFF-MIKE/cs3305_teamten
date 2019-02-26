@@ -536,3 +536,80 @@ exports.group_members_delete=(req, res) => {
         return res.render("group_member_delete.ejs",{status:status});
     }
 }
+
+
+/**************************** Held a proposal ********************************/
+
+exports.heldProposal=(req, res) => {
+    let userID = req.session.userId;
+    if (userID == undefined) {
+        var string =encodeURIComponent('1');
+        return res.redirect("/?errorStatus="+string);;
+    }
+
+    if (req.method == "POST") {
+        let status="";
+
+        // store title && description to database
+        funder_user_id = userID;
+        title = req.body.title;
+        description = req.body.description;
+        active_status = 0; // 0 for watting 1 for accept 2 for reject
+
+        sql_insert = "insert into calls(funder_user_id, title,active_status,description) value(?,?,?,?);";
+        db.query(sql_insert,[funder_user_id,title,active_status,description],(err,result) => {
+            console.log(result);
+            return res.render("displayAllProposal.ejs",{status:status})
+
+        });
+    } else {
+        // method is Get
+        let status = ""
+        console.log(userID);
+        res.render("heldProposal.ejs", {status:status});
+    }
+}
+
+
+
+/**************************** Display Proposal ********************************/
+// call_id
+// funder_user_id
+// title
+// expiry_date
+// active_status
+// description
+
+exports.displayAllProposal=(req, res) => {
+    if (req.method == "POST") {
+        return res.send("no post function");
+    } else {
+        
+        sql = "select * from calls";
+        db.query(sql,(err, result) => {
+            if (err) throw err;
+            
+            res.render("displayAllProposal.ejs",{result:result});
+        });
+    }
+}
+
+exports.displayAllProposal_self=(req, res) => {
+    sql = "select * from calls where call_id=?";
+    db.query(sql,req.params.id,(err, result) => {
+        if (err) throw err;
+        
+        res.send(result)
+        // res.render("displayAllProposal.ejs",{result:result});
+    });
+}
+
+exports.displayAllProposal_delete=(req, res) => {
+    sql = "delete from calls where call_id=?";
+    db.query(sql,req.params.id,(err, result) => {
+        if (err) throw err;
+        
+        res.send(result)
+        // res.render("displayAllProposal.ejs",{result:result});
+    });
+}

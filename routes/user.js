@@ -55,9 +55,9 @@ function fetchId(data,callback){
 
 function insertRoles(data,callback){
     // callback function for inserting into roles table on account creation.
-    let sql = "INSERT INTO `roles` (id,researcher,reviewer,funder,admin) VALUES (?,?,?,?,?);";
+    let sql = "INSERT INTO `roles` (id,researcher,reviewer,funder,admin,research_office) VALUES (?,?,?,?,?);";
     // data is an object of roles mapped to yes or no
-    db.query(sql,[data.tempUserID, data.researcher ,data.reviewer, data.funder, data.admin],(err,rows) => {
+    db.query(sql,[data.tempUserID, data.researcher ,data.reviewer, data.funder, data.admin,data.research_office],(err,rows) => {
         if (err){
             callback(err,null);
         } else {
@@ -81,7 +81,8 @@ function selectRoles(data,callback){
                admin: rows[0].admin,
                reviewer: rows[0].reviewer,
                researcher: rows[0].researcher,
-               funder: rows[0].funder
+               funder: rows[0].funder,
+               research_office: rows[0].research_office
            };
            callback(null,retObj);
        }
@@ -115,6 +116,7 @@ exports.profile=(req,res) =>{
             let researcher = "";
             let reviewer = "";
             let funder = "";
+            let research_office = "";
             if (err) throw err;     
             if(results[0].length){
                 // grabs data from users table
@@ -134,6 +136,7 @@ exports.profile=(req,res) =>{
                 results[1][0].reviewer === "YES" ? reviewer = "Y" : reviewer = "N";
                 results[1][0].funder === "YES" ? funder = "Y" : funder = "N";
                 results[1][0].admin === "YES" ? admin = "Y" : admin = "N";
+                results[1][0].research_office === "YES" ? research_office = "Y" : research_office = "N";
             } else {
                 errorFlag = true;
             }
@@ -149,6 +152,7 @@ exports.profile=(req,res) =>{
                                     researcher: researcher,
                                     reviewer: reviewer,
                                     funder: funder,
+                                    research_office: research_office,
                                     userName: userName });
         } else {
             let string = encodeURIComponent('2');
@@ -203,7 +207,7 @@ exports.login=(req,res) => {
 
 /* ---------------------------- Register Tab *****************************/
 exports.register=(req,res) =>{
-    let userID = req.session.user_ID;
+    let userID = req.session.user_id;
     if (userID !== undefined){
         // already logged in, see above
         var string =encodeURIComponent('1');
@@ -273,6 +277,7 @@ exports.register=(req,res) =>{
                         researcher: "YES",
                         reviewer: "NO",
                         funder: "NO",
+                        research_office: "NO",
                         tempUserID: id_num
                     };
                     insertRoles(rolesData,(err,content) => {

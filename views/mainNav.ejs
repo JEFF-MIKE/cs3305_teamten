@@ -7,7 +7,22 @@
                 <ul class="navbar-nav">
                 <% if (userName.length === 0) {%>
                     <li class="nav-item">
+                        <a class="nav-link" href="/displayAllProposal">Proposal</a>
+                    </li>
+                <% } %>
+                <% if (userName.length !== 0) {%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/displayAllProposal">Proposal</a>
+                    </li>
+                <% } %>
+                <% if (userName.length === 0) {%>
+                    <li class="nav-item">
                         <a class="nav-link" href="/login">Login</a>
+                    </li>
+                <% } %>
+                <% if (userName.length !== 0) {%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/heldProposal">Held Proposal</a>
                     </li>
                 <% } %>
                 <% if (userName.length) {%>
@@ -21,6 +36,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/news">News Updates</a>
                     </li>
+                <% if (userName.length !== 0) {%>
+                <li class="nav-item">
+                    <a class="nav-link" href="/group_members_add">Group Manager</a>
+                </li>
+                <% } %>
                 <% if (userName.length !== 0) { %>
                     <li class="nav-item">
                         <a class ="nav-link" href="/logout">Logout</a>

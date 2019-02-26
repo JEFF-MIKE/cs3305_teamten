@@ -6,6 +6,7 @@ var express = require('express'),
     upload = require('./routes/upload'),
     passwordReset = require('./routes/passwordReset'),
     reviewApplication = require('./routes/reviewApplication'),
+    funding = require('./routes/funding'),
     path = require('path');
 
 var session = require('express-session') // cookie handler
@@ -98,9 +99,13 @@ app.post("/submission",upload.uploadFile);
 app.get("/apply",user.apply);
 app.post("/apply",user.apply);
 
+app.get("/funding",user.funding);
+app.post("/funding",user.funding);
+
+
 app.get("/group_members_add",user.group_members_add);
 app.post("/group_members_add",user.group_members_add);
- 
+
 app.get("/group_members_delete",user.group_members_delete);
 app.post("/group_members_delete",user.group_members_delete);
 

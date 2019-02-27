@@ -55,9 +55,9 @@ function fetchId(data,callback){
 
 function insertRoles(data,callback){
     // callback function for inserting into roles table on account creation.
-    let sql = "INSERT INTO `roles` (id,researcher,reviewer,funder,admin,research_office) VALUES (?,?,?,?,?);";
+    let sql = "INSERT INTO `roles` (id,researcher,reviewer,funder,admin) VALUES (?,?,?,?,?);";
     // data is an object of roles mapped to yes or no
-    db.query(sql,[data.tempUserID, data.researcher ,data.reviewer, data.funder, data.admin,data.research_office],(err,rows) => {
+    db.query(sql,[data.tempUserID, data.researcher ,data.reviewer, data.funder, data.admin],(err,rows) => {
         if (err){
             callback(err,null);
         } else {
@@ -81,8 +81,7 @@ function selectRoles(data,callback){
                admin: rows[0].admin,
                reviewer: rows[0].reviewer,
                researcher: rows[0].researcher,
-               funder: rows[0].funder,
-               research_office: rows[0].research_office
+               funder: rows[0].funder
            };
            callback(null,retObj);
        }
@@ -116,7 +115,6 @@ exports.profile=(req,res) =>{
             let researcher = "";
             let reviewer = "";
             let funder = "";
-            let research_office = "";
             if (err) throw err;     
             if(results[0].length){
                 // grabs data from users table
@@ -136,7 +134,6 @@ exports.profile=(req,res) =>{
                 results[1][0].reviewer === "YES" ? reviewer = "Y" : reviewer = "N";
                 results[1][0].funder === "YES" ? funder = "Y" : funder = "N";
                 results[1][0].admin === "YES" ? admin = "Y" : admin = "N";
-                results[1][0].research_office === "YES" ? research_office = "Y" : research_office = "N";
             } else {
                 errorFlag = true;
             }
@@ -152,7 +149,6 @@ exports.profile=(req,res) =>{
                                     researcher: researcher,
                                     reviewer: reviewer,
                                     funder: funder,
-                                    research_office: research_office,
                                     userName: userName });
         } else {
             let string = encodeURIComponent('2');
@@ -207,7 +203,7 @@ exports.login=(req,res) => {
 
 /* ---------------------------- Register Tab *****************************/
 exports.register=(req,res) =>{
-    let userID = req.session.user_id;
+    let userID = req.session.user_ID;
     if (userID !== undefined){
         // already logged in, see above
         var string =encodeURIComponent('1');
@@ -277,7 +273,6 @@ exports.register=(req,res) =>{
                         researcher: "YES",
                         reviewer: "NO",
                         funder: "NO",
-                        research_office: "NO",
                         tempUserID: id_num
                     };
                     insertRoles(rolesData,(err,content) => {
@@ -535,81 +530,4 @@ exports.group_members_delete=(req, res) => {
         status=""
         return res.render("group_member_delete.ejs",{status:status});
     }
-}
-
-
-/**************************** Held a proposal ********************************/
-
-exports.heldProposal=(req, res) => {
-    let userID = req.session.userId;
-    if (userID == undefined) {
-        var string =encodeURIComponent('1');
-        return res.redirect("/?errorStatus="+string);;
-    }
-
-    if (req.method == "POST") {
-        let status="";
-
-        // store title && description to database
-        funder_user_id = userID;
-        title = req.body.title;
-        description = req.body.description;
-        active_status = 0; // 0 for watting 1 for accept 2 for reject
-
-        sql_insert = "insert into calls(funder_user_id, title,active_status,description) value(?,?,?,?);";
-        db.query(sql_insert,[funder_user_id,title,active_status,description],(err,result) => {
-            console.log(result);
-            return res.render("displayAllProposal.ejs",{status:status})
-
-        });
-    } else {
-        // method is Get
-        let status = ""
-        console.log(userID);
-        res.render("heldProposal.ejs", {status:status});
-    }
-}
-
-
-
-/**************************** Display Proposal ********************************/
-// call_id
-// funder_user_id
-// title
-// expiry_date
-// active_status
-// description
-
-exports.displayAllProposal=(req, res) => {
-    if (req.method == "POST") {
-        return res.send("no post function");
-    } else {
-        
-        sql = "select * from calls";
-        db.query(sql,(err, result) => {
-            if (err) throw err;
-            
-            res.render("displayAllProposal.ejs",{result:result});
-        });
-    }
-}
-
-exports.displayAllProposal_self=(req, res) => {
-    sql = "select * from calls where call_id=?";
-    db.query(sql,req.params.id,(err, result) => {
-        if (err) throw err;
-        
-        res.send(result)
-        // res.render("displayAllProposal.ejs",{result:result});
-    });
-}
-
-exports.displayAllProposal_delete=(req, res) => {
-    sql = "delete from calls where call_id=?";
-    db.query(sql,req.params.id,(err, result) => {
-        if (err) throw err;
-        
-        res.send(result)
-        // res.render("displayAllProposal.ejs",{result:result});
-    });
 }

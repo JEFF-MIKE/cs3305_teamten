@@ -4,15 +4,10 @@ var express = require('express'),
     http = require('http'),
     user = require('./routes/user'),
     upload = require('./routes/upload'),
-
-    path = require('path'),
-    apply = require('./routes/apply');
-
     passwordReset = require('./routes/passwordReset'),
     reviewApplication = require('./routes/reviewApplication'),
     funding = require('./routes/funding'),
     path = require('path');
-
 
 var session = require('express-session') // cookie handler
 var app = express(); // initialise express object.
@@ -101,17 +96,11 @@ app.get("/submission",upload.uploadFile);
 app.post("/submission",upload.uploadFile);
 
 
-app.get("/apply", apply.storeApplications);
-app.post("/apply", apply.storeApplications);
-
-
-
-
 app.get("/apply",user.apply);
 app.post("/apply",user.apply);
 
-//app.get("/funding",user.funding);
-//app.post("/funding",user.funding);
+app.get("/funding",user.funding);
+app.post("/funding",user.funding);
 
 
 app.get("/group_members_add",user.group_members_add);
@@ -129,31 +118,9 @@ app.get("/passwordSuccess",);
 app.get("/viewSubmittedApplications",reviewApplication.viewSubmittedApplications);
 
 app.get("/reviewSingleApplication",reviewApplication.reviewSubmittedApplication);
-
-app.post("/saveReviewDraft",reviewApplication.saveReviewDraft);
-
-app.post("/finalizeReview",reviewApplication.finalizeReview);
-
-app.get("/proposals", funding.fetchCalls);
-
-//app.get("/createProposal", funding.createProposal);
-//app.post("/createProposal", funding.createProposal);
+app.post("/reviewSingleApplication",reviewApplication.reviewSubmittedApplication);
 
 app.post("/saveReview",reviewApplication.saveReviewDraft);
-
-
-
-app.get("/HeldProposal",user.heldProposal);
-app.post("/HeldProposal",user.heldProposal);
-
-app.get("/displayAllProposal",user.displayAllProposal);
-
-app.get("/displayAllProposal/:id",user.displayAllProposal_self);
-app.delete("/displayAllProposal/:id",user.displayAllProposal_delete);
-// app.put("/displayAllProposal/:id",user.displayAllProposal_update);
-
-
 app.listen('3001', () => {
   console.log("Server started on port 3001");
 });
-

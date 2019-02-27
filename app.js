@@ -75,9 +75,9 @@ app.use(session({
               secret: 'keyboard cat',
               resave: false,
               saveUninitialized: true,
-              cookie: { maxAge: 60000 }
+              cookie: { maxAge: 360000 }
             }));
-// cookie age is currently 1 minute
+// cookie age is currently 10 minutes
 
 // navigate to routes folder and run index.js file
 app.get('/',routes.index);

@@ -39,7 +39,7 @@ DROP TABLE IF EXISTS 'funding_diversification';
 CREATE TABLE 'funding_diversification' (
   start_date DATE NOT NULL,
   end_date DATE NOT NULL,
-  amount_of_funding VARCHAR(255) NOT NULL,
+  amount_of_funding INT NOT NULL,
   funding_body VARCHAR(255) NOT NULL,
   funding_programme VARCHAR(255) NOT NULL,
   status VARCHAR(255) NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE 'publications' (
   title VARCHAR(255) NOT NULL,
   journal_name VARCHAR(255) NOT NULL,
   publication_status INT NOT NULL, --INT because only one of select options
-  doi VARCHAR(255) NOT NULL,
+  doi VARCHAR(20) NOT NULL,
   primary_attribution VARCHAR(255) NOT NULL
 );
 
@@ -143,14 +143,14 @@ CREATE TABLE 'communications_overview' (
   year DATE NOT NULL,
   number_of_public_lectures INT NOT NULL,
   number_of_visits INT NOT NULL,
-  number_of_media_interactions NOT NULL
+  number_of_media_interactions INT NOT NULL
 );
 
 
 DROP TABLE IF EXISTS 'sfi_funding_ratio';
 CREATE TABLE 'sfi_funding_ratio' (
   year DATE NOT NULL,
-  percentage_of_annual_spend VARCHAR(255) NOT NULL
+  percentage_of_annual_spend INT NOT NULL
 );
 
 

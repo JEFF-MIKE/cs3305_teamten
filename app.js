@@ -4,13 +4,45 @@ var express = require('express'),
     http = require('http'),
     user = require('./routes/user'),
     upload = require('./routes/upload'),
+
+    path = require('path'),
+    apply = require('./routes/apply');
+
+    passwordReset = require('./routes/passwordReset'),
+    reviewApplication = require('./routes/reviewApplication'),
+    funding = require('./routes/funding'),
     path = require('path');
+
 
 var session = require('express-session') // cookie handler
 var app = express(); // initialise express object.
 var mysql = require("mysql"); // sql library
 var bodyParser = require("body-parser");
 var fileUpload = require('express-fileupload');
+/*
+// below three variables set up the emailing system
+var hbs = require('nodemailer-express-handlebars'),
+    email = process.env.PROGRAM_EMAIL,
+    pass = process.env.PROGRAM_EMAIL_PASSWORD,
+    nodemailer = require('nodemailer');
+
+var emailer = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: email,
+    pass,pass
+  }
+});
+// set the view Engine specifically for emailer
+var handlebarsOptions = {
+  viewEngine: 'handlebars',
+  viewPath: path.resolve('./emails/'),
+  extName: '.html'
+};
+
+emailer.use('compile',hbs(handlebarsOptions));
+
+*/
 
 // my personal database connection.
 var connection = mysql.createConnection({
@@ -19,22 +51,12 @@ var connection = mysql.createConnection({
     password : 'JCDQcTNBknX',
     database : 'mj_a_klaas_database',
     multipleStatements: true
-});
+  });
 
-// var connection = mysql.createConnection({
-//   host     : '127.0.0.1',
-//   user     : 'root',
-//   password : '12345678',
-//   database : 'nodemysql'
-//   // multipleStatements: true
-// });
-
-
-// Connect
-connection.connect((err) => {
-  if (err) throw err;
-  console.log("Connected to mysql database...");
-  // var sql = "INSERT INTO users(first_name,last_name,mob_no,user_name,password) VALUES ('123','123','123','123','123')";
+  connection.connect((err) => {
+    if (err) throw err;
+    console.log("Connected to mysql database!");
+    // var sql = "INSERT INTO users(first_name,last_name,mob_no,user_name,password) VALUES ('123','123','123','123','123')";
 });
 
 global.db = connection; // multiple things need this object.
@@ -60,9 +82,11 @@ app.use(session({
               saveUninitialized: true,
               cookie: { maxAge: 60000 }
             }));
+// cookie age is currently 1 minute
 
 // navigate to routes folder and run index.js file
 app.get('/',routes.index);
+app.get('/index',routes.index);
 app.get('/profile',user.profile);
 
 app.get('/login',user.login);
@@ -76,93 +100,60 @@ app.get('/logout',user.logout);
 app.get("/submission",upload.uploadFile);
 app.post("/submission",upload.uploadFile);
 
+
+app.get("/apply", apply.storeApplications);
+app.post("/apply", apply.storeApplications);
+
+
+
+
 app.get("/apply",user.apply);
+app.post("/apply",user.apply);
 
-// // Create DB
-// app.get('/createdb', (req, res) => {
-//   let sql = 'CREATE DATABASE nodemysql'
-//   connection.query(sql, (err, result) => {
-//     if(err) throw err;
-//     console.log(result);
-//     res.send('database created...');
-//   });
-// });
-
-// // Create table
-// app.get('/createpoststable', (req, res) => {
-//   let sql = 'create table posts(id int auto_increment, title varchar(255), body varchar(255), primary key(id))';
-//   connection.query(sql, (err, result) => {
-//       if(err) throw err;
-//       console.log(result);
-//       res.send('Posts table created...')
-//   });
-// });
-
-// // Insert post 1
-// app.get('/addpost1', (req, res) => {
-//   let post = {title:'Post One', body:'This is post number one'};
-//   let sql = 'insert into posts set ?';
-//     let query = connection.query(sql, post, (err, result) => {
-//       if(err) throw err;
-//       console.log(result);
-//       res.send('Posts 1 added...');
-//   });
-// });
-
-// // Insert post 2
-// app.get('/addpost2', (req, res) => {
-//   let post = {title:'Post Two', body:'This is post number two'};
-//   let sql = 'insert into posts set ?';
-//     let query = connection.query(sql, post, (err, result) => {
-//       if(err) throw err;
-//       console.log(result);
-//       res.send('Posts 2 added...');
-//   });
-// });
-
-// // Select post
-// app.get('/getposts', (req, res) => {
-//   let sql = 'select * from posts';
-//     let query = connection.query(sql, (err, result) => {
-//       if(err) throw err;
-//       console.log(result);
-//       res.send('Posts fetched...');
-//   });
-// });
-
-// // Select single post
-// app.get('/getpost/:id', (req, res) => {
-//   let sql = `select * from posts where id = ${req.params.id}`;
-//     let query = connection.query(sql, (err, result) => {
-//       if(err) throw err;
-//       console.log(result);
-//       res.send('Post fetched...');
-//   });
-// });
+//app.get("/funding",user.funding);
+//app.post("/funding",user.funding);
 
 
-// // Update title
-// app.get('/updatepost/:id', (req, res) => {
-//   let newTitle = 'Updated Title';
-//   let sql = `update posts set title = '${newTitle}' where id = ${req.params.id}`;
-//     let query = connection.query(sql, (err, result) => {
-//       if(err) throw err;
-//       console.log(result);
-//       res.send('Post updated...');
-//   });
-// });
+app.get("/group_members_add",user.group_members_add);
+app.post("/group_members_add",user.group_members_add);
+
+app.get("/group_members_delete",user.group_members_delete);
+app.post("/group_members_delete",user.group_members_delete);
+
+app.get("/resetPassword",passwordReset.resetPassword);
+app.post("/resetPassword",passwordReset.resetPassword);
+
+// not posting anything to the success page for password
+app.get("/passwordSuccess",);
+
+app.get("/viewSubmittedApplications",reviewApplication.viewSubmittedApplications);
+
+app.get("/reviewSingleApplication",reviewApplication.reviewSubmittedApplication);
+
+app.post("/saveReviewDraft",reviewApplication.saveReviewDraft);
+
+app.post("/finalizeReview",reviewApplication.finalizeReview);
+
+app.get("/proposals", funding.fetchCalls);
+
+//app.get("/createProposal", funding.createProposal);
+//app.post("/createProposal", funding.createProposal);
+
+app.post("/saveReview",reviewApplication.saveReviewDraft);
 
 
-// // Delete post
-// app.get('/deletepost/:id', (req, res) => {
-//   let sql = `delete from posts where id = ${req.params.id}`;
-//     let query = connection.query(sql, (err, result) => {
-//       if(err) throw err;
-//       console.log(result);
-//       res.send('Post deleted...');
-//   });
-// });
+
+app.get("/HeldProposal",user.heldProposal);
+app.post("/HeldProposal",user.heldProposal);
+
+app.get("/displayAllProposal",user.displayAllProposal);
+
+app.get("/displayAllProposal/:id",user.displayAllProposal_self);
+app.delete("/displayAllProposal/:id",user.displayAllProposal_delete);
+// app.put("/displayAllProposal/:id",user.displayAllProposal_update);
+
 
 app.listen('3001', () => {
   console.log("Server started on port 3001");
 });
+

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Group and Members</title>
+</head>
+<body>
+	<h1>Group and Members</h1>
+	<br>
+	<h1>DELETE</h1>	
+	<div>
+		<form method="post">
+			<% if (status.length > 0) { %>
+      		<!-- Error message in this p -->
+      		<p class="d-inline p mb-2"><%= status %><p>
+      		<% } %>
+			Group Name:<input type="text" name="groupName" placeholder="Group Name">
+			<br>
+			<br>
+			User Name: <input type="text" name="memberName" placeholder="User Name">
+			<br>
+			<input type="submit" name="delete" value="Delete Relationship">
+		</form>
+		<a href="/group_members_add">Click here to add relationship</a>
+		<br>
+		<a class="btn btn-lg btn-info btn-block" role="button" href="/">Home</a>
+	</div>
+</body>
+</html>

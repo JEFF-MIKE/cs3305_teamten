@@ -9,7 +9,8 @@
         
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
         <link rel="stylesheet" href="../public/apply.css">
-        <script type="text/javascript" src="apply.js"></script>
+        <link rel="stylesheet" href="../team10.css">
+        <script type="text/javascript" src="../public/apply.js"></script>
         <style>
             @import url('https://fonts.googleapis.com/css?family=Cabin|Dosis');
         </style>
@@ -56,28 +57,20 @@
                 If you'd like to apply for your relavant funding<br> Please fill out the form below and attach a CV.
             </p1>
             <p2>
-                <div class="form-group">
-                    <label for="name">Full name:</label>
-                    <textarea class="form-control" rows="1" id="name" placeholder="Your Full name"></textarea>
-                </div>
-                <!-- Remember the funding that is clicked on -->
-                <div class="form-group">
-                    <label for="fundingID">Funding:</label>
-                    <textarea class="form-control" rows="1" id="fundingID" placeholder="Your Founding ID"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="comment">Why you should get this funding:</label>
-                    <textarea class="form-control" rows="5" id="comment" placeholder="Reason..."></textarea>
-                </div>
-                <div class="file-upload-wrapper">
-                    <label for="input-file-now" class="file-upload">Choose File</label>
-                    <input type="file" id="input-file-now"/>
-                </div>
-                <div class = "row">
-                    <form class="form-apply">
-                        <button class="btn btn-lg btn-primary btn-block" type="submit"><i class="far fa-paper-plane"></i>Submit Application</button>
-                    </form>
-                </div>
+                <form class="form-group" method="post" action="/apply" role="form">
+                    <div>
+                        <label for="name">Name of application:</label>
+                    <textarea class="form-control" rows="1" name="name_of_application" placeholder="Name of application"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="comment">Why you should get this funding:</label>
+                        <textarea class="form-control" rows="5" name="comment" placeholder="Reason..."></textarea>
+                    </div>
+
+                    <button class="btn btn-lg btn-primary btn-block" type="submit"><i class="far fa-paper-plane"></i>Submmit</button>
+
+                </form>              
             </p2>
         </main>
     </body>

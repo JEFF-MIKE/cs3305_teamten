@@ -2,25 +2,19 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Team 10 Funding Application page</title>
-        
-        <!-- Bootstrap core CSS -->
-        <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        
+        <title>Team 10 Research Page</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
         <link rel="stylesheet" href="team10.css">
-        <script type="text/javascript" src="apply.js"></script>
+        <link rel="stylesheet" href="news.css">
         <style>
             @import url('https://fonts.googleapis.com/css?family=Cabin|Dosis');
         </style>
-        <!-- The paper plane icon for the submit button. -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     </head>
     <body>
-        <div class="jumbotron text-center" style="margin-bottom:0">
+        <header class="jumbotron text-center" style="margin-bottom:0">
             <h1>Team 10 Research Page</h1>
-            <p>This is the page where you can apply for funding.</p> 
-        </div>
+            <p>News and events</p> 
+        </header>
         <!-- To change nav colour change the bg-info part to be bg-somethingelse. Navbar-custom can also be changed for nice looking stuff. -->
         <nav class="navbar navbar-expand-sm bg-info navbar-custom">
             <a class="navbar-brand" href="index.html">Home</a>
@@ -37,49 +31,72 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="profile.html">My Profile</a>
-                    </li>
+                    </li> 
                     <li class="nav-item">
                         <a class="nav-link" href="submitDoc.html">Submit Documents</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="news.html">News Updates</a>
+                        <a class="nav-link" href="#">News Updates</a>
                     </li>
                     <input type="text" placeholder=" Search..">
                 </ul>
             </div>  
         </nav>
-        <main class="container" style="margin-bottom:0">
-            <h1>
-                Applying for funding.
-            </h1>
-            <p1>
-                If you'd like to apply for your relavant funding<br> Please fill out the form below and attach a CV.
-            </p1>
-            <p2>
-                <div class="form-group">
-                    <label for="name">Full name:</label>
-                    <textarea class="form-control" rows="1" id="name"></textarea>
+        <main>
+            <section class="details-card">
+                <div class="container">
+                    <div class="row">
+                    <!--
+                        <ol class="carousel-indicators">
+                            <li data-target="#blogCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#blogCarousel" data-slide-to="1"></li>
+                        </ol>
+                        -->
+                        <div class="col-md-4">
+                            <div class="card-content">
+                                <div class="card-img">
+                                    <img src="Car.jpg" alt="A picture of a pit crew fixing a racing car at a nascar event" >
+                                    <span><h4>News</h4></span>
+                                </div>
+                                <div class="card-desc">
+                                    <h3>SFI Wishes Good Luck to Teams Competing at Formula Imperial</h3>
+                                    <p><i>On December 12, 2018</i></p>
+                                    <p>Each year, SFI Affiliate sanctioning body Imperial Society of Innovative Engineers (ISIE) in India hosts a student engineering competition in which teams demonstrate and prove their creativity and their engineering skills to compete with a Formula-style vehicle in areas of engineering design, safety, overall cost, marketability and</p>
+                                    <a href="https://sfifoundation.com/sfi-wishes-good-luck-to-teams-competing-at-formula-imperial/" class="btn-card">Read more</a>   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-content">
+                                <div class="card-img">
+                                    <img src="events.jpg" alt="students huddled over a table reading a page and talking">
+                                    <span><h4>Events</h4></span>
+                                </div>
+                                <div class="card-desc">
+                                    <h3>I'm an Engineer, Get me out of here!</h3>
+                                    <p><i>4 March – 17 March 2019</i></p>
+                                    <p>I’m an Engineer, Get me out of here! is an online STEM enrichment activity where students connect with engineers and talk about the things that really matter to them. Students challenge the engineers over fast-paced online text-based live CHATs. They ASK the engineers anything they want, and </p>
+                                    <a href="http://www.sfi.ie/events/#/?i=1" class="btn-card">Read more</a>   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-content">
+                                <div class="card-img">
+                                    <img src="DORA.png" alt="logo for Declaration of Research Assessment San Francisco, comprises the words 'Signatory of DORA' with spikes coming inward with all different colours of the rainbow">
+                                        <span><h4>News</h4></span>
+                                </div>
+                                <div class="card-desc">
+                                    <h3>SFI Joins DORA</h3>
+                                    <p><i>On 14th February 2019</i></p>
+                                    <p>Science Foundation Ireland has become a signatory to the San Francisco Declaration of Research Assessment (DORA), making a formal commitment to assessing the quality and impact of research through means other than journal impact factors.DORA comprises a set of recommendations that respond to the pressing need to</p>
+                                    <a href="http://www.sfi.ie/research-news/news/sfi-joins-dora/" class="btn-card">Read more</a>   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- Remember the funding that is clicked on -->
-                <div class="form-group">
-                    <label for="fundingID">Funding:</label>
-                    <textarea class="form-control" rows="1" id="fundingID"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="comment">Why you should get this funding:</label>
-                    <textarea class="form-control" rows="5" id="comment"></textarea>
-                </div>
-                <div class="file-upload-wrapper">
-                    <label for="input-file-now" class="file-upload">
-                    </label>
-                    <input type="file" id="input-file-now"/>
-                </div>
-                <div class = "row">
-                    <form class="form-apply">
-                        <button class="btn btn-lg btn-primary btn-block" type="submit"><i class="far fa-paper-plane"></i>Submit Application</button>
-                    </form>
-                </div>
-            </p2>
+            </section>
         </main>
     </body>
     <footer id="footer" class="footer mt-auto py-3">

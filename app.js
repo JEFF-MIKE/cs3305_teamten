@@ -4,15 +4,8 @@ var express = require('express'),
     http = require('http'),
     user = require('./routes/user'),
     upload = require('./routes/upload'),
-<<<<<<< HEAD
     path = require('path'),
     apply = require('./routes/apply');
-=======
-    passwordReset = require('./routes/passwordReset'),
-    reviewApplication = require('./routes/reviewApplication'),
-    funding = require('./routes/funding'),
-    path = require('path');
->>>>>>> e2fed4d32353acbaf4d8fa3fba24c3dece35c299
 
 var session = require('express-session') // cookie handler
 var app = express(); // initialise express object.
@@ -100,48 +93,7 @@ app.get('/logout',user.logout);
 app.get("/submission",upload.uploadFile);
 app.post("/submission",upload.uploadFile);
 
-<<<<<<< HEAD
 app.get("/apply", apply.storeApplications);
 app.post("/apply", apply.storeApplications);
 
 app.listen('3001');
-=======
-
-app.get("/apply",user.apply);
-app.post("/apply",user.apply);
-
-//app.get("/funding",user.funding);
-//app.post("/funding",user.funding);
-
-
-app.get("/group_members_add",user.group_members_add);
-app.post("/group_members_add",user.group_members_add);
-
-app.get("/group_members_delete",user.group_members_delete);
-app.post("/group_members_delete",user.group_members_delete);
-
-app.get("/resetPassword",passwordReset.resetPassword);
-app.post("/resetPassword",passwordReset.resetPassword);
-
-// not posting anything to the success page for password
-app.get("/passwordSuccess",);
-
-app.get("/viewSubmittedApplications",reviewApplication.viewSubmittedApplications);
-
-app.get("/reviewSingleApplication",reviewApplication.reviewSubmittedApplication);
-
-app.post("/saveReviewDraft",reviewApplication.saveReviewDraft);
-
-app.post("/finalizeReview",reviewApplication.finalizeReview);
-
-app.get("/proposals", funding.fetchCalls);
-
-//app.get("/createProposal", funding.createProposal);
-//app.post("/createProposal", funding.createProposal);
-
-app.post("/saveReview",reviewApplication.saveReviewDraft);
-
-app.listen('3001', () => {
-  console.log("Server started on port 3001");
-});
->>>>>>> e2fed4d32353acbaf4d8fa3fba24c3dece35c299

@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS 'education';
+--SELECT * FROM 'educationDROP' TABLE IF EXISTS 'education';
 CREATE TABLE 'education' (
   degree VARCHAR(255) NOT NULL,
   field_of_study VARCHAR(255) NOT NULL,
@@ -7,7 +7,7 @@ CREATE TABLE 'education' (
   year_of_degree_award DATE NOT NULL
 );
 
-
+--SELECT * FROM 'employment'
 DROP TABLE IF EXISTS 'employment';
 CREATE TABLE 'employment' (
   company_name VARCHAR(255) NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE 'employment' (
   years DATE NOT NULL
 );
 
-
+--SELECT * FROM 'professional_societies'
 DROP TABLE IF EXISTS 'professional_societies';
 CREATE TABLE 'professional_societies' (
   start_date DATE NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE 'professional_societies' (
   status VARCHAR(255) NOT NULL
 );
 
-
+--SELECT * FROM 'awards'
 DROP TABLE IF EXISTS 'awards';
 CREATE TABLE 'awards' (
   year DATE NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE 'awards' (
   team_member_name VARCHAR(255) NOT NULL
 );
 
-
+--SELECT * FROM 'funding_diversification'
 DROP TABLE IF EXISTS 'funding_diversification';
 CREATE TABLE 'funding_diversification' (
   start_date DATE NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE 'funding_diversification' (
   primary_attribution VARCHAR(255) NOT NULL
 );
 
-
+--SELECT * FROM 'team_members'
 DROP TABLE IF EXISTS 'team_members';
 CREATE TABLE 'team_members' (
   start_date_with_team DATE NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE 'team_members' (
   primary_attribution VARCHAR(255) NOT NULL
 );
 
-
+--SELECT * FROM 'impacts'
 DROP TABLE IF EXISTS 'impacts';
 CREATE TABLE 'impacts' (
   impact_title VARCHAR(255) NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE 'impacts' (
   primary_attribution VARCHAR(255) NOT NULL
 );
 
-
+--SELECT * FROM 'innovation_and_commercialisation'
 DROP TABLE IF EXISTS 'innovation_and_commercialisation';
 CREATE TABLE 'innovation_and_commercialisation' (
   year DATE NOT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE 'innovation_and_commercialisation' (
   primary_attribution VARCHAR(255) NOT NULL
 );
 
-
+--SELECT * FROM 'publications'
 DROP TABLE IF EXISTS 'publications';
 CREATE TABLE 'publications' (
   publication_year DATE NOT NULL,
@@ -86,7 +86,7 @@ CREATE TABLE 'publications' (
   primary_attribution VARCHAR(255) NOT NULL
 );
 
-
+--SELECT * FROM 'presentations'
 DROP TABLE IF EXISTS 'presentations';
 CREATE TABLE 'presentations' (
   year DATE NOT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE 'presentations' (
   primary_attribution VARCHAR(255) NOT NULL
 );
 
-
+--SELECT * FROM 'academic_collaborations'
 DROP TABLE IF EXISTS 'academic_collaborations';
 CREATE TABLE 'academic_collaborations' (
   start_date DATE NOT NULL,
@@ -111,7 +111,7 @@ CREATE TABLE 'academic_collaborations' (
   primary_attribution VARCHAR(255) NOT NULL
 );
 
-
+--SELECT * FROM 'non_academic_collaborations'
 DROP TABLE IF EXISTS 'non_academic_collaborations';
 CREATE TABLE 'non_academic_collaborations' (
   start_date DATE NOT NULL,
@@ -125,7 +125,7 @@ CREATE TABLE 'non_academic_collaborations' (
   primary_attribution VARCHAR(255) NOT NULL
 );
 
-
+--SELECT * FROM 'conferences'
 DROP TABLE IF EXISTS 'conferences';
 CREATE TABLE 'conferences' (
   start_date DATE NOT NULL,
@@ -137,7 +137,7 @@ CREATE TABLE 'conferences' (
   primary_attribution VARCHAR(255) NOT NULL
 );
 
-
+--SELECT * FROM 'communications_overview'
 DROP TABLE IF EXISTS 'communications_overview';
 CREATE TABLE 'communications_overview' (
   year DATE NOT NULL,
@@ -146,14 +146,14 @@ CREATE TABLE 'communications_overview' (
   number_of_media_interactions INT NOT NULL
 );
 
-
+--SELECT * FROM 'sfi_funding_ratio'
 DROP TABLE IF EXISTS 'sfi_funding_ratio';
 CREATE TABLE 'sfi_funding_ratio' (
   year DATE NOT NULL,
   percentage_of_annual_spend INT NOT NULL
 );
 
-
+--SELECT * FROM 'education_and_public_engagement'
 DROP TABLE IF EXISTS 'education_and_public_engagement';
 CREATE TABLE 'education_and_public_engagement' (
   name_of_project VARCHAR(255) NOT NULL,

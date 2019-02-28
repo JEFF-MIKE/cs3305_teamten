@@ -11,6 +11,7 @@ var passwordReset = require('./routes/passwordReset');
 var reviewApplication = require('./routes/reviewApplication');
 var funding = require('./routes/funding');
 var path = require('path');
+var funderActions = require('./routes/funderActions');
 
 
 var session = require('express-session') // cookie handler
@@ -126,6 +127,8 @@ app.get("/viewSubmittedApplications",reviewApplication.viewSubmittedApplications
 
 app.get("/reviewSingleApplication",reviewApplication.reviewSubmittedApplication);
 app.post("/reviewSingleApplication",reviewApplication.reviewSubmittedApplication);
+
+app.get("/funderViewCalls",funderActions.funderViewCalls);
 
 app.post("/saveReview",reviewApplication.saveReviewDraft);
 app.listen('3001', () => {

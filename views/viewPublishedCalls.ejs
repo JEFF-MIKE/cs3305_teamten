@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>View Your Calls</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/public/index.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Khand');
+    </style>
+</head>
+<body>
+    <div class="jumbotron text-center" style="margin-bottom:0">
+        <h1>Team 10 Research Page</h1>
+        <% if (userName === undefined) { %> 
+        <p>This is our team project page</p>
+        <% } %>
+        <% if (userName.length) { %>
+        <p><%= userName %>. Select Dashboard to see your available actions.</p>
+        <% } %> 
+    </div>
+    <% include mainNav %>
+    <main>
+        <% if (rows === undefined) { %>
+            <p>You have not created any calls.</p>
+        <% } %>
+        <% if (rows !== undefined){ %>
+            <% for(let i=0;i<rows.length;i++) { %>
+                <div id = "<% rows[i].call_id %>">
+                <h1> <%= rows[i].title %> </h1>
+                <span>Status: <%= rows[i].status %></span>
+                <button class="btn btn-lg btn-primary btn-block p2" type="submit" formaction="<%= '/funderViewApplications?call_id=' + rows[i].call_id %>">View Applications for call</button>
+                </div>
+            <% } %>
+        <% } %>
+    </main>
+    <% include mainFooter %>
+</body>
+</html>

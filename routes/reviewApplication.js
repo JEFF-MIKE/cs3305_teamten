@@ -34,10 +34,6 @@ function checkReview(data,callback){
    });
 }
 
-function setDraftApplication(data,callback){
-    /* Callback function for setting the value of a draft in the database
-    */
-}
 
 exports.saveReviewDraft = (req,res) => {
     if (req.session.user_name === undefined && req.session.user_id === undefined){

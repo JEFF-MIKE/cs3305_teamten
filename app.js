@@ -4,10 +4,21 @@ var express = require('express'),
     http = require('http'),
     user = require('./routes/user'),
     upload = require('./routes/upload'),
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    path = require('path'),
+    apply = require('./routes/apply');
+=======
+>>>>>>> parent of ad9bfca... amend files
     passwordReset = require('./routes/passwordReset'),
     reviewApplication = require('./routes/reviewApplication'),
     funding = require('./routes/funding'),
     path = require('path');
+<<<<<<< HEAD
+=======
+>>>>>>> e2fed4d32353acbaf4d8fa3fba24c3dece35c299
+>>>>>>> parent of ad9bfca... amend files
 
 var session = require('express-session') // cookie handler
 var app = express(); // initialise express object.
@@ -95,6 +106,15 @@ app.get('/logout',user.logout);
 app.get("/submission",upload.uploadFile);
 app.post("/submission",upload.uploadFile);
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+app.get("/apply", apply.storeApplications);
+app.post("/apply", apply.storeApplications);
+
+app.listen('3001');
+=======
+>>>>>>> parent of ad9bfca... amend files
 
 app.get("/apply",user.apply);
 app.post("/apply",user.apply);
@@ -133,3 +153,7 @@ app.post("/saveReview",reviewApplication.saveReviewDraft);
 app.listen('3001', () => {
   console.log("Server started on port 3001");
 });
+<<<<<<< HEAD
+=======
+>>>>>>> e2fed4d32353acbaf4d8fa3fba24c3dece35c299
+>>>>>>> parent of ad9bfca... amend files

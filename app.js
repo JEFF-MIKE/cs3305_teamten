@@ -119,8 +119,8 @@ app.listen('3001');
 app.get("/apply",user.apply);
 app.post("/apply",user.apply);
 
-//app.get("/funding",user.funding);
-//app.post("/funding",user.funding);
+app.get("/funding",funding.funding);
+app.post("/funding",funding.funding);
 
 
 app.get("/group_members_add",user.group_members_add);
@@ -138,18 +138,9 @@ app.get("/passwordSuccess",);
 app.get("/viewSubmittedApplications",reviewApplication.viewSubmittedApplications);
 
 app.get("/reviewSingleApplication",reviewApplication.reviewSubmittedApplication);
-
-app.post("/saveReviewDraft",reviewApplication.saveReviewDraft);
-
-app.post("/finalizeReview",reviewApplication.finalizeReview);
-
-app.get("/proposals", funding.fetchCalls);
-
-//app.get("/createProposal", funding.createProposal);
-//app.post("/createProposal", funding.createProposal);
+app.post("/reviewSingleApplication",reviewApplication.reviewSubmittedApplication);
 
 app.post("/saveReview",reviewApplication.saveReviewDraft);
-
 app.listen('3001', () => {
   console.log("Server started on port 3001");
 });

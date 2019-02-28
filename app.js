@@ -99,8 +99,8 @@ app.post("/submission",upload.uploadFile);
 app.get("/apply",user.apply);
 app.post("/apply",user.apply);
 
-app.get("/funding",user.funding);
-app.post("/funding",user.funding);
+app.get("/funding",funding.funding);
+app.post("/funding",funding.funding);
 
 
 app.get("/group_members_add",user.group_members_add);

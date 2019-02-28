@@ -34,6 +34,11 @@ function checkReview(data,callback){
    });
 }
 
+function setDraftApplication(data,callback){
+    /* Callback function for setting the value of a draft in the database
+    */
+}
+
 exports.saveReviewDraft = (req,res) => {
     if (req.session.user_name === undefined && req.session.user_id === undefined){
         let string = encodeURIComponent('0');
@@ -137,8 +142,6 @@ exports.reviewSubmittedApplication = (req,res) => {
                             // Assign variables and then render the single
                             // application to the reviewer. 
                             res.render("submitReview.ejs",{resultList:result, userName: req.session.user_name});
-                        } else {
-                            res.send("An error occured with the database!");
                         }
                     });
                 }

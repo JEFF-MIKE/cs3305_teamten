@@ -4,12 +4,12 @@ var express = require('express'),
     http = require('http'),
     user = require('./routes/user'),
     upload = require('./routes/upload'),
-    path = require('path'),
-    apply = require('./routes/apply');
+    path = require('path');
+    //apply = require('./routes/apply');
 
-var passwordReset = require('./routes/passwordReset'),
-var reviewApplication = require('./routes/reviewApplication'),
-var funding = require('./routes/funding'),
+var passwordReset = require('./routes/passwordReset');
+var reviewApplication = require('./routes/reviewApplication');
+var funding = require('./routes/funding');
 var path = require('path');
 
 
@@ -99,10 +99,8 @@ app.get('/logout',user.logout);
 app.get("/submission",upload.uploadFile);
 app.post("/submission",upload.uploadFile);
 
-app.get("/apply", apply.storeApplications);
-app.post("/apply", apply.storeApplications);
-
-app.listen('3001');
+//app.get("/apply", apply.storeApplications);
+//app.post("/apply", apply.storeApplications);
 
 app.get("/apply",user.apply);
 app.post("/apply",user.apply);
@@ -110,6 +108,7 @@ app.post("/apply",user.apply);
 app.get("/funding",funding.funding);
 app.post("/funding",funding.funding);
 
+app.post("/finalizeReview", reviewApplication.finalizeReview);
 
 app.get("/group_members_add",user.group_members_add);
 app.post("/group_members_add",user.group_members_add);

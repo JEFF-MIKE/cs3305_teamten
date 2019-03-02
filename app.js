@@ -130,6 +130,10 @@ app.post("/reviewSingleApplication",reviewApplication.reviewSubmittedApplication
 
 app.get("/funderViewCalls",funderActions.funderViewCalls);
 
+app.get("/funderViewApplications",funderActions.funderViewApplications);
+
+app.get("/funderViewReviews",funderActions.funderViewReviews);
+
 app.post("/saveReview",reviewApplication.saveReviewDraft);
 app.listen('3001', () => {
   console.log("Server started on port 3001");

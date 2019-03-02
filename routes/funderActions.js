@@ -19,6 +19,36 @@ function selectRoles(data,callback){
    });
 }
 
+function checkFunderCallID(data,callback){
+    // function required to check whether the funder can 
+    // in fact view these applications or not.
+    // data is object containing user_id and 
+    let sql = "SELECT * FROM calls WHERE funder_user_id = ? and call_id = ?;";
+    db.query(sql,[data.user_id,data.call_id],(err,rows) => {
+        if (err){
+            callback(err,null);
+        } else {
+            callback(null,rows);
+        }
+    });
+}
+
+function getResearcherDetails(data,callback){
+    /* 
+    Callback function for getting the name,last name
+    and username of the researcher who submitted the application.
+    Data is a tuple of the user_ids
+    */
+   let sql = "SELECT first_name,last_name,user_name,id FROM `users` where id in " + data +" ;";
+   db.query(sql,data,(err,rows) => {
+       if (err){
+           callback(err,null);
+       } else {
+           callback(null,rows);
+       }
+   });
+}
+
 function selectCalls(data,callback){
     /*
     Callback function for selecting what calls belong to which funder_user
@@ -29,10 +59,63 @@ function selectCalls(data,callback){
        if (err){
            callback(err,null);
        } else {
-           callback(err,rows);
+           callback(null,rows);
        }
     });
 }
+
+function grabRelatedApplications(data,callback){
+    /* 
+    Callback function for grabbing all the applications that relate
+    to the call_id. Data is call_id.
+    */
+   let sql = "SELECT * FROM `applications` WHERE call_id = ? AND approved = 0 ORDER BY application_id;";
+   db.query(sql,data,(err,rows) => {
+       if(err){
+           callback(err,null);
+       } else {
+           callback(null,rows)
+       }
+   });
+}
+
+function verifyApplicationToCall(data,callback){
+    /* 
+    Callback function to check whether we have access to 
+    reviews on this application or not.
+    Grabs the calls which funder has posted first then
+    Grabs all reviews made for this application.
+    */
+   let sql = "SELECT call_id from calls where funder_user_id = ?;";
+   // declare variables here so they can be used
+   db.query(sql,data,(err,rows) => {
+       if (rows.length){
+        // call_ids grabbed
+        let newArray = [];
+        for (let q = 0;q<rows.length;q++){
+            newArray.push(rows[q].call_id);
+        }
+        callback(null,"( " + newArray.join() + " )");
+       } else{
+           callback(err,null);
+       }
+   });
+}
+function grabRelevantReviews(data,callback){
+   // data is user_id of funder and then application id
+   verifyApplicationToCall(data.user_id,(err,callIds) => {
+       if (err){
+            return res.send("Call was invalid");
+       } else {
+           console.log("Returned from helper function: " + callIds);
+            let reviewsSQL = "SELECT * FROM reviews_v1 WHERE call_id IN " + callIds + " AND application_id = ? and is_draft = 0;";
+            db.query(reviewsSQL,[data.application_id],(err,result) => {
+                callback(err,result);
+        });
+        }
+    });
+}
+
 /* 
     Funders overall will be able to see the following:
     Click on applications.
@@ -70,9 +153,9 @@ exports.funderViewCalls = (req,res) => {
                         res.send(err);
                     } else {
                         if (rows.length){
-                            res.render("viewPublishedCalls.ejs",{userName: req.session.user_name,rows: rows});
+                            return res.render("viewPublishedCalls.ejs",{userName: req.session.user_name,rows: rows});
                         } else {
-                            res.render("viewPublishedCalls.ejs",{userName: req.session.user_name,rows:undefined});
+                            return res.render("viewPublishedCalls.ejs",{userName: req.session.user_name,rows:undefined});
                         }
                     }
                 });
@@ -81,3 +164,117 @@ exports.funderViewCalls = (req,res) => {
     });
 }
 
+exports.funderViewApplications = (req,res) => {
+    // allows a funder to view applications after clicking a call.
+    if (req.session.user_name === undefined && req.session.user_id === undefined){
+        return res.send("You must be logged in to view this.")
+    }
+    if (req.query === {}) {
+        // empty query, throw error!
+        return res.send("No call identified!");
+    }
+    // Check to see if they are a funder
+    selectRoles(req.session.user_id,(err,roles) => {
+        if (err){
+            console.log(err);
+            res.send(err);
+        } else {
+            if (roles.funder === "NO") {
+                return res.send("You must be a funder to view this.");
+            } else {
+                // we check to see if this funder can actually view
+                // these applications or not.
+                checkFunderCallID({ user_id:req.session.user_id,call_id:req.query.call_id },(err,result) =>{
+                    if (err){
+                        return res.send("Error! Could not validate if funder can view these applications!");
+                    }
+                    if (result.length === 0) {
+                        // they can't view it, return the error message
+                        return res.send("This is not your call. Not displaying applications.");
+                    }
+                    else {
+                    // now we grab data and pass it through to the template
+                    // defining now to make the template part much easier.
+                    
+                    let userDetails = [];
+                    let applicationDetails = [];
+                    let z = req.query.call_id; 
+                    grabRelatedApplications(z,(err,applications) => {
+                        if (err){
+                            console.log(err);
+                            return res.send("An error occured when grabbing applications!");
+                        } else {
+                            // There should only be one application made by a 
+                            // researcher at a time, so just grab user details
+                            // for said applications.
+                            if (applications.length === 0) {
+                                // no applications have been made, return immediately
+                                return res.render('funderViewApplications.ejs',{   userName: req.session.user_name,
+                                                                            userDetails:userDetails,
+                                                                            applicationDetails:applicationDetails
+
+                                });
+                            }
+                            applicationDetails = applications;
+                            let tempArray = []; //array used for querying
+                            for (let i = 0; i<applications.length;i++){
+                                if (tempArray.includes(applications[i].applicant_id) === false ){
+                                    tempArray.push(applications[i].applicant_id);
+                                } 
+                            }
+                            let stringQuery = "( "+ tempArray.join() + " )";
+                            console.log(stringQuery);
+                            getResearcherDetails(stringQuery,(err,details) =>{
+                                if (err){
+                                    return res.send("An error occured when grabbing applicant details!");
+                                } else {
+                                    // now we render the application views
+                                    userDetails = details;
+                                    return res.render('funderViewApplications.ejs',{    userName:req.session.user_name,
+                                                                                        userDetails:userDetails,
+                                                                                        applicationDetails:applicationDetails
+                                                                                    }
+                                    );
+                            }
+                        });
+                    }
+                });
+                } 
+            });
+            }
+        }
+    });
+}
+
+exports.funderViewReviews = (req,res) => {
+    if (req.session.user_name === undefined && req.session.user_id === undefined){
+        return res.send("You must be logged in to view this page.");
+    }
+    if (req.query === {}) {
+        return res.send("No application specified...");
+    }
+    selectRoles(req.session.user_id,(er,roleObj) => {
+        if (roleObj.funder === "NO"){
+            return res.send("You must be a funder to view this page");
+        } else {
+            // verified funder. Check to see if application matches their call
+            let appFromLinkId = req.query.application;
+            grabRelevantReviews({user_id:req.session.user_id,application_id: appFromLinkId},(err,result) => {
+                if (err){
+                    console.log(err);
+                    return res.send("An error occured while querying the database!");
+                } else {
+                    // render the reviews for this application
+                    if (result.length){
+                        return res.render('funderViewReviews.ejs',{userName:req.session.user_name,reviews:result,failure:[]});
+                    } else {
+                        let sql = "SELECT call_id FROM applications where application_id = ?;";
+                        db.query(sql,appFromLinkId,(err,failure) => {
+                        return res.render('funderViewReviews.ejs',{userName:req.session.user_name,reviews:[],failure:failure});
+                    });
+                    }
+                }
+            });
+        }
+    });
+}

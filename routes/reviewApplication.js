@@ -12,8 +12,7 @@ function selectRoles(data,callback){
                admin: rows[0].admin,
                reviewer: rows[0].reviewer,
                researcher: rows[0].researcher,
-               funder: rows[0].funder,
-               research_office: rows[0].research_office
+               funder: rows[0].funder
            };
            callback(null,retObj);
        }
@@ -33,6 +32,11 @@ function checkReview(data,callback){
            callback(null,rows);
        }
    });
+}
+
+function setDraftApplication(data,callback){
+    /* Callback function for setting the value of a draft in the database
+    */
 }
 
 exports.saveReviewDraft = (req,res) => {
@@ -138,8 +142,6 @@ exports.reviewSubmittedApplication = (req,res) => {
                             // Assign variables and then render the single
                             // application to the reviewer. 
                             res.render("submitReview.ejs",{resultList:result, userName: req.session.user_name});
-                        } else {
-                            res.send("An error occured with the database!");
                         }
                     });
                 }

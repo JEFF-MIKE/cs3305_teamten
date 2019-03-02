@@ -17,24 +17,15 @@
     }
 </style>
 <body>
-    <div class="jumbotron text-center" style="margin-bottom:0">
-    <h1>Team 10 Research Page</h1>
-    <% if (userName === undefined) { %> 
-    <p>This is our team project page</p>
-    <% } %>
-    <% if (userName.length) { %>
-    <p><%= userName %>. Select Dashboard to see your available actions.</p>
-    <% } %> 
-    </div>
     <% include mainNav %>
     <main>
-            <div id = "<%= resultList[0].application_id %>" class="application">
-                <p> <%= resultList[0].applicant_id %></p>        
+            <div id="<%= resultList[0].application_id %>" class="application">
+                <p> <%= resultList[0].applicant_id %> </p>        
             </div>
     <form role="form" method="post" action="/finalizeReview" >
     <div class="form-group">
     <label for="exampleFormControlTextarea3">Review analysis</label>
-    <textarea class="form-control" id="exampleFormControlTextarea3" rows="10" name="txt"></textarea>
+    <textarea class="form-control" id="exampleFormControlTextarea3" rows="10"></textarea>
     <input type="hidden" name="application_id" value="<%= resultList[0].application_id %>">
     <input type="hidden" name="applicant_id" value="<%= resultList[0].applicant_id %>">
   </div>

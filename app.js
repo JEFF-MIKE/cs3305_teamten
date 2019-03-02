@@ -7,6 +7,14 @@ var express = require('express'),
     path = require('path'),
     apply = require('./routes/apply');
     sendEmail = require('./routes/sendEmail');
+    path = require('path');
+    //apply = require('./routes/apply');
+
+var passwordReset = require('./routes/passwordReset');
+var reviewApplication = require('./routes/reviewApplication');
+var funding = require('./routes/funding');
+var path = require('path');
+
 
 var session = require('express-session') // cookie handler
 var app = express(); // initialise express object.
@@ -74,9 +82,9 @@ app.use(session({
               secret: 'keyboard cat',
               resave: false,
               saveUninitialized: true,
-              cookie: { maxAge: 60000 }
+              cookie: { maxAge: 360000 }
             }));
-// cookie age is currently 1 minute
+// cookie age is currently 10 minutes
 
 // navigate to routes folder and run index.js file
 app.get('/',routes.index);
@@ -94,7 +102,42 @@ app.get('/logout',user.logout);
 app.get("/submission",upload.uploadFile);
 app.post("/submission",upload.uploadFile);
 
+<<<<<<< HEAD
 app.get("/apply", apply.storeApplications);
 app.post("/apply", apply.storeApplications);
 
 app.listen('3001');
+=======
+//app.get("/apply", apply.storeApplications);
+//app.post("/apply", apply.storeApplications);
+
+app.get("/apply",user.apply);
+app.post("/apply",user.apply);
+
+app.get("/funding",funding.funding);
+app.post("/funding",funding.funding);
+
+app.post("/finalizeReview", reviewApplication.finalizeReview);
+
+app.get("/group_members_add",user.group_members_add);
+app.post("/group_members_add",user.group_members_add);
+
+app.get("/group_members_delete",user.group_members_delete);
+app.post("/group_members_delete",user.group_members_delete);
+
+app.get("/resetPassword",passwordReset.resetPassword);
+app.post("/resetPassword",passwordReset.resetPassword);
+
+// not posting anything to the success page for password
+app.get("/passwordSuccess",);
+
+app.get("/viewSubmittedApplications",reviewApplication.viewSubmittedApplications);
+
+app.get("/reviewSingleApplication",reviewApplication.reviewSubmittedApplication);
+app.post("/reviewSingleApplication",reviewApplication.reviewSubmittedApplication);
+
+app.post("/saveReview",reviewApplication.saveReviewDraft);
+app.listen('3001', () => {
+  console.log("Server started on port 3001");
+});
+>>>>>>> 83ea35bb6798e007365f2a08c203113ea8b692cc

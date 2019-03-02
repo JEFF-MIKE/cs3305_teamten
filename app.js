@@ -6,6 +6,7 @@ var express = require('express'),
     upload = require('./routes/upload'),
     path = require('path'),
     apply = require('./routes/apply');
+    sendEmail = require('./routes/sendEmail');
 
 var session = require('express-session') // cookie handler
 var app = express(); // initialise express object.

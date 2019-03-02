@@ -21,15 +21,20 @@
     </div>
     <% include mainNav %>
     <main>
-        <% if (rows === undefined) { %>
-            <p>You have not created any calls.</p>
+        <% if (applicationDetails.length === 0) { %>
+            <p>No applications have been made for this call.</p>
         <% } %>
-        <% if (rows !== undefined){ %>
-            <% for(let i=0;i<rows.length;i++) { %>
-                <div id = "<% rows[i].call_id %>">
-                <h1> <%= rows[i].title %> </h1>
-                <span>Status: <%= rows[i].status %></span>
-                <a class="btn btn-lg btn-primary btn-block p2" type="submit" href="<%= '/funderViewApplications?call_id=' + rows[i].call_id %>">View Applications for call</a>
+        <% if (applicationDetails.length){ %>
+            <% for(let i=0;i<applicationDetails.length;i++) { %>
+                <div id = "<%= applicationDetails[i].application_id %>">
+                <% for (let x = 0; x < userDetails.length;x++) { %>
+                    <% if (applicationDetails[i].applicant_id === userDetails[x].id ) { %>
+                        <h1>Username: <%= userDetails[x].user_name %></h1>
+                        <h1>Full name:<%= userDetails[x].first_name + " " + userDetails[x].last_name %></h1>
+                    <% } %>
+                <% } %>
+                <p>Cover Note: <%=  applicationDetails[i].cover_note %></p>
+                <a class="btn btn-lg btn-primary btn-block p2" role="button" href="<%= '/funderViewReviews?application=' + applicationDetails[i].application_id %>">View Reviews for application</a>
                 </div>
             <% } %>
         <% } %>

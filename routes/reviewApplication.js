@@ -19,6 +19,21 @@ function selectRoles(data,callback){
    });
 }
 
+
+function grabApplicantDetails(data,callback){
+    /* 
+    Callback function for grabbing applicants details.
+    */
+   let sql = "SELECT id,first_name,last_name,user_name FROM users WHERE id in ?;";
+   db.query(sql,data,(err,rows) => {
+       if (err){
+           callback(err,null)
+       } else {
+           callback(err,rows);
+       }
+   });
+}
+
 function checkReview(data,callback){
     /* 
     Callback function for checking if a review draft exists in the 
@@ -103,7 +118,11 @@ exports.viewSubmittedApplications = (req,res) => {
                 // passes through the array of results to the ejs render
                 let sql = "SELECT * FROM applications WHERE `is_draft` = 1;";
                 db.query(sql,(err,result) => {
-                    res.render("reviewApplications.ejs",{ resultList: result,userName:req.session.user_name });
+                    if (result){
+                        res.render("reviewApplications.ejs",{ resultList: result,userName:req.session.user_name });
+                    } else {
+                        res.render("reviewApplications.ejs",{resultList:[],userName:req.session.user_name});
+                    }
                 });
             }
         }

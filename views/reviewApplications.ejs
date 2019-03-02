@@ -17,11 +17,16 @@
 <body>
     <% include mainNav %>
     <main>
-        <% for (let i = 0;i<resultList.length;i++){ %>
-            <div id = "<%= resultList[i].application_id %>" class="application">
-                <p> <%= resultList[i].applicant_id %></p>
-                <a href ="<%= '/reviewSingleApplication?application_id='+resultList[i].application_id %>" class="btn btn-primary"/>Review</a>        
-            </div>
+        <% if (resultList.length === 0) { %>
+            <p> You have no applications to review... </p>
+        <% } %>
+        <% if (resultList.length !== 0) { %>
+            <% for (let i = 0;i<resultList.length;i++){ %>
+                <div id = "<%= resultList[i].application_id %>" class="application">
+                    <p> <%= resultList[i].applicant_id %></p>
+                    <a href ="<%= '/reviewSingleApplication?application_id='+resultList[i].application_id %>" class="btn btn-primary"/>Review</a>        
+                </div>
+            <% } %>
         <% } %>
     </main>
     <% include mainFooter %>

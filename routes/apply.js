@@ -19,7 +19,7 @@ exports.storeApplications = (req,res) => {
         // this is when you submit data
         let name = req.body.name;
         let applicant_id = req.body.fundingID;
-        let call_id = 12;
+        let call_id = 45;
         let time_of_submission = new Date();
         let submission_version = 1;
         let amount_requested = req.body.amount_requested;
@@ -39,13 +39,20 @@ exports.storeApplications = (req,res) => {
         res.end()
     })
     */
-    var sql = "INSERT INTO `applications` (applicant_id, call_id, time_of_submission,amount_requested, cover_note, submission_version,group_id) VALUES (?,?,?,?,?,?,?);";
-    db.query(sql,[applicant_id, call_id, time_of_submission,amount_requested,cover_note,submission_version,group_name] ,function(err, result) {
+    var application_id;
+    var sql1 = "SELECT MAX(application_id) FROM applications";
+    db.query(sql1, function(err, result, fields){
+        if (err) throw err;
+        application_id = result[0].application_id + 1;
+    });
+
+    var sql2 = "INSERT INTO `applications` (applicant_id, call_id, time_of_submission,amount_requested, cover_note, submission_version,group_id) VALUES (?,?,?,?,?,?,?);";
+    db.query(sql2,[applicant_id, call_id, time_of_submission,amount_requested,cover_note,submission_version,group_name] ,function(err, result) {
     if (err) throw err;
         console.log("Successfully entered in data");
 
-        var sql1 = "SELECT * FROM users WHERE id = (SELECT funder_user_id FROM calls WHERE call_id = (SELECT call_id FROM applications WHERE application_id = 3))";
-        db.query(sql1, function(err, result, fields){
+        var sql3 = 'SELECT * FROM users WHERE id = (SELECT funder_user_id FROM calls WHERE call_id = (SELECT call_id FROM applications WHERE application_id = "'+ application_id + '"))';
+        db.query(sql3, function(err, result, fields){
         if (err) throw err;
             console.log(result);
             var email = result[0].email;

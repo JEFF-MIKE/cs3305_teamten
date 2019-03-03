@@ -102,12 +102,10 @@ app.get('/logout',user.logout);
 app.get("/submission",upload.uploadFile);
 app.post("/submission",upload.uploadFile);
 
-<<<<<<< HEAD
 app.get("/apply", apply.storeApplications);
 app.post("/apply", apply.storeApplications);
 
-app.listen('3001');
-=======
+//app.listen('3001');
 //app.get("/apply", apply.storeApplications);
 //app.post("/apply", apply.storeApplications);
 
@@ -140,4 +138,3 @@ app.post("/saveReview",reviewApplication.saveReviewDraft);
 app.listen('3001', () => {
   console.log("Server started on port 3001");
 });
->>>>>>> 83ea35bb6798e007365f2a08c203113ea8b692cc

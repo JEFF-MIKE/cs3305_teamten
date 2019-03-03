@@ -1,29 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-        <title>Page for submitting research documents</title>
-
+        <title>View Funding</title>
+        
         <!-- Bootstrap core CSS -->
+        <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-        <!-- Custom styles for this template -->
-       <link href="submitDoc-1.css" rel="stylesheet">
-        <link href="team10.css" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="team10.css">
         <style>
             @import url('https://fonts.googleapis.com/css?family=Cabin|Dosis');
-        </style> 
+        </style>
     </head>
 
-    <body class="text-center">
+    <body>
         <div class="jumbotron text-center" style="margin-bottom:0">
             <h1>Team 10 Research Page</h1>
-            <p>Submit and view documents page</p> 
+            <p>This is the page where you can view calls for proposals</p> 
         </div>
         <!-- To change nav colour change the bg-info part to be bg-somethingelse. Navbar-custom can also be changed for nice looking stuff. -->
         <nav class="navbar navbar-expand-sm bg-info navbar-custom">
@@ -50,37 +45,54 @@
                     </li>
                     <input type="text" placeholder=" Search..">
                 </ul>
-            </div>
+            </div>  
         </nav>
-        <form class="form-signin">
-            <h1 class="h3 mb-3 font-weight-normal">Please Enter your ID number and upload your file.</h1>
-            <label for="idNumber" class="sr-only">ID Number</label>
-            <input type="userId" id="idNumber" class="form-control" placeholder="Enter User ID" required autofocus>
 
-            <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-            <div class="container d-flex h-100">
-                <div class="file-upload">
-                    <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add File</button>
-                        <div class="file-upload-wrap">
-                            <input class="file-upload-input" type='file' onchange="readURL(this);" accept=".pdf" />
-                            <div class="drag-text">
-                                <h3>Drag and drop a file or select Add File</h3>
-                            </div>
-                        </div>
-                    <div class="file-upload-content">
-                        <img class="file-upload-file" src="#" alt="your file" />
-                        <div class="file-title-wrap">
-                            <button type="button" onclick="removeUpload()" class="remove-file">Remove <span class="file-title">Uploaded File</span></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="btn btn-lg btn-primary btn-block" id="submit" type="submit">Submit Documents.</button>
-            <a class="btn btn-lg btn-primary btn-block" id="view" href="viewdocs.html" role="button">View Submitted Documents</a>
-        </form>
-        <!-- <a class="btn btn-lg btn-primary btn-block" id="view" href="viewdocs.html" role="button">View Submitted Documents</a> -->
-    </body>
-    <footer id="footer" class="footer mt-auto py-3">
+
+      <div class="my-3 p-3 bg-white rounded box-shadow">
+        <h6 class="border-bottom border-gray pb-2 mb-0">Calls for proposals</h6>
+        <div class="media text-muted pt-3">
+          <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
+          <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            <strong class="d-block text-gray-dark">Name</strong>
+            Proposal details
+          </p>
+          <a href="apply.html">Apply</a>
+        </div>
+        <div class="media text-muted pt-3">
+          <img data-src="holder.js/32x32?theme=thumb&bg=e83e8c&fg=e83e8c&size=1" alt="" class="mr-2 rounded">
+          <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            <strong class="d-block text-gray-dark">Name</strong>
+            Proposal details
+          </p>
+          <a href="apply.html">Apply</a>
+        </div>
+        <div class="media text-muted pt-3">
+          <img data-src="holder.js/32x32?theme=thumb&bg=6f42c1&fg=6f42c1&size=1" alt="" class="mr-2 rounded">
+          <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            <strong class="d-block text-gray-dark">Name</strong>
+            Proposal details
+          </p>
+          <a href="apply.html">Apply</a>
+        </div>
+        <small class="d-block text-right mt-3">
+          <a href="#">View more</a>
+        </small>
+      </div>
+
+    </main>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+    <script src="offcanvas.js"></script>
+  </body>
+  <footer id="footer" class="footer mt-auto py-3">
         <div class="container">
             <div class="row text-center text-xs-center text-sm-left text-md-left">
                 <div class="col-xs-12 col-sm-4 col-md-4">

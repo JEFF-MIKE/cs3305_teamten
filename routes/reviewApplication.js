@@ -49,6 +49,12 @@ function checkReview(data,callback){
    });
 }
 
+function checkCalls(req,res){
+    /* 
+    Callback function for checking to see what calls the reviewer is assigned to.
+    */
+}
+
 
 exports.saveReviewDraft = (req,res) => {
     if (req.session.user_name === undefined && req.session.user_id === undefined){

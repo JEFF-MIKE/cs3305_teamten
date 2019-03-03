@@ -19,16 +19,15 @@
 <body>
     <% include mainNav %>
     <main>
-            <div id = "<%= resultList[0].application_id %>" class="application">
-                <p> <%= resultList[0].applicant_id %></p>        
+            <div id="<%= resultList[0].application_id %>" class="application">
+                <p> <%= resultList[0].applicant_id %> </p>        
             </div>
-        <% } %>
-    <form role="form" method="post" action="/reviewSingleApplication" >
+    <form role="form" method="post" action="/finalizeReview" >
     <div class="form-group">
     <label for="exampleFormControlTextarea3">Review analysis</label>
     <textarea class="form-control" id="exampleFormControlTextarea3" rows="10"></textarea>
-    <input type="hidden" name="application_id" value="<% resultList[0].application_id %>">
-    <input type="hidden" name="applicant_id" value="<% resultList[0].applicant_id %>">
+    <input type="hidden" name="application_id" value="<%= resultList[0].application_id %>">
+    <input type="hidden" name="applicant_id" value="<%= resultList[0].applicant_id %>">
   </div>
     <button class="btn btn-lg btn-primary btn-block p2" type="submit">Submit!</button>
     <button class="btn btn-lg btn-primary btn-block p2" type="submit" formaction="/saveReviewDraft">Save as draft!</button>

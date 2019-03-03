@@ -4,10 +4,15 @@ var express = require('express'),
     http = require('http'),
     user = require('./routes/user'),
     upload = require('./routes/upload'),
-    passwordReset = require('./routes/passwordReset'),
-    reviewApplication = require('./routes/reviewApplication'),
-    funding = require('./routes/funding'),
     path = require('path');
+    //apply = require('./routes/apply');
+
+var passwordReset = require('./routes/passwordReset');
+var reviewApplication = require('./routes/reviewApplication');
+var funding = require('./routes/funding');
+var path = require('path');
+var funderActions = require('./routes/funderActions');
+
 
 var session = require('express-session') // cookie handler
 var app = express(); // initialise express object.
@@ -75,9 +80,9 @@ app.use(session({
               secret: 'keyboard cat',
               resave: false,
               saveUninitialized: true,
-              cookie: { maxAge: 60000 }
+              cookie: { maxAge: 360000 }
             }));
-// cookie age is currently 1 minute
+// cookie age is currently 10 minutes
 
 // navigate to routes folder and run index.js file
 app.get('/',routes.index);
@@ -95,6 +100,8 @@ app.get('/logout',user.logout);
 app.get("/submission",upload.uploadFile);
 app.post("/submission",upload.uploadFile);
 
+//app.get("/apply", apply.storeApplications);
+//app.post("/apply", apply.storeApplications);
 
 app.get("/apply",user.apply);
 app.post("/apply",user.apply);
@@ -102,6 +109,7 @@ app.post("/apply",user.apply);
 app.get("/funding",funding.funding);
 // app.post("/funding",funding.funding);
 
+app.post("/finalizeReview", reviewApplication.finalizeReview);
 
 app.get("/group_members_add",user.group_members_add);
 app.post("/group_members_add",user.group_members_add);

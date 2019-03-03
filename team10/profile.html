@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Team 10 Research Page</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" href="team10.css">
+        <link rel="stylesheet" href="profile.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!--
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        -->
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Cabin|Dosis');
+        </style> 
+
+    </head>
+    <body>
+        <div class="jumbotron text-center" style="margin-bottom:0">
+            <h1>Team 10 Research Page</h1>
+            <p>Home page</p> 
+        </div>
+        <!-- To change nav colour change the bg-info part to be bg-somethingelse. Navbar-custom can also be changed for nice looking stuff. -->
+        <nav class="navbar navbar-expand-sm bg-info navbar-custom">
+            <a class="navbar-brand" href="#">Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="applyredirect.html">Apply For Funding</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">My Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="submitDoc.html">Submit Documents</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="news.html">News Updates</a>
+                    </li>
+                    <input type="text" placeholder=" Search..">
+                </ul>
+            </div>
+        </nav>
+        <main>
+            <div class="container emp-profile">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="profile-img">
+                                <img src="profiler.jpg" alt="A blue circle signifying a head and a blue rounded square to signify a boyd."/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="profile-head">
+                                        <!-- Place user name in database here -->
+                                        <h5>
+                                            Kshiti Ghelani
+                                        </h5>
+                                        <h6>
+                                            Web Developer and Designer
+                                        </h6>
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">More Info</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <a href="edit.html" class="btn"> Edit Profile </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="profile-work">
+                                <p>WORK LINK</p>
+                                <a href="">Website Link</a><br/>
+                                <p>SKILLS</p>
+                                <a href="">Web Designer</a><br/>
+                                <a href="">Web Developer</a><br/>
+                                <a href="">WordPress</a><br/>
+                                <a href="">WooCommerce</a><br/>
+                                <a href="">PHP, .Net</a><br/>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="tab-content profile-tab" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>User Id</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <!-- Insert ID from db -->
+                                                    <p>Kshiti123</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Name</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>Kshiti Ghelani</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Email</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>kshitighelani@gmail.com</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Profession</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <!-- Can put employment details here -->
+                                                    <p>Web Developer and Designer</p>
+                                                </div>
+                                            </div>
+                                </div>
+                                <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Education</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>degree</p>
+                                                    <p>field_of_study</p>
+                                                    <p>insitution</p>
+                                                    <p>location</p>
+                                                    <p>year_of_degree_award</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Publications</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>publication_year</p>
+                                                    <p>publication_type</p>
+                                                    <p>title</p>
+                                                    <p>journal_name</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>SFI funding history</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>year</p>
+                                                </div>
+                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>           
+            </div>
+        </main>
+    </body>
+    <footer id="footer" class="footer mt-auto py-3">
+        <div class="container">
+            <div class="row text-center text-xs-center text-sm-left text-md-left">
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <h5>Main Links</h5>
+                    <ul class="list-unstyled quick-links">
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Home</a></li>
+                        <li><a href="login.html"><i class="fa fa-angle-double-right"></i>Login</a></li>
+                        <li><a href="profile.html"><i class="fa fa-angle-double-right"></i>Profile</a></li>
+                        <li><a href="submitDoc.html"><i class="fa fa-angle-double-right"></i>Submit Documents</a></li>
+                        <li><a href="news.html"><i class="fa fa-angle-double-right"></i>News</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <h5>Partner Sites</h5>
+                    <ul class="list-unstyled quick-links">
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Site 1</a></li>
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Site 2</a></li>
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Site 3</a></li>
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Site 4</a></li>
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Site 5</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <h5>Useful Links</h5>
+                    <ul class="list-unstyled quick-links">
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Link 1</a></li>
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Link 2</a></li>
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Link 3</a></li>
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Link 4</a></li>
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Link 5</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+                    <ul class="list-unstyled list-inline text-center social">
+                        <li class="list-inline-item"><a href="javascript:void();"><i class="fab fa-facebook-square"></i></a></li>
+                        <li class="list-inline-item"><a href="javascript:void();"><i class="fab fa-twitter"></i></a></li>
+                        <li class="list-inline-item"><a href="javascript:void();"><i class="fab fa-instagram"></i></a></li>
+                        <li class="list-inline-item"><a href="javascript:void();" target="_blank"><i class="fa fa-envelope"></i></a></li>
+                    </ul>
+                </div>
+                </hr>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center">
+                    <p><u><a href="#">Science Foundation Ireland</a></u></p>
+                </div>
+                </hr>
+            </div>
+        </div>
+    </footer>
+</html>
+    

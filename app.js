@@ -4,8 +4,10 @@ var express = require('express'),
     http = require('http'),
     user = require('./routes/user'),
     upload = require('./routes/upload'),
+<<<<<<< HEAD
     path = require('path'),
     apply = require('./routes/apply');
+<<<<<<< HEAD
     sendEmail = require('./routes/sendEmail');
     path = require('path');
     //apply = require('./routes/apply');
@@ -15,6 +17,14 @@ var reviewApplication = require('./routes/reviewApplication');
 var funding = require('./routes/funding');
 var path = require('path');
 
+=======
+=======
+    passwordReset = require('./routes/passwordReset'),
+    reviewApplication = require('./routes/reviewApplication'),
+    funding = require('./routes/funding'),
+    path = require('path');
+>>>>>>> e2fed4d32353acbaf4d8fa3fba24c3dece35c299
+>>>>>>> parent of eee3426... Added app.js
 
 var session = require('express-session') // cookie handler
 var app = express(); // initialise express object.
@@ -108,16 +118,25 @@ app.post("/apply", apply.storeApplications);
 
 app.listen('3001');
 =======
+<<<<<<< HEAD
 //app.get("/apply", apply.storeApplications);
 //app.post("/apply", apply.storeApplications);
+=======
+>>>>>>> parent of eee3426... Added app.js
 
 app.get("/apply",user.apply);
 app.post("/apply",user.apply);
 
+<<<<<<< HEAD
 app.get("/funding",funding.funding);
 app.post("/funding",funding.funding);
 
 app.post("/finalizeReview", reviewApplication.finalizeReview);
+=======
+//app.get("/funding",user.funding);
+//app.post("/funding",user.funding);
+
+>>>>>>> parent of eee3426... Added app.js
 
 app.get("/group_members_add",user.group_members_add);
 app.post("/group_members_add",user.group_members_add);
@@ -134,6 +153,7 @@ app.get("/passwordSuccess",);
 app.get("/viewSubmittedApplications",reviewApplication.viewSubmittedApplications);
 
 app.get("/reviewSingleApplication",reviewApplication.reviewSubmittedApplication);
+<<<<<<< HEAD
 app.post("/reviewSingleApplication",reviewApplication.reviewSubmittedApplication);
 
 app.post("/saveReview",reviewApplication.saveReviewDraft);
@@ -141,3 +161,21 @@ app.listen('3001', () => {
   console.log("Server started on port 3001");
 });
 >>>>>>> 83ea35bb6798e007365f2a08c203113ea8b692cc
+=======
+
+app.post("/saveReviewDraft",reviewApplication.saveReviewDraft);
+
+app.post("/finalizeReview",reviewApplication.finalizeReview);
+
+app.get("/proposals", funding.fetchCalls);
+
+//app.get("/createProposal", funding.createProposal);
+//app.post("/createProposal", funding.createProposal);
+
+app.post("/saveReview",reviewApplication.saveReviewDraft);
+
+app.listen('3001', () => {
+  console.log("Server started on port 3001");
+});
+>>>>>>> e2fed4d32353acbaf4d8fa3fba24c3dece35c299
+>>>>>>> parent of eee3426... Added app.js

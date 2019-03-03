@@ -78,10 +78,10 @@ CREATE TABLE 'innovation_and_commercialisation' (
 DROP TABLE IF EXISTS 'publications';
 CREATE TABLE 'publications' (
   publication_year DATE NOT NULL,
-  publication_type ENUM ("Refereed original article", "Refereed review article", "Refereed conference paper", "Book", "Technical report"),
+  publication_type ENUM ("Refereed original article", "Refereed review article", "Refereed conference paper", "Book", "Technical report") NOT NULL,
   title VARCHAR(255) NOT NULL,
   journal_name VARCHAR(255) NOT NULL,
-  publication_status ENUM ("Published", "In press"),
+  publication_status ENUM ("Published", "In press") NOT NULL,
   doi VARCHAR(20) NOT NULL,
   primary_attribution VARCHAR(255) NOT NULL
 );
@@ -91,7 +91,7 @@ DROP TABLE IF EXISTS 'presentations';
 CREATE TABLE 'presentations' (
   year DATE NOT NULL,
   title_of_presentation VARCHAR(255) NOT NULL,
-  event_type ENUM ("Conference", "Invited seminar", "Keynote"),
+  event_type ENUM ("Conference", "Invited seminar", "Keynote") NOT NULL,
   organising_body VARCHAR(255) NOT NULL,
   location VARCHAR(255) NOT NULL,
   primary_attribution VARCHAR(255) NOT NULL
@@ -106,7 +106,7 @@ CREATE TABLE 'academic_collaborations' (
   department_within_institution VARCHAR(255) NOT NULL,
   location VARCHAR(255) NOT NULL,
   name_of_collaborator VARCHAR(255) NOT NULL,
-  primary_goal_of_collaboration ENUM ("Access to software etc", "Training and career development", "Joint publication", "Startup development", "License development", "Building networks and relationships"),
+  primary_goal_of_collaboration ENUM ("Access to software etc", "Training and career development", "Joint publication", "Startup development", "License development", "Building networks and relationships") NOT NULL,
   frequency_of_interaction INT NOT NULL,
   primary_attribution VARCHAR(255) NOT NULL
 );
@@ -120,7 +120,7 @@ CREATE TABLE 'non_academic_collaborations' (
   department_within_institution VARCHAR(255) NOT NULL,
   location VARCHAR(255) NOT NULL,
   name_of_collaborator VARCHAR(255) NOT NULL,
-  primary_goal_of_collaboration ENUM ("Access to software etc", "Training and career development", "Joint publication", "Startup development", "License development", "Building networks and relationships"),
+  primary_goal_of_collaboration ENUM ("Access to software etc", "Training and career development", "Joint publication", "Startup development", "License development", "Building networks and relationships") NOT NULL,
   frequency_of_interaction INT NOT NULL,
   primary_attribution VARCHAR(255) NOT NULL
 );
@@ -131,7 +131,7 @@ CREATE TABLE 'conferences' (
   start_date DATE NOT NULL,
   end_date DATE NOT NULL,
   title VARCHAR(255) NOT NULL,
-  event_type ENUM ("Conference", "Workshop", "Seminar"),
+  event_type ENUM ("Conference", "Workshop", "Seminar") NOT NULL,
   role VARCHAR(255) NOT NULL,
   location_of_event VARCHAR(255) NOT NULL,
   primary_attribution VARCHAR(255) NOT NULL
@@ -159,8 +159,8 @@ CREATE TABLE 'education_and_public_engagement' (
   name_of_project VARCHAR(255) NOT NULL,
   start_date DATE NOT NULL,
   end_date DATE NOT NULL,
-  activity_type ENUM ("Public event", "In-class activities", "Career experience programme", "Other "),
-  project_topic ENUM ("Science", "Math", "Engineering", "Technology", "Space related", "Other"),
-  target_geographical_area ENUM ("Local ", "National", "International"),
+  activity_type ENUM ("Public event", "In-class activities", "Career experience programme", "Other ") NOT NULL,
+  project_topic ENUM ("Science", "Math", "Engineering", "Technology", "Space related", "Other") NOT NULL,
+  target_geographical_area ENUM ("Local", "National", "International") NOT NULL,
   primary_attribution VARCHAR(255) NOT NULL
 );

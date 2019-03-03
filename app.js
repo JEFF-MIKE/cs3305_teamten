@@ -100,7 +100,7 @@ app.get("/apply",user.apply);
 app.post("/apply",user.apply);
 
 app.get("/funding",funding.funding);
-app.post("/funding",funding.funding);
+// app.post("/funding",funding.funding);
 
 
 app.get("/group_members_add",user.group_members_add);
@@ -120,7 +120,7 @@ app.get("/viewSubmittedApplications",reviewApplication.viewSubmittedApplications
 app.get("/reviewSingleApplication",reviewApplication.reviewSubmittedApplication);
 app.post("/reviewSingleApplication",reviewApplication.reviewSubmittedApplication);
 
-app.post("/saveReview",reviewApplication.saveReviewDraft);
+// app.post("/saveReview",reviewApplication.saveReviewDraft);
 app.listen('3001', () => {
   console.log("Server started on port 3001");
 });

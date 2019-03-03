@@ -2,7 +2,7 @@
 exports.index = (req, res) => {
     // below are personal details
     let message = '';
-    let userName = (req.session.user_name === undefined ? "" : req.session.user_name);
+    let userName = req.session.user_name || "";
     // below are roles for nav
     if (req.query.errorStatus==='0'){
         // set in user.js
@@ -19,7 +19,7 @@ exports.index = (req, res) => {
     if (req.session.user_name !== undefined) {
         // display that a user is currently logged in.
         userName = "Welcome, " + req.session.user_name;
-    } 
+    }
     if (req.query.successStatus==="1"){
         message = "Account registered, please login now.";
     }

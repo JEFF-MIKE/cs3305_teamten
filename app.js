@@ -4,16 +4,15 @@ var express = require('express'),
     http = require('http'),
     user = require('./routes/user'),
     upload = require('./routes/upload'),
-    path = require('path'),
+    path = require('path');
     apply = require('./routes/apply');
     sendEmail = require('./routes/sendEmail');
-    path = require('path');
-    //apply = require('./routes/apply');
 
 var passwordReset = require('./routes/passwordReset');
 var reviewApplication = require('./routes/reviewApplication');
 var funding = require('./routes/funding');
 var path = require('path');
+var funderActions = require('./routes/funderActions');
 
 
 var session = require('express-session') // cookie handler
@@ -27,7 +26,6 @@ var hbs = require('nodemailer-express-handlebars'),
     email = process.env.PROGRAM_EMAIL,
     pass = process.env.PROGRAM_EMAIL_PASSWORD,
     nodemailer = require('nodemailer');
-
 var emailer = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
@@ -41,9 +39,7 @@ var handlebarsOptions = {
   viewPath: path.resolve('./emails/'),
   extName: '.html'
 };
-
 emailer.use('compile',hbs(handlebarsOptions));
-
 */
 
 // my personal database connection.
@@ -102,12 +98,6 @@ app.get('/logout',user.logout);
 app.get("/submission",upload.uploadFile);
 app.post("/submission",upload.uploadFile);
 
-<<<<<<< HEAD
-app.get("/apply", apply.storeApplications);
-app.post("/apply", apply.storeApplications);
-
-app.listen('3001');
-=======
 //app.get("/apply", apply.storeApplications);
 //app.post("/apply", apply.storeApplications);
 
@@ -136,8 +126,13 @@ app.get("/viewSubmittedApplications",reviewApplication.viewSubmittedApplications
 app.get("/reviewSingleApplication",reviewApplication.reviewSubmittedApplication);
 app.post("/reviewSingleApplication",reviewApplication.reviewSubmittedApplication);
 
+app.get("/funderViewCalls",funderActions.funderViewCalls);
+
+app.get("/funderViewApplications",funderActions.funderViewApplications);
+
+app.get("/funderViewReviews",funderActions.funderViewReviews);
+
 app.post("/saveReview",reviewApplication.saveReviewDraft);
 app.listen('3001', () => {
   console.log("Server started on port 3001");
 });
->>>>>>> 83ea35bb6798e007365f2a08c203113ea8b692cc

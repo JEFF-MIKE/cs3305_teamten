@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Team 10 Research Page</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" href="team10.css">
+        <link rel="stylesheet" href="profile.css">
+        <link rel="stylesheet" href="uploadimage.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        -->
+        <!--
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        -->
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Cabin|Dosis');
+        </style> 
+
+    </head>
+     <body>
+        <div class="jumbotron text-center" style="margin-bottom:0">
+            <h1>Team 10 Research Page</h1>
+            <p>Edit profile page</p> 
+        </div>
+        <!-- To change nav colour change the bg-info part to be bg-somethingelse. Navbar-custom can also be changed for nice looking stuff. -->
+        <nav class="navbar navbar-expand-sm bg-info navbar-custom">
+            <a class="navbar-brand" href="index.html">Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="applyredirect.html">Apply For Funding</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">My Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="submitDoc.html">Submit Documents</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="news.html">News Updates</a>
+                    </li>
+                    <input type="text" placeholder=" Search..">
+                </ul>
+            </div>
+        </nav>
+        <main>
+            <div class="container bootstrap snippet">
+                <div class="row">
+                    <div class="col-sm-10"><h1>User name</h1></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                <div class="text-center">
+                    <div id="profile-container">
+                        <img id="profileImage" src="profiler.jpg" class="avatar img-circle img-thumbnail" alt="avatar"/>
+                    </div>
+                    <h6>Upload a different photo...</h6>
+                    <input id="imageUpload" class="text-center center-block file-upload" type="file" name="profile_photo" placeholder="Photo" required="" capture>
+                </div>
+                    
+                    </div>
+                    <div class="col-sm-9">
+                        <ul class="nav nav-tabs">
+                            <li class="active">Edit</li>
+                        </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="home">
+                            <form class="form" action="##" method="post" id="registrationForm">
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        <label for="first_name"><h4>First name</h4></label>
+                                        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="Please enter your first name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    
+                                    <div class="col-xs-6">
+                                        <label for="last_name"><h4>Last name</h4></label>
+                                        <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="Please enter your last name">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    
+                                    <div class="col-xs-6">
+                                        <label for="email"><h4>Email</h4></label>
+                                        <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="Please enter your email.">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                    
+                                <div class="form-group">
+                                    
+                                    <div class="col-xs-6">
+                                        <label for="profession"><h4>Profession</h4></label>
+                                        <input type="text" class="form-control" name="profession" id="profession" placeholder="enter job title" title="Please enter your profession">
+                                    </div>
+                                </div>
+                    
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        <label for="education"><h4>Education</h4></label>
+                                        <input type="text" class="form-control" name="degree" id="degree" placeholder="enter degree title" title="Please enter the name of your degree">
+                                        <input type="text" class="form-control" name="field" id="field" placeholder="enter field of study" title="Please enter your field of study">
+                                        <input type="text" class="form-control" name="institution" id="institution" placeholder="enter the asociated institution" title="Please enter the name of the institution">
+                                        <input type="text" class="form-control" name="location" id="location" placeholder="enter location" title="Please enter the location of where you got the degree">
+                                        <input type="text" class="form-control" name="year_of_degree_award" id="year_of_degree_award" placeholder="enter year of award" title="Please enter the year you recieved your degree">
+                                    </div>
+                                </div>
+                                    
+                                    <div class="col-xs-6">
+                                        <label for="publications"><h4>Publications</h4></label>
+                                        <input type="text" class="form-control" name="title" id="title" placeholder="enter title of publication" title="Please enter title of publication">
+                                        <input type="text" class="form-control" name="publication_year" id="publication_year" placeholder="enter year of publication" title="Please enter year of publication">
+                                        <input type="text" class="form-control" name="publication_type" id="publication_type" placeholder="enter type of publication" title="Please enter type of publication">
+                                        <input type="text" class="form-control" name="journal_name" id="journal_name" placeholder="enter name of publisher" title="Please enter name of publisher">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    
+                                    <div class="col-xs-6">
+                                        <label for="sfi"><h4>SFI funding history</h4></label>
+                                        <input type="text" class="form-control" name="sfi" id="sfi" placeholder="enter year of recieveing SFI funding" title="Please enter year of recieving SFI funding">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                    <!-- Save to database -->
+                                            <a href="profile.html" class="btn btn-lg btn-success"><i class="glyphicon glyphicon-ok-sign"></i> Save</a>
+                                        </div>
+                                </div>
+                            </form>
+                        
+                        </div>
+                    </div><!--/tab-content-->
+
+                    </div><!--/col-9-->
+                </div><!--/row-->
+            </div>
+        </main>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="imageupload.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+    <footer id="footer" class="footer mt-auto py-3">
+        <div class="container">
+            <div class="row text-center text-xs-center text-sm-left text-md-left">
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <h5>Main Links</h5>
+                    <ul class="list-unstyled quick-links">
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Home</a></li>
+                        <li><a href="login.html"><i class="fa fa-angle-double-right"></i>Login</a></li>
+                        <li><a href="profile.html"><i class="fa fa-angle-double-right"></i>Profile</a></li>
+                        <li><a href="submitDoc.html"><i class="fa fa-angle-double-right"></i>Submit Documents</a></li>
+                        <li><a href="news.html"><i class="fa fa-angle-double-right"></i>News</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <h5>Partner Sites</h5>
+                    <ul class="list-unstyled quick-links">
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Site 1</a></li>
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Site 2</a></li>
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Site 3</a></li>
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Site 4</a></li>
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Site 5</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <h5>Useful Links</h5>
+                    <ul class="list-unstyled quick-links">
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Link 1</a></li>
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Link 2</a></li>
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Link 3</a></li>
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Link 4</a></li>
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i>Link 5</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+                    <ul class="list-unstyled list-inline text-center social">
+                        <li class="list-inline-item"><a href="javascript:void();"><i class="fab fa-facebook-square"></i></a></li>
+                        <li class="list-inline-item"><a href="javascript:void();"><i class="fab fa-twitter"></i></a></li>
+                        <li class="list-inline-item"><a href="javascript:void();"><i class="fab fa-instagram"></i></a></li>
+                        <li class="list-inline-item"><a href="javascript:void();" target="_blank"><i class="fa fa-envelope"></i></a></li>
+                    </ul>
+                </div>
+                </hr>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center">
+                    <p><u><a href="#">Science Foundation Ireland</a></u></p>
+                </div>
+                </hr>
+            </div>
+        </div>
+    </footer>
+</html>

@@ -1,0 +1,19 @@
+{
+    "name": "login",
+    "version": "1.0.0",
+    "description": "This is a login for our node.js website",
+    "main": "login.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Merited/cs3305_teamten.git"
+    },
+    "author": "Team10",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Merited/cs3305_teamten/issues"
+    },
+    "homepage": "https://github.com/Merited/cs3305_teamten#readme"
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>View Your Calls</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/public/index.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Khand');
+    </style>
+</head>
+<body>
+    <div class="jumbotron text-center" style="margin-bottom:0">
+        <h1>Team 10 Research Page</h1>
+        <% if (userName === undefined) { %> 
+        <p>This is our team project page</p>
+        <% } %>
+        <% if (userName.length) { %>
+        <p><%= userName %>. Select Dashboard to see your available actions.</p>
+        <% } %> 
+    </div>
+    <% include mainNav %>
+    <main>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h5>Researcher Actions</h5>
+            </div>
+            <div class="col">
+                <h5>Research Centre Actions</h5>
+            </div>
+            <div class="col">
+                <h5>Reviewer Actions</h5>
+            </div>
+            <div class="col">
+                <h5>Funder Actions</h5>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col">
+                <!-- Researcher -->
+                <a class="btn-primary btn-block lnk" href="/getActiveCalls" role="button">Apply for Funding</a>
+            </div>
+            <div class="col">
+                <!-- Research Center -->
+                <a class="btn-success btn-block lnk" href="#" role="button">View Submitted Applications</a>
+            </div>
+            <div class="col">
+                <!-- Reviewer -->
+                <a class="btn-danger btn-block lnk" href="/viewSubmittedApplications" role="button">Look at & review Applications</a>
+            </div>
+            <div class="col">
+                <!-- Funder -->
+                <a class="btn-warning btn-block lnk" href="/funderViewCalls" role="button">Check your calls</a>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col">
+                <!--<a class="btn-primary btn-block lnk" href="funding.html" role="button">View Submitted Applications</a> -->
+            </div>
+            <div class="col">
+    
+            </div>
+            <div class="col">
+               <!--<a class="btn-danger btn-block lnk" href="funding.html" role="button">View Reviewed Applications</a>-->
+            </div>
+            <div class="col">
+                <a class="btn-warning btn-block lnk" href="/funderAssignReviewers" role="button">Select Reviewers for call.</a>
+                <!--<a class="btn-warning btn-block lnk" href="proposalview.html" role="button">View Approved Applications</a>-->
+            </div>
+        </div>
+    
+        <div class="row ">
+            <div class="col">
+            
+            </div>
+            <div class="col">
+            
+            </div>
+            <div class="col">
+            
+            </div>
+            <div class="col">
+            <a class="btn-warning btn-block lnk" href="/funderCreateCall" role="button">Create a New Call.</a>
+                <!--<a class="btn-warning btn-block lnk" href="apply.html" role="button">View Funding History</a>-->
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col">
+            
+            </div>
+            <div class="col">
+    
+            </div>
+            <div class="col">
+    
+            </div>
+            <div class="col">
+
+            </div>
+        </div>
+    </div>
+    
+    <br>
+    </main>
+    <% include mainFooter %>
+</body>
+</html>

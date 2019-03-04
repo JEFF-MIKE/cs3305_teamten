@@ -5,7 +5,8 @@ var express = require('express'),
     user = require('./routes/user'),
     upload = require('./routes/upload'),
     path = require('path');
-    //apply = require('./routes/apply');
+    apply = require('./routes/apply');
+    sendEmail = require('./routes/sendEmail');
 
 var passwordReset = require('./routes/passwordReset');
 var reviewApplication = require('./routes/reviewApplication');
@@ -25,7 +26,6 @@ var hbs = require('nodemailer-express-handlebars'),
     email = process.env.PROGRAM_EMAIL,
     pass = process.env.PROGRAM_EMAIL_PASSWORD,
     nodemailer = require('nodemailer');
-
 var emailer = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
@@ -39,9 +39,7 @@ var handlebarsOptions = {
   viewPath: path.resolve('./emails/'),
   extName: '.html'
 };
-
 emailer.use('compile',hbs(handlebarsOptions));
-
 */
 
 // my personal database connection.

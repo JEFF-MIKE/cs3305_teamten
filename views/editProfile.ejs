@@ -29,26 +29,26 @@
         </div>
         <!-- To change nav colour change the bg-info part to be bg-somethingelse. Navbar-custom can also be changed for nice looking stuff. -->
         <nav class="navbar navbar-expand-sm bg-info navbar-custom">
-            <a class="navbar-brand" href="#">Home</a>
+            <a style="color:white;" class="navbar-brand" href="#">Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html">Login</a>
+                        <a style="color:white;" class="nav-link" href="login.html">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="applyredirect.html">Apply For Funding</a>
+                        <a style="color:white;" class="nav-link" href="applyredirect.html">Apply For Funding</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="profile.html">My Profile</a>
+                        <a style="color:white;" class="nav-link" href="profile.html">My Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="submitDoc.html">Submit Documents</a>
+                        <a style="color:white;" class="nav-link" href="submitDoc.html">Submit Documents</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="news.html">News Updates</a>
+                        <a style="color:white;" class="nav-link" href="news.html">News Updates</a>
                     </li>
                     <input type="text" placeholder=" Search..">
                 </ul>
@@ -57,23 +57,21 @@
         <main>
             <div class="container bootstrap snippet">
                 <div class="row">
-                    <div class="col-sm-10"><h1>User name</h1></div>
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
                 <div class="text-center">
-                    <div id="profile-container">
+                    <!-- <div id="profile-container">
                         <img id="profileImage" src="profiler.jpg" class="avatar img-circle img-thumbnail" alt="avatar"/>
                     </div>
                     <h6>Upload a different photo...</h6>
-                    <input id="imageUpload" class="text-center center-block file-upload" type="file" name="profile_photo" placeholder="Photo" required="" capture>
+                    <input id="imageUpload" class="text-center center-block file-upload" type="file" name="profile_photo" placeholder="Photo" required="" capture> -->
                 </div>
 
                     </div>
                     <div class="col-sm-9">
-                        <ul class="nav nav-tabs">
-                            <li class="active">Edit</li>
-                        </ul>
+                    <br><br><br>
+                    <p class="d-inline p mb-2"><%= message %><p>
                     <div class="tab-content">
                         <div class="tab-pane active" id="home">
                             <form class="form" action="##" method="post" id="registrationForm">
@@ -100,13 +98,13 @@
                                 </div>
                                 <div class="form-group">
 
-                                <div class="form-group">
+                                <!-- <div class="form-group">
 
                                     <div class="col-xs-6">
                                         <label for="profession"><h4>Profession</h4></label>
                                         <input type="text" class="form-control" name="profession" id="profession" placeholder="enter job title" title="Please enter your profession">
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="form-group">
                                     <div class="col-xs-6">
@@ -115,26 +113,26 @@
                                         <input type="text" class="form-control" name="field" id="field" placeholder="enter field of study" title="Please enter your field of study">
                                         <input type="text" class="form-control" name="institution" id="institution" placeholder="enter the asociated institution" title="Please enter the name of the institution">
                                         <input type="text" class="form-control" name="location" id="location" placeholder="enter location" title="Please enter the location of where you got the degree">
-                                        <input type="text" class="form-control" name="year_of_degree_award" id="year_of_degree_award" placeholder="enter year of award" title="Please enter the year you recieved your degree">
+                                        <!-- <input type="text" class="form-control" name="year_of_degree_award" id="year_of_degree_award" placeholder="enter year of award" title="Please enter the year you recieved your degree"> -->
                                     </div>
                                 </div>
 
                                     <div class="col-xs-6">
                                         <label for="publications"><h4>Publications</h4></label>
                                         <input type="text" class="form-control" name="title" id="title" placeholder="enter title of publication" title="Please enter title of publication">
-                                        <input type="text" class="form-control" name="publication_year" id="publication_year" placeholder="enter year of publication" title="Please enter year of publication">
-                                        <input type="text" class="form-control" name="publication_type" id="publication_type" placeholder="enter type of publication" title="Please enter type of publication">
+                                        <!-- <input type="text" class="form-control" name="publication_year" id="publication_year" placeholder="enter year of publication" title="Please enter year of publication">
+                                        <input type="text" class="form-control" name="publication_type" id="publication_type" placeholder="enter type of publication" title="Please enter type of publication"> -->
                                         <input type="text" class="form-control" name="journal_name" id="journal_name" placeholder="enter name of publisher" title="Please enter name of publisher">
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <!-- <div class="form-group">
 
                                     <div class="col-xs-6">
                                         <label for="sfi"><h4>SFI funding history</h4></label>
                                         <input type="text" class="form-control" name="sfi" id="sfi" placeholder="enter year of recieveing SFI funding" title="Please enter year of recieving SFI funding">
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="form-group">
                                     <div class="col-xs-12">

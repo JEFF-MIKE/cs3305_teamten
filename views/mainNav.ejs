@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-sm bg-info navbar-custom">
-            <a class="navbar-brand" href="/">Home</a>
+            <a style="color:white;" class="navbar-brand" href="/">Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -7,23 +7,23 @@
                 <ul class="navbar-nav">
                 <% if (userName.length === 0) {%>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
+                        <a style="color:white;" class="nav-link" href="/login">Login</a>
                     </li>
                 <% } %>
                 <% if (userName.length) {%>
                     <li class="nav-item">
-                        <a class="nav-link" href="/profile">My Profile</a>
+                        <a style="color:white;" class="nav-link" href="/profile">My Profile</a>
                     </li>
                 <% } %>
                     <li class="nav-item">
-                        <a class="nav-link" href="/dashboard">User Dashboard</a>
+                        <a style="color:white;" class="nav-link" href="/dashboard">User Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/news">News Updates</a>
+                        <a style="color:white;" class="nav-link" href="/news">News Updates</a>
                     </li>
                 <% if (userName.length !== 0) { %>
                     <li class="nav-item">
-                        <a class ="nav-link" href="/logout">Logout</a>
+                        <a style="color:white;" class ="nav-link" href="/logout">Logout</a>
                     </li>
                 <% } %>
                     <input type="text" placeholder="Search..">

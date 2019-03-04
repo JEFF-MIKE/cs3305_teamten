@@ -73,6 +73,8 @@ app.use(bodyParser.json()); // json datatype.
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(fileUpload()); // creates object from import.
+app.use(express.static('team10'));
+
 
 // express.static is used for frontend css and javascript
 app.use('/public',express.static(path.join(__dirname, 'public')));

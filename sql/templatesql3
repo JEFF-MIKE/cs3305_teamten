@@ -1,0 +1,136 @@
+
+if(results[example].length){
+  DEGREE = results[example][0].degree;
+  FIELD OF STUDY = results[example][0].field of study;
+  INSTITUTION = results[example][0].institution;
+  LOCATION = results[example][0].location;
+  YEAR OF DEGREE AWARD = results[example][0].year of degree award;
+}
+
+if(results[example].length){
+  COMPANY NAME = results[example][0].company name;
+  LOCATION = results[example][0].location;
+  YEARS = results[example][0].years;
+}
+
+if(results[example].length){
+  START DATE = results[example][0].start date;
+  END DATE = results[example][0].end date;
+  NAME OF SOCIETY = results[example][0].name of society;
+  TYPE OF MEMBERSHIP = results[example][0].type of membership;
+  STATUS = results[example][0].status;
+}
+
+if(results[example].length){
+  YEAR = results[example][0].year;
+  AWARDING BODY = results[example][0].awarding body;
+  DETAILS OF AWARD = results[example][0].details of award;
+  TEAM MEMBER NAME = results[example][0].team member name;
+}
+
+if(results[example].length){
+  START DATE = results[example][0].start date;
+  END DATE = results[example][0].end date;
+  AMOUNT OF FUNDING = results[example][0].amount of funding;
+  FUNDING BODY = results[example][0].funding body;
+  FUNDING PROGRAMME = results[example][0].funding programme;
+  STATUS = results[example][0].status;
+  PRIMARY ATTRIBUTION = results[example][0].primary attribution;
+}
+
+if(results[example].length){
+  START DATE WITH TEAM = results[example][0].start date with team;
+  DEPARTURE DATE = results[example][0].departure date;
+  NAME = results[example][0].name;
+  POSITION WITHIN THE TEAM = results[example][0].position within the team;
+  PRIMARY ATTRIBUTION = results[example][0].primary attribution;
+}
+
+if(results[example].length){
+  IMPACT TITLE = results[example][0].impact title;
+  IMPACT CATEGORY = results[example][0].impact category;
+  PRIMARY BENEFICIARY = results[example][0].primary beneficiary;
+  PRIMARY ATTRIBUTION = results[example][0].primary attribution;
+}
+
+if(results[example].length){
+  YEAR = results[example][0].year;
+  TYPE = results[example][0].type;
+  TITLE = results[example][0].title;
+  PRIMARY ATTRIBUTION = results[example][0].primary attribution;
+}
+
+if(results[example].length){
+  PUBLICATION YEAR = results[example][0].publication year;
+  PUBLICATION TYPE = results[example][0].publication type;
+  TITLE = results[example][0].title;
+  JOURNAL NAME = results[example][0].journal name;
+  PUBLICATION STATUS = results[example][0].publication status;
+  DOI = results[example][0].doi;
+  PRIMARY ATTRIBUTION = results[example][0].primary attribution;
+}
+
+if(results[example].length){
+  YEAR = results[example][0].year;
+  TITLE OF PRESENTATION = results[example][0].title of presentation;
+  EVENT TYPE = results[example][0].event type;
+  ORGANISING BODY = results[example][0].organising body;
+  LOCATION = results[example][0].location;
+  PRIMARY ATTRIBUTION = results[example][0].primary attribution;
+}
+
+if(results[example].length){
+  START DATE = results[example][0].start date;
+  END DATE = results[example][0].end date;
+  NAME OF INSTITUTION = results[example][0].name of institution;
+  DEPARTMENT WITHIN INSTITUTION = results[example][0].department within institution;
+  LOCATION = results[example][0].location;
+  NAME OF COLLABORATOR = results[example][0].name of collaborator;
+  PRIMARY GOAL OF COLLABORATION = results[example][0].primary goal of collaboration;
+  FREQUENCY OF INTERACTION = results[example][0].frequency of interaction;
+  PRIMARY ATTRIBUTION = results[example][0].primary attribution;
+}
+
+if(results[example].length){
+  START DATE = results[example][0].start date;
+  END DATE = results[example][0].end date;
+  NAME OF INSTITUTION = results[example][0].name of institution;
+  DEPARTMENT WITHIN INSTITUTION = results[example][0].department within institution;
+  LOCATION = results[example][0].location;
+  NAME OF COLLABORATOR = results[example][0].name of collaborator;
+  PRIMARY GOAL OF COLLABORATION = results[example][0].primary goal of collaboration;
+  FREQUENCY OF INTERACTION = results[example][0].frequency of interaction;
+  PRIMARY ATTRIBUTION = results[example][0].primary attribution;
+}
+
+if(results[example].length){
+  START DATE = results[example][0].start date;
+  END DATE = results[example][0].end date;
+  TITLE = results[example][0].title;
+  EVENT TYPE = results[example][0].event type;
+  ROLE = results[example][0].role;
+  LOCATION OF EVENT = results[example][0].location of event;
+  PRIMARY ATTRIBUTION = results[example][0].primary attribution;
+}
+
+if(results[example].length){
+  YEAR = results[example][0].year;
+  NUMBER OF PUBLIC LECTURES = results[example][0].number of public lectures;
+  NUMBER OF VISITS = results[example][0].number of visits;
+  NUMBER OF MEDIA INTERACTIONS = results[example][0].number of media interactions;
+}
+
+if(results[example].length){
+  YEAR = results[example][0].year;
+  PERCENTAGE OF ANNUAL SPEND = results[example][0].percentage of annual spend;
+}
+
+if(results[example].length){
+  NAME OF PROJECT = results[example][0].name of project;
+  START DATE = results[example][0].start date;
+  END DATE = results[example][0].end date;
+  ACTIVITY TYPE = results[example][0].activity type;
+  PROJECT TOPIC = results[example][0].project topic;
+  TARGET GEOGRAPHICAL AREA = results[example][0].target geographical area;
+  PRIMARY ATTRIBUTION = results[example][0].primary attribution;
+}

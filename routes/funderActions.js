@@ -211,6 +211,47 @@ exports.funderViewCalls = (req,res) => {
     });
 }
 
+exports.getCallCreation = (req,res) => {
+    if (req.session.user_id === undefined && req.session.user_name === undefined){
+        return res.send("You must be logged in to continue");
+    }
+    selectRoles(req.session.user_id,(err,roleObj) => {
+        if (roleObj.funder === "NO"){
+            return res.send("You must be a funder to make a call.");
+        } else {
+            return res.render("createCall.ejs",{userName:req.session.user_name,user_id: req.session.user_id});
+        }
+    });
+}
+
+exports.postCallCreation = (req,res) => {
+    if (req.session.user_id === undefined && req.session.user_name === undefined){
+        return res.send("You must be logged in to continue");
+    }
+    selectRoles(req.session.user_id,(err,roles) => {
+        if (err){
+            console.log(err);
+            return res.send(err);
+        } else {
+            if (roles.funder === "NO"){
+                return res.send("You must be a funder to view this page.");
+            } else {
+                let description = req.body.description;
+                let title = req.body.title;
+                let expire_date = req.body.date;
+                let sql = "INSERT INTO calls (funder_user_id,title,expiry_date,active_status,is_draft,description) VALUES (?,?,?,?,?,?);";
+                db.query(sql,[req.session.user_id,title,expire_date,1,0,description],(err,rows) => {
+                    if (err){
+                        console.log(err);
+                        return res.send(err);
+                    } else {
+                        res.render("callSuccess.ejs",{userName:req.session.user_name});
+                    }
+                });
+            }
+        }
+    });
+}
 exports.funderViewApplications = (req,res) => {
     // allows a funder to view applications after clicking a call.
     if (req.session.user_name === undefined && req.session.user_id === undefined){
@@ -224,7 +265,7 @@ exports.funderViewApplications = (req,res) => {
     selectRoles(req.session.user_id,(err,roles) => {
         if (err){
             console.log(err);
-            res.send(err);
+            return res.send(err);
         } else {
             if (roles.funder === "NO") {
                 return res.send("You must be a funder to view this.");

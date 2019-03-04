@@ -116,7 +116,7 @@ function grabRelatedApplications(data,callback){
     Callback function for grabbing all the applications that relate
     to the call_id. Data is call_id.
     */
-   let sql = "SELECT * FROM `applications` WHERE call_id = ? AND approved = 0 ORDER BY application_id;";
+   let sql = "SELECT * FROM `applications` WHERE call_id = ? AND approved IS NULL ORDER BY application_id;";
    db.query(sql,data,(err,rows) => {
        if(err){
            callback(err,null);
@@ -329,7 +329,39 @@ exports.funderViewReviews = (req,res) => {
 exports.funderSubmitDecision = (req,res) => {
     // POST function for deciding whether to accept or reject an application
     // and why the funder did it.
-    
+    if (req.session.user_id === undefined && req.session.user_name === undefined){
+        return res.send("You must be logged in to continue");
+    }
+    selectRoles(req.session.user_id,(err,roleObj) => {
+        if (err){
+            console.log(err);
+        } else {
+            if (roleObj.funder === "NO"){
+                return res.send("You must be a funder to finalize a decision");
+            } else {
+                checkFunderCallID({call_id:req.body.callID,user_id:req.session.user_id},(err,result) => {
+                    if (err){
+                        console.log(err);
+                    } else if (result.length === 0) {
+                        res.send("You do not have permission to decide on this application.");
+                    } else {
+                        // query the database, update application so researcher can see if
+                        // they were successful or not.
+                        let sql = "UPDATE applications SET approved = ? WHERE application_id = ?;";
+                        db.query(sql,[req.body.options,req.body.applicationID],(err,k) => {
+                            if (err) {
+                                console.log(err);
+                                res.send("An error occured when submitting your review.");
+                            } else {
+                                res.render("funderSubmittedDecision.ejs",{userName:req.session.user_name,result:req.body.options,application:req.body.applicationID,call:req.body.callID});
+                            }
+                        });
+                    }
+                });
+
+            }
+        }
+    });
 }
 
 exports.getFunderAssignReviewers = (req,res) => {

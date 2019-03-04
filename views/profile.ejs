@@ -3,62 +3,423 @@
     <head>
         <meta charset="utf-8">
         <title>Team 10 Research Page</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"/>        <link rel="stylesheet" href="/public/index.css"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" href="team10.css">
+        <link rel="stylesheet" href="profile.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!--
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        -->
         <style>
-            @import url('https://fonts.googleapis.com/css?family=Khand');
+            @import url('https://fonts.googleapis.com/css?family=Cabin|Dosis');
         </style>
+
     </head>
     <body>
         <header class="jumbotron text-center" style="margin-bottom:0">
             <h1>Team 10 Research Page</h1>
-            <p>Your profile</p> 
+            <p>Home page</p>
         </header>
         <!-- To change nav colour change the bg-info part to be bg-somethingelse. Navbar-custom can also be changed for nice looking stuff. -->
-        <% include mainNav %> 
+        <% include mainNav %>
         <main>
-            <div class="col-md-8 text-md-right header-buttons">
-                <a href="#" class="site-btn">Download CV</a>
-                <a href="#" class="site-btn">My published research</a>
+            <div class="container emp-profile">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="profile-img">
+                                <img src="profiler.jpg" alt="A blue circle signifying a head and a blue rounded square to signify a boyd."/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="profile-head">
+                                        <!-- Place user name in database here -->
+                                        <h5>
+                                            <%= fname %> <%= lname %>
+                                        </h5>
+                                        <h6>
+                                            Web Developer and Designer
+                                        </h6>
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">More Info</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <a href="editProfile" class="btn"> Edit Profile </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="profile-work">
+                                <p>WORK LINK</p>
+                                <a href="">Website Link</a><br/>
+                                <p>SKILLS</p>
+                                <a href="">Web Designer</a><br/>
+                                <a href="">Web Developer</a><br/>
+                                <a href="">WordPress</a><br/>
+                                <a href="">WooCommerce</a><br/>
+                                <a href="">PHP, .Net</a><br/>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="tab-content profile-tab" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Username</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p><%= user_name %></p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Name</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p><%= fname %> <%= lname %></p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Email</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p><%= email %></p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Profession</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <!-- Can put employment details here -->
+                                                    <% if (admin === "Y") { %>
+                                                        <p>Admin<p>
+                                                    <% } %>
+                                                    <% if (funder === "Y") { %>
+                                                        <p>Funder<p>
+                                                    <% } %>
+                                                    <% if (reviewer === "Y") { %>
+                                                        <p>Reviewer<p>
+                                                    <% } %>
+                                                    <!-- Researcher will mostly be yes-->
+                                                    <% if (researcher === "Y") { %>
+                                                        <p>Researcher<p>
+                                                    <% } %>
+                                                </div>
+                                            </div>
+                                </div>
+                                <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <label><b>EDUCATION</b></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label><b>DEGREE</b><label>
+                                        <br><p><%= education_degree %></p>
+                                        <label><b>FIELD OF STUDY</b><label>
+                                        <br><p><%= education_field_of_study %></p>
+                                        <label><b>INSTITUTION</b><label>
+                                        <br><p><%= education_institution %></p>
+                                        <label><b>LOCATION</b><label>
+                                        <br><p><%= education_location %></p>
+                                        <label><b>YEAR OF DEGREE AWARD</b><label>
+                                        <br><p><%= education_year_of_degree_award %></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <label><b>EMPLOYMENT</b></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label><b>COMPANY NAME</b><label>
+                                        <br><p><%= employment_company_name %></p>
+                                        <label><b>LOCATION</b><label>
+                                        <br><p><%= employment_location %></p>
+                                        <label><b>YEARS</b><label>
+                                        <br><p><%= employment_years %></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <label><b>PROFESSIONAL SOCIETIES</b></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label><b>START DATE</b><label>
+                                        <br><p><%= professional_societies_start_date %></p>
+                                        <label><b>END DATE</b><label>
+                                        <br><p><%= professional_societies_end_date %></p>
+                                        <label><b>NAME OF SOCIETY</b><label>
+                                        <br><p><%= professional_societies_name_of_society %></p>
+                                        <label><b>TYPE OF MEMBERSHIP</b><label>
+                                        <br><p><%= professional_societies_type_of_membership %></p>
+                                        <label><b>STATUS</b><label>
+                                        <br><p><%= professional_societies_status %></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <label><b>AWARDS</b></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label><b>YEAR</b><label>
+                                        <br><p><%= awards_year %></p>
+                                        <label><b>AWARDING BODY</b><label>
+                                        <br><p><%= awards_awarding_body %></p>
+                                        <label><b>DETAILS OF AWARD</b><label>
+                                        <br><p><%= awards_details_of_award %></p>
+                                        <label><b>TEAM MEMBER NAME</b><label>
+                                        <br><p><%= awards_team_member_name %></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <label><b>FUNDING DIVERSIFICATION</b></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label><b>START DATE</b><label>
+                                        <br><p><%= funding_diversification_start_date %></p>
+                                        <label><b>END DATE</b><label>
+                                        <br><p><%= funding_diversification_end_date %></p>
+                                        <label><b>AMOUNT OF FUNDING</b><label>
+                                        <br><p><%= funding_diversification_amount_of_funding %></p>
+                                        <label><b>FUNDING BODY</b><label>
+                                        <br><p><%= funding_diversification_funding_body %></p>
+                                        <label><b>FUNDING PROGRAMME</b><label>
+                                        <br><p><%= funding_diversification_funding_programme %></p>
+                                        <label><b>STATUS</b><label>
+                                        <br><p><%= funding_diversification_status %></p>
+                                        <label><b>PRIMARY ATTRIBUTION</b><label>
+                                        <br><p><%= funding_diversification_primary_attribution %></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <label><b>TEAM MEMBERS</b></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label><b>START DATE WITH TEAM</b><label>
+                                        <br><p><%= team_members_start_date_with_team %></p>
+                                        <label><b>DEPARTURE DATE</b><label>
+                                        <br><p><%= team_members_departure_date %></p>
+                                        <label><b>NAME</b><label>
+                                        <br><p><%= team_members_name %></p>
+                                        <label><b>POSITION WITHIN THE TEAM</b><label>
+                                        <br><p><%= team_members_position_within_the_team %></p>
+                                        <label><b>PRIMARY ATTRIBUTION</b><label>
+                                        <br><p><%= team_members_primary_attribution %></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <label><b>IMPACTS</b></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label><b>IMPACT TITLE</b><label>
+                                        <br><p><%= impacts_impact_title %></p>
+                                        <label><b>IMPACT CATEGORY</b><label>
+                                        <br><p><%= impacts_impact_category %></p>
+                                        <label><b>PRIMARY BENEFICIARY</b><label>
+                                        <br><p><%= impacts__beneficiary %></p>
+                                        <label><b>PRIMARY ATTRIBUTION</b><label>
+                                        <br><p><%= impacts_primary_attribution %></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <label><b>INNOVATION AND COMMERCIALISATION</b></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label><b>YEAR</b><label>
+                                        <br><p><%= innovation_and_commercialisation_year %></p>
+                                        <label><b>TYPE</b><label>
+                                        <br><p><%= innovation_and_commercialisation_type %></p>
+                                        <label><b>TITLE</b><label>
+                                        <br><p><%= innovation_and_commercialisation_title %></p>
+                                        <label><b>PRIMARY ATTRIBUTION</b><label>
+                                        <br><p><%= innovation_and_commercialisation_primary_attribution %></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <label><b>PUBLICATIONS</b></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label><b>PUBLICATION YEAR</b><label>
+                                        <br><p><%= publications_publication_year %></p>
+                                        <label><b>PUBLICATION TYPE</b><label>
+                                        <br><p><%= publications_publication_type %></p>
+                                        <label><b>TITLE</b><label>
+                                        <br><p><%= publications_title %></p>
+                                        <label><b>JOURNAL NAME</b><label>
+                                        <br><p><%= publications_journal_name %></p>
+                                        <label><b>PUBLICATION STATUS</b><label>
+                                        <br><p><%= publications_publication_status %></p>
+                                        <label><b>DOI</b><label>
+                                        <br><p><%= publications_doi %></p>
+                                        <label><b>PRIMARY ATTRIBUTION</b><label>
+                                        <br><p><%= publications_primary_attribution %></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <label><b>PRESENTATION</b></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label><b>YEAR</b><label>
+                                        <br><p><%= presentations_year %></p>
+                                        <label><b>TITLE OF PRESENTATION</b><label>
+                                        <br><p><%= presentations_title_of_presentation %></p>
+                                        <label><b>EVENT TYPE</b><label>
+                                        <br><p><%= presentations_event_type %></p>
+                                        <label><b>ORGANISING BODY</b><label>
+                                        <br><p><%= presentations_organising_body %></p>
+                                        <label><b>LOCATION</b><label>
+                                        <br><p><%= presentations_location %></p>
+                                        <label><b>PRIMARY ATTRIBUTION</b><label>
+                                        <br><p><%= presentations_primary_attribution %></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <label><b>ACADEMIC COLLABORATIONS</b></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label><b>START DATE</b><label>
+                                        <br><p><%= academic_collaborations_start_date %></p>
+                                        <label><b>END DATE</b><label>
+                                        <br><p><%= academic_collaborations_end_date %></p>
+                                        <label><b>NAME OF INSTITUTION</b><label>
+                                        <br><p><%= academic_collaborations_name_of_institution %></p>
+                                        <label><b>DEPARTMENT WITHIN INSTITUTION</b><label>
+                                        <br><p><%= academic_collaborations_department_within_institution %></p>
+                                        <label><b>LOCATION</b><label>
+                                        <br><p><%= academic_collaborations_location %></p>
+                                        <label><b>NAME OF COLLABORATOR</b><label>
+                                        <br><p><%= academic_collaborations_name_of_collaborator %></p>
+                                        <label><b>PRIMARY GOAL OF COLLABORATION</b><label>
+                                        <br><p><%= academic_collaborations__goal_of_collaboration %></p>
+                                        <label><b>FREQUENCY OF INTERACTION</b><label>
+                                        <br><p><%= academic_collaborations_frequency_of_interaction %></p>
+                                        <label><b>PRIMARY ATTRIBUTION</b><label>
+                                        <br><p><%= academic_collaborations_primary_attribution %></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <label><b>NON ACADEMIC COLLABORATIONS</b></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label><b>START DATE</b><label>
+                                        <br><p><%= non_academic_collaborations_start_date %></p>
+                                        <label><b>END DATE</b><label>
+                                        <br><p><%= non_academic_collaborations_end_date %></p>
+                                        <label><b>NAME OF INSTITUTION</b><label>
+                                        <br><p><%= non_academic_collaborations_name_of_institution %></p>
+                                        <label><b>DEPARTMENT WITHIN INSTITUTION</b><label>
+                                        <br><p><%= non_academic_collaborations_department_within_institution %></p>
+                                        <label><b>LOCATION</b><label>
+                                        <br><p><%= non_academic_collaborations_location %></p>
+                                        <label><b>NAME OF COLLABORATOR</b><label>
+                                        <br><p><%= non_academic_collaborations_name_of_collaborator %></p>
+                                        <label><b>PRIMARY GOAL OF COLLABORATION</b><label>
+                                        <br><p><%= non_academic_collaborations__goal_of_collaboration %></p>
+                                        <label><b>FREQUENCY OF INTERACTION</b><label>
+                                        <br><p><%= non_academic_collaborations_frequency_of_interaction %></p>
+                                        <label><b>PRIMARY ATTRIBUTION</b><label>
+                                        <br><p><%= non_academic_collaborations_primary_attribution %></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <label><b>CONFERENCES</b></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label><b>START DATE</b><label>
+                                        <br><p><%= conferences_start_date %></p>
+                                        <label><b>END DATE</b><label>
+                                        <br><p><%= conferences_end_date %></p>
+                                        <label><b>TITLE</b><label>
+                                        <br><p><%= conferences_title %></p>
+                                        <label><b>EVENT TYPE</b><label>
+                                        <br><p><%= conferences_event_type %></p>
+                                        <label><b>ROLE</b><label>
+                                        <br><p><%= conferences_role %></p>
+                                        <label><b>LOCATION OF EVENT</b><label>
+                                        <br><p><%= conferences_location_of_event %></p>
+                                        <label><b>PRIMARY ATTRIBUTION</b><label>
+                                        <br><p><%= conferences_primary_attribution %></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <label><b>COMMUNICATIONS OVERVIEW</b></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label><b>YEAR</b><label>
+                                        <br><p><%= communications_overview_year %></p>
+                                        <label><b>NUMBER OF PUBLIC LECTURES</b><label>
+                                        <br><p><%= communications_overview_number_of_public_lectures %></p>
+                                        <label><b>NUMBER OF VISITS</b><label>
+                                        <br><p><%= communications_overview_number_of_visits %></p>
+                                        <label><b>NUMBER OF MEDIA INTERACTIONS</b><label>
+                                        <br><p><%= communications_overview_number_of_media_interactions %></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <label><b>SFI FUNDING RATIO</b></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label><b>YEAR</b><label>
+                                        <br><p><%= sfi_funding_ratio_year %></p>
+                                        <label><b>PERCENTAGE OF ANNUAL SPEND</b><label>
+                                        <br><p><%= sfi_funding_ratio_percentage_of_annual_spend %></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <label><b>EDUCATION AND PUBLIC ENGAGEMENT</b></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label><b>NAME OF PROJECT</b><label>
+                                        <br><p><%= education_and_public_engagement_name_of_project %></p>
+                                        <label><b>START DATE</b><label>
+                                        <br><p><%= education_and_public_engagement_start_date %></p>
+                                        <label><b>END DATE</b><label>
+                                        <br><p><%= education_and_public_engagement_end_date %></p>
+                                        <label><b>ACTIVITY TYPE</b><label>
+                                        <br><p><%= education_and_public_engagement_activity_type %></p>
+                                        <label><b>PROJECT TOPIC</b><label>
+                                        <br><p><%= education_and_public_engagement_project_topic %></p>
+                                        <label><b>TARGET GEOGRAPHICAL AREA</b><label>
+                                        <br><p><%= education_and_public_engagement_target_geographical_area %></p>
+                                        <label><b>PRIMARY ATTRIBUTION</b><label>
+                                        <br><p><%= education_and_public_engagement_primary_attribution %></p>
+                                      </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <figure class="hero-image">
-                <img src="profiler.jpg" alt="">
-            </figure>
-            <div class="hero-text">
-                <h1 class = "text-center"> Username: <i><%= user_name %></i></h1>
-                <h2 class = "text-center">Name: <i><%= fname %> <%= lname %></h2>
-                <h3 class = "text-center"><i>email: <%= email %></i></h3>
-                <h3 class = "text-center">Mobile number: <%= mobile %></h3>
-                <h4 class = "text-center">User roles</h4>
-                <ul class="group list-unstyled">
-                    <% if (admin === "Y") { %>
-                        <li class="list-group-item list-group-item-danger row text-center">Admin</li>
-                    <% } %>
-                    <% if (funder === "Y") { %>
-                        <li class="list-group-item list-group-item-warning row text-center">Funder</li>
-                    <% } %>
-                    <% if (reviewer === "Y") { %>
-                        <li class="list-group-item list-group-item-success row text-center">Reviewer</li>
-                    <% } %>
-                    <!-- Researcher will mostly be yes-->
-                    <% if (researcher === "Y") { %>
-                        <li class="list-group-item list-group-item-info row text-center">Researcher</li>
-                    <% } %>
-                </ul>
-                <p><i>ProfileBio</i></p>
-            </div>
-            <p>
-                Inform other researchers about proposals:
-            </p>
-            <div class="form-group">
-                <label for="usr">Email: <%= email%></label>
-                <input type="text" class="form-control" id="usr">
-            </div>
-             <div class="form-group">
-                <label for="comment">Message:</label>
-                <textarea class="form-control" rows="5" id="comment"></textarea>
-            </div> 
         </main>
-    
     </body>
     <% include mainFooter %>
 </html>

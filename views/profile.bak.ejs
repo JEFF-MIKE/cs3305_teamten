@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Team 10 Research Page</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"/>        <link rel="stylesheet" href="/public/index.css"/>
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Khand');
+        </style>
+    </head>
+    <body>
+        <header class="jumbotron text-center" style="margin-bottom:0">
+            <h1>Team 10 Research Page</h1>
+            <p>Your profile</p>
+        </header>
+        <!-- To change nav colour change the bg-info part to be bg-somethingelse. Navbar-custom can also be changed for nice looking stuff. -->
+        <% include mainNav %>
+        <main>
+            <div class="col-md-8 text-md-right header-buttons">
+                <a href="#" class="site-btn">Download CV</a>
+                <a href="#" class="site-btn">My published research</a>
+            </div>
+            <figure class="hero-image">
+                <img src="profiler.jpg" alt="">
+            </figure>
+            <div class="hero-text">
+                <h1 class = "text-center"> Username: <i><%= user_name %></i></h1>
+                <h2 class = "text-center">Name: <i><%= fname %> <%= lname %></h2>
+                <h3 class = "text-center"><i>email: <%= email %></i></h3>
+                <h3 class = "text-center">Mobile number: <%= mobile %></h3>
+                <h4 class = "text-center">User roles</h4>
+                <ul class="group list-unstyled">
+                    <% if (admin === "Y") { %>
+                        <p>Admin<p>
+                    <% } %>
+                    <% if (funder === "Y") { %>
+                        <p>Funder<p>
+                    <% } %>
+                    <% if (reviewer === "Y") { %>
+                        <p>Reviewer<p>
+                    <% } %>
+                    <!-- Researcher will mostly be yes-->
+                    <% if (researcher === "Y") { %>
+                        <p>Researcher<p>
+                    <% } %>
+                </ul>
+                <p><i>ProfileBio</i></p>
+            </div>
+            <p>
+                Inform other researchers about proposals:
+            </p>
+            <div class="form-group">
+                <label for="usr">Email: <%= email%></label>
+                <input type="text" class="form-control" id="usr">
+            </div>
+             <div class="form-group">
+                <label for="comment">Message:</label>
+                <textarea class="form-control" rows="5" id="comment"></textarea>
+            </div>
+        </main>
+
+    </body>
+    <% include mainFooter %>
+</html>

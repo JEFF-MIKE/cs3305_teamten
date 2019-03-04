@@ -109,6 +109,9 @@ app.post("/apply",user.apply);
 app.get("/funding",funding.funding);
 app.post("/funding",funding.funding);
 
+app.get("/editProfile",user.editProfile);
+app.post("/editProfile",user.editProfile);
+
 app.post("/finalizeReview", reviewApplication.finalizeReview);
 
 app.get("/group_members_add",user.group_members_add);

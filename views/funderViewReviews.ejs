@@ -37,14 +37,16 @@
             <form role="form" method="post" action="/decideOnForm" >
             <div class="btn-group" data-toggle="buttons">
                 <label class="btn btn-primary">
-                <input type="radio" name="options" id="option1" value="accept"> Accept
+                <input type="radio" name="options" id="option1" value="1"> Accept
                 </label>
                 <label class="btn btn-primary">
-                <input type="radio" name="options" id="option2" value="reject"> Reject
+                <input type="radio" name="options" id="option2" value="0"> Reject
                 </label>
             </div>
+            <input type="hidden" name = "applicationID" value ="<%= reviews[0].application_id %>" />
+            <input type="hidden" name="callID" value="<%= reviews[0].call_id %>" />
             <label for="exampleFormControlTextarea1">Additional information</label>
-            <textarea class="form-control" id="exampleFormControlTextarea2" rows="5"></textarea>
+            <textarea name = "additionalInfo" class="form-control" id="exampleFormControlTextarea2" rows="5"></textarea>
             <p> Please Note: Once you make this decision, you cannot revert it! </p>
             <button class="btn btn-lg btn-primary btn-block p2" type="submit">Finalize </button>
             </form>

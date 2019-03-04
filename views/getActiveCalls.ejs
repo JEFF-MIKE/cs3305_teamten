@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>View Your Calls</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/public/index.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Khand');
+    </style>
+</head>
+<body>
+    <div class="jumbotron text-center" style="margin-bottom:0">
+        <h1>Team 10 Research Page</h1>
+        <% if (userName === undefined) { %> 
+        <p>This is our team project page</p>
+        <% } %>
+        <% if (userName.length) { %>
+        <p><%= userName %>. Select Dashboard to see your available actions.</p>
+        <% } %> 
+    </div>
+    <% include mainNav %>
+    <main>
+    <% if (rows.length === 0) { %>
+        <p>There are no active calls for proposals...</p>
+    <% } %>
+    <% if (rows.length) { %>
+        <% for (let x = 0;x < rows.length; x++){ %>
+        <div class="media text-muted mx-2 my-1 px-3 py-2 " id ="<%= rows[x].call_id %>">
+          <!-- deal with later...<img data-src="holder.js/32x32?theme=thumb&bg=e83e8c&fg=e83e8c&size=1" alt="" class="mr-2 rounded">-->
+          <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            <strong class="d-block text-gray-dark"><%= rows[x].title %></strong>
+            <%= rows[x].description %>
+            <br>
+            ends on: <%= rows[x].expiry_date %>
+          </p>
+          <a href="<%= '/apply?call_id='+rows[x].call_id %>" > Apply!</a>
+        </div>
+        <% } %>
+    <% } %>
+    </main>
+    <% include mainFooter %>
+</body>
+</html>

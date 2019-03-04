@@ -142,9 +142,15 @@ app.get("/funderAssignReviewers",funderActions.getFunderAssignReviewers);
 
 app.post("/assignReviewerPost",funderActions.assignReviewerPost);
 
+app.get("/reviewerAssignedCalls",reviewApplication.viewAssignedCalls);
+
 app.post("/saveReview",reviewApplication.saveReviewDraft);
 
 app.get("/userActions",userActions.getUserActions);
+
+app.get("/funderCreateCall",funderActions.getCallCreation);
+app.post("/postCallCreate",funderActions.postCallCreation);
+
 app.listen('3001', () => {
   console.log("Server started on port 3001");
 });

@@ -372,7 +372,9 @@ exports.logout=(req,res)=>{
 
 /**************************** apply for founding ********************************/
 exports.apply=(req, res) => {
-
+    if (req.session.user_id === undefined && req.session.user_name === undefined){
+        res.send("You must be logged in to continue...");
+    }
     if (req.method=="POST"){
         let post = req.body
 
@@ -404,14 +406,7 @@ exports.apply=(req, res) => {
         });
 
     } else {
-        var userID = req.session.userId;
-        if (userID === undefined){
-            res.send('You need to login first...');
-            return
-        }
-        else {
-            return res.render("apply.ejs");
-        }
+        return res.render("apply.ejs");
     }
 }
 

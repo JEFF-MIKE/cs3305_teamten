@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>View Your Calls</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/public/index.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Khand');
+    </style>
+</head>
+<body>
+    <div class="jumbotron text-center" style="margin-bottom:0">
+        <h1>Team 10 Research Page</h1>
+        <% if (userName === undefined) { %> 
+        <p>This is our team project page</p>
+        <% } %>
+        <% if (userName.length) { %>
+        <p><%= userName %>. Select Dashboard to see your available actions.</p>
+        <% } %> 
+    </div>
+    <% include mainNav %>
+    <main>
+        <% if (applicationDetails.length === 0) { %>
+            <p>There are no pending applications for this call...</p>
+        <% } %>
+        <% if (applicationDetails.length){ %>
+            <% for(let i=0;i<applicationDetails.length;i++) { %>
+                <div id = "<%= applicationDetails[i].application_id %>">
+                <% for (let x = 0; x < userDetails.length;x++) { %>
+                    <% if (applicationDetails[i].applicant_id === userDetails[x].id ) { %>
+                        <h1>Username: <%= userDetails[x].user_name %></h1>
+                        <h1>Full name:<%= userDetails[x].first_name + " " + userDetails[x].last_name %></h1>
+                    <% } %>
+                <% } %>
+                <p>Cover Note: <%=  applicationDetails[i].cover_note %></p>
+                <a class="btn btn-lg btn-primary btn-block p2" role="button" href="<%= '/funderViewReviews?application=' + applicationDetails[i].application_id %>">View Reviews for application</a>
+                </div>
+            <% } %>
+            <a class="btn btn-lg btn-primary btn-block p2" role="button" href="<%= '/funderViewCalls?call_id=' + applicationDetails[0].call_id %>">Back to Calls</a>
+
+        <% } %>
+    </main>
+    <% include mainFooter %>
+</body>
+</html>

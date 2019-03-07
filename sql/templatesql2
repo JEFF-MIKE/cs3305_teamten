@@ -1,0 +1,27 @@
+user_id first_name, last_name, user_name, email, mob_no FROM users WHERE id=?;
+user_id * FROM roles WHERE id=?;
+
+
+
+
+
+
+
+
+
+user_id * FROM education user_id = ?;
+user_id * FROM employment user_id = ?;
+user_id * FROM professional_societies user_id = ?;
+user_id * FROM awards user_id = ?;
+user_id * FROM funding_diversification user_id = ?;
+user_id * FROM team_members user_id = ?;
+user_id * FROM impacts user_id = ?;
+user_id * FROM innovation_and_commercialisation user_id = ?;
+user_id * FROM publications user_id = ?;
+user_id * FROM presentations user_id = ?;
+user_id * FROM academic_collaborations user_id = ?;
+user_id * FROM non_academic_collaborations user_id = ?;
+user_id * FROM conferences user_id = ?;
+user_id * FROM communications_overview user_id = ?;
+user_id * FROM sfi_funding_ratio user_id = ?;
+user_id * FROM education_and_public_engagement user_id = ?;

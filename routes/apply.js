@@ -2,7 +2,7 @@ exports.storeApplications = (req,res) => {
     if (req.session.user_id === undefined && req.session.user_name === undefined) {
         return res.send("You must be logged in first to continue");
     }
-
+  
     var sendEmail = require('./sendEmail');
 
     let status = "";
@@ -22,7 +22,6 @@ exports.storeApplications = (req,res) => {
         let name = req.body.name;
         let applicant_id = req.session.user_id;
         let call_id = req.body.fundingID; // grab from body.
-        console.log(call_id);
         let time_of_submission = new Date();
         let submission_version = 1;
         let amount_requested = req.body.amount_requested;
@@ -71,10 +70,11 @@ exports.storeApplications = (req,res) => {
             var message = 'Hello, '+ first_name +'.' + '\n' + 'A researcher named '+ name +' has just applied for a proposal that you are reviewing.' + '\n\n' + 'You can view the application at the link below.' + '\n' + 'https://team10.netsoc.co/application' + '\n' + 'Kind Regards,' + '\n' + 'Science Foundation Ireland';
             var subject = "New Application from SFI";
 
-            sendEmail(email, subject, message);
+            //sendEmail(email, subject, message);
         });
 
         status = "Thank you for submitting your application. It has been sent to the reviewers and they will be in touch with you soon."
+
         //return res.send("Thank you for submitting your application. It has been sent to the reviewers and they will be in touch with you soon.");
         return res.render('apply1.ejs',{status:status,success:success});
         });

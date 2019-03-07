@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>View Your Calls</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/public/index.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Khand');
+    </style>
+</head>
+<body>
+    <div class="jumbotron text-center" style="margin-bottom:0">
+        <h1>Team 10 Research Page</h1>
+        <% if (userName === undefined) { %> 
+        <p>This is our team project page</p>
+        <% } %>
+        <% if (userName.length) { %>
+        <p><%= userName %>. Select Dashboard to see your available actions.</p>
+        <% } %> 
+    </div>
+    <% include mainNav %>
+    <main>
+        <% if (reviewerData.length === 0) { %>
+            <p>No reviewers are registered in the system...</p>
+            
+        <% } %>
+        <% if (reviewerData.length){ %>
+        <form role="form" method="post" action="/assignReviewerPost">
+            <h1> Assign Reviewers to call </h1>
+            <select class = "form-control custom-select" name="reviewer_id">
+            <option selected>Please choose an option below.</option>
+            <% for(let i=0;i<reviewerData.length;i++) { %>
+                <option value ="<%= reviewerData[i].id %>"><%= reviewerData[i].id %></option>
+            <% } %>
+            </select>
+            <input type = "hidden" name = "callID" value ="<%=call_id%>"/>
+            <button class="btn btn-lg btn-primary btn-block p2" type="submit">Choose reviewer</button>
+        </form>
+        <% } %>
+        <a class="btn btn-lg btn-primary btn-block p2" role="button" href="<%= '/funderViewCalls'%>">Back to Calls</a>
+    </main>
+    <% include mainFooter %>
+</body>
+</html>

@@ -4,8 +4,10 @@ var express = require('express'),
     http = require('http'),
     user = require('./routes/user'),
     upload = require('./routes/upload'),
-    path = require('path');
-    apply = require('./routes/apply');
+    path = require('path'),
+    activeCalls = require("./routes/activeCalls"),
+    apply = require('./routes/apply'),
+    userActions = require("./routes/userActions"),
     sendEmail = require('./routes/sendEmail');
 
 var passwordReset = require('./routes/passwordReset');
@@ -71,6 +73,8 @@ app.use(bodyParser.json()); // json datatype.
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(fileUpload()); // creates object from import.
+app.use(express.static('team10'));
+
 
 // express.static is used for frontend css and javascript
 app.use('/public',express.static(path.join(__dirname, 'public')));
@@ -101,11 +105,16 @@ app.post("/submission",upload.uploadFile);
 //app.get("/apply", apply.storeApplications);
 //app.post("/apply", apply.storeApplications);
 
-app.get("/apply",user.apply);
-app.post("/apply",user.apply);
+app.get("/getActiveCalls",activeCalls.viewActiveCalls);
+
+app.get("/apply",apply.storeApplications);
+app.post("/apply",apply.storeApplications);
 
 app.get("/funding",funding.funding);
 app.post("/funding",funding.funding);
+
+app.get("/editProfile",user.editProfile);
+app.post("/editProfile",user.editProfile);
 
 app.post("/finalizeReview", reviewApplication.finalizeReview);
 
@@ -132,7 +141,21 @@ app.get("/funderViewApplications",funderActions.funderViewApplications);
 
 app.get("/funderViewReviews",funderActions.funderViewReviews);
 
+app.post("/decideOnForm",funderActions.funderSubmitDecision);
+
+app.get("/funderAssignReviewers",funderActions.getFunderAssignReviewers);
+
+app.post("/assignReviewerPost",funderActions.assignReviewerPost);
+
+app.get("/reviewerAssignedCalls",reviewApplication.viewAssignedCalls);
+
 app.post("/saveReview",reviewApplication.saveReviewDraft);
+
+app.get("/userActions",userActions.getUserActions);
+
+app.get("/funderCreateCall",funderActions.getCallCreation);
+app.post("/postCallCreate",funderActions.postCallCreation);
+
 app.listen('3001', () => {
   console.log("Server started on port 3001");
 });

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>View Your Calls</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/public/index.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Khand');
+    </style>
+</head>
+<body>
+    <div class="jumbotron text-center" style="margin-bottom:0">
+        <h1>Team 10 Research Page</h1>
+        <% if (userName === undefined) { %> 
+        <p>This is our team project page</p>
+        <% } %>
+        <% if (userName.length) { %>
+        <p><%= userName %>. Select Dashboard to see your available actions.</p>
+        <% } %> 
+    </div>
+    <% include mainNav %>
+    <main>
+    <% if (result === "0") {%>
+    <p> You have successfully rejected application number: <%= application %>!</p>
+    <% }%>
+    <% if (result === "1") {%>
+    <p>You have successfully accepted applicaton number: <%= application %></p>
+    <% }%>
+    <a class="btn btn-lg btn-primary btn-block p2" role="button" href="<%= '/funderViewApplications?call_id=' + call %>">Back to applications</a>
+    <a class="btn btn-lg btn-primary btn-block p2" role="button" href="/funderViewCalls">Back to Calls</a>
+    </main>
+    <% include mainFooter %>
+</body>
+</html>

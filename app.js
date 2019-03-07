@@ -73,6 +73,8 @@ app.use(bodyParser.json()); // json datatype.
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(fileUpload()); // creates object from import.
+app.use(express.static('team10'));
+
 
 // express.static is used for frontend css and javascript
 app.use('/public',express.static(path.join(__dirname, 'public')));
@@ -110,6 +112,9 @@ app.post("/apply",apply.storeApplications);
 
 app.get("/funding",funding.funding);
 app.post("/funding",funding.funding);
+
+app.get("/editProfile",user.editProfile);
+app.post("/editProfile",user.editProfile);
 
 app.post("/finalizeReview", reviewApplication.finalizeReview);
 

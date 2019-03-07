@@ -26,29 +26,31 @@
             <a class="btn btn-lg btn-primary btn-block p2" role="button" href="<%= '/funderViewApplications?call_id=' + failure[0].call_id %>">Back to applications</a>
         <% } %>
         <% if (reviews.length){ %>
-            <% for (let i=0;i<result.length;i++) { %>
-                <div id = "<%= result[i].review_id %>">
+            <% for (let i=0;i<reviews.length;i++) { %>
+                <div id = "<%= reviews[i].review_id %>">
                 <h1>Application ID: <%= reviews[i].application_id %></h1>
                 <h1>Reviewer ID: <%= reviews[i].reviewer_id %></h1>
                 <p>Review Text: <%=  reviews[i].review_text %></p>
-                <a class="btn btn-lg btn-primary btn-block p2" role="button" href="<%= '/funderViewReviews?application=' + applicationDetails[i].application_id %>">View Reviews for application</a>
                 </div>
             <% } %>
             <h1> Accept or reject application? </h1>
             <form role="form" method="post" action="/decideOnForm" >
             <div class="btn-group" data-toggle="buttons">
                 <label class="btn btn-primary">
-                <input type="radio" name="options" id="option1" value="accept"> Accept
+                <input type="radio" name="options" id="option1" value="1"> Accept
                 </label>
                 <label class="btn btn-primary">
-                <input type="radio" name="options" id="option2" value="reject"> Reject
+                <input type="radio" name="options" id="option2" value="0"> Reject
                 </label>
             </div>
+            <input type="hidden" name = "applicationID" value ="<%= reviews[0].application_id %>" />
+            <input type="hidden" name="callID" value="<%= reviews[0].call_id %>" />
             <label for="exampleFormControlTextarea1">Additional information</label>
-            <textarea class="form-control" id="exampleFormControlTextarea2" rows="5"></textarea>
+            <textarea name = "additionalInfo" class="form-control" id="exampleFormControlTextarea2" rows="5"></textarea>
             <p> Please Note: Once you make this decision, you cannot revert it! </p>
             <button class="btn btn-lg btn-primary btn-block p2" type="submit">Finalize </button>
             </form>
+            <a class="btn btn-lg btn-primary btn-block p2" role="button" href="<%= '/funderViewApplications?call_id=' + reviews[0].call_id %>">Back to applications</a>
         <% } %>
     </main>
     <% include mainFooter %>

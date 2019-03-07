@@ -21,19 +21,14 @@
     </div>
     <% include mainNav %>
     <main>
-        <% if (rows === undefined) { %>
-            <p>You have not created any calls.</p>
-        <% } %>
-        <% if (rows !== undefined){ %>
-            <% for(let i=0;i<rows.length;i++) { %>
-                <div id = "<% rows[i].call_id %>">
-                <h1> <%= rows[i].title %> </h1>
-                <span>Status: <%= rows[i].status %></span>
-                <a class="btn btn-lg btn-primary btn-block p2" type="submit" href="<%= '/funderViewApplications?call_id=' + rows[i].call_id %>">View Applications for this call.</a>
-                <a class="btn btn-lg btn-primary btn-block p2" type="submit" href="<%= '/funderAssignReviewers?call_id=' + rows[i].call_id %>">Assign Reviewers to this call.</a>
-                </div>
-            <% } %>
-        <% } %>
+    <% if (result === "0") {%>
+    <p> You have successfully rejected application number: <%= application %>!</p>
+    <% }%>
+    <% if (result === "1") {%>
+    <p>You have successfully accepted applicaton number: <%= application %></p>
+    <% }%>
+    <a class="btn btn-lg btn-primary btn-block p2" role="button" href="<%= '/funderViewApplications?call_id=' + call %>">Back to applications</a>
+    <a class="btn btn-lg btn-primary btn-block p2" role="button" href="/funderViewCalls">Back to Calls</a>
     </main>
     <% include mainFooter %>
 </body>

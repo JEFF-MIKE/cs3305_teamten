@@ -21,19 +21,23 @@
     </div>
     <% include mainNav %>
     <main>
-        <% if (rows === undefined) { %>
-            <p>You have not created any calls.</p>
+    <% if (rows.length === 0) { %>
+        <p>There are no active calls for proposals...</p>
+    <% } %>
+    <% if (rows.length) { %>
+        <% for (let x = 0;x < rows.length; x++){ %>
+        <div class="media text-muted mx-2 my-1 px-3 py-2 " id ="<%= rows[x].call_id %>">
+          <!-- deal with later...<img data-src="holder.js/32x32?theme=thumb&bg=e83e8c&fg=e83e8c&size=1" alt="" class="mr-2 rounded">-->
+          <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            <strong class="d-block text-gray-dark"><%= rows[x].title %></strong>
+            <%= rows[x].description %>
+            <br>
+            ends on: <%= rows[x].expiry_date %>
+          </p>
+          <a href="<%= '/apply?call_id='+rows[x].call_id %>" > Apply!</a>
+        </div>
         <% } %>
-        <% if (rows !== undefined){ %>
-            <% for(let i=0;i<rows.length;i++) { %>
-                <div id = "<% rows[i].call_id %>">
-                <h1> <%= rows[i].title %> </h1>
-                <span>Status: <%= rows[i].status %></span>
-                <a class="btn btn-lg btn-primary btn-block p2" type="submit" href="<%= '/funderViewApplications?call_id=' + rows[i].call_id %>">View Applications for this call.</a>
-                <a class="btn btn-lg btn-primary btn-block p2" type="submit" href="<%= '/funderAssignReviewers?call_id=' + rows[i].call_id %>">Assign Reviewers to this call.</a>
-                </div>
-            <% } %>
-        <% } %>
+    <% } %>
     </main>
     <% include mainFooter %>
 </body>

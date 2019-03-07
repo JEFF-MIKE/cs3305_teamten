@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Bootstrap core CSS -->
+        <meta charset="utf-8" />
+        <title>Apply for funding</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="/public/index.css"/>
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Khand');
+        </style>
+        <!-- The paper plane icon for the submit button. -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="jumbotron text-center" style="margin-bottom:0">
+            <h1>Team 10 Research Page</h1>
+            <p>This is the page where you can create a call.</p>
+        </div>
+        <!-- To change nav colour change the bg-info part to be bg-somethingelse. Navbar-custom can also be changed for nice looking stuff. -->
+        <% include mainNav %>
+        <main class="container" style="margin-bottom:0">
+            <h1>
+                Create a call
+            </h1>
+            <p>
+                Please fill out the form below to create a call.
+            </p>
+            <form class="form-apply" method="post" action="/postCallCreate" role="form">
+                    <div class="form-group">
+                        <label for="name">Title</label>
+                        <textarea class="form-control" rows="1" id="name" name="title" placeholder="Title"></textarea>
+                    </div>
+                    <!-- Remember the funding that is clicked on -->
+                    <!--
+                    <div class="form-group">
+                        <label for="fundingID">Funding:</label>
+                        <textarea class="form-control" rows="1" id="fundingID" name="fundingID" placeholder="Your Funding ID"></textarea>
+                    </div>
+                    -->
+                    <input type = "hidden" name="funder_user_id" value = <%= user_id %> />
+                    <div class="form-group">
+                        <label for="date">date</label>
+                        <input type = "date" name="date" id="date" />
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Describe your call </label>
+                        <textarea class="form-control" rows="5" id="description" name="description" placeholder="Description of call"></textarea>
+                    </div>
+                    <div class = "row">    
+                    <button class="btn btn-lg btn-primary btn-block" type="submit"><i class="far fa-paper-plane"></i>Create Call!</button>
+                    </div>
+            </form>
+        </main>
+    </body>
+    <% include mainFooter %>
+</html>

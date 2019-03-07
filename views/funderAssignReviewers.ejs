@@ -21,19 +21,24 @@
     </div>
     <% include mainNav %>
     <main>
-        <% if (rows === undefined) { %>
-            <p>You have not created any calls.</p>
+        <% if (reviewerData.length === 0) { %>
+            <p>No reviewers are registered in the system...</p>
+            
         <% } %>
-        <% if (rows !== undefined){ %>
-            <% for(let i=0;i<rows.length;i++) { %>
-                <div id = "<% rows[i].call_id %>">
-                <h1> <%= rows[i].title %> </h1>
-                <span>Status: <%= rows[i].status %></span>
-                <a class="btn btn-lg btn-primary btn-block p2" type="submit" href="<%= '/funderViewApplications?call_id=' + rows[i].call_id %>">View Applications for this call.</a>
-                <a class="btn btn-lg btn-primary btn-block p2" type="submit" href="<%= '/funderAssignReviewers?call_id=' + rows[i].call_id %>">Assign Reviewers to this call.</a>
-                </div>
+        <% if (reviewerData.length){ %>
+        <form role="form" method="post" action="/assignReviewerPost">
+            <h1> Assign Reviewers to call </h1>
+            <select class = "form-control custom-select" name="reviewer_id">
+            <option selected>Please choose an option below.</option>
+            <% for(let i=0;i<reviewerData.length;i++) { %>
+                <option value ="<%= reviewerData[i].id %>"><%= reviewerData[i].id %></option>
             <% } %>
+            </select>
+            <input type = "hidden" name = "callID" value ="<%=call_id%>"/>
+            <button class="btn btn-lg btn-primary btn-block p2" type="submit">Choose reviewer</button>
+        </form>
         <% } %>
+        <a class="btn btn-lg btn-primary btn-block p2" role="button" href="<%= '/funderViewCalls'%>">Back to Calls</a>
     </main>
     <% include mainFooter %>
 </body>

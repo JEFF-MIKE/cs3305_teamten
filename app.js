@@ -4,8 +4,11 @@ var express = require('express'),
     http = require('http'),
     user = require('./routes/user'),
     upload = require('./routes/upload'),
-    path = require('path');
-    //apply = require('./routes/apply');
+    path = require('path'),
+    activeCalls = require("./routes/activeCalls"),
+    apply = require('./routes/apply'),
+    userActions = require("./routes/userActions"),
+    sendEmail = require('./routes/sendEmail');
 
 var passwordReset = require('./routes/passwordReset');
 var reviewApplication = require('./routes/reviewApplication');
@@ -25,7 +28,6 @@ var hbs = require('nodemailer-express-handlebars'),
     email = process.env.PROGRAM_EMAIL,
     pass = process.env.PROGRAM_EMAIL_PASSWORD,
     nodemailer = require('nodemailer');
-
 var emailer = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
@@ -39,9 +41,7 @@ var handlebarsOptions = {
   viewPath: path.resolve('./emails/'),
   extName: '.html'
 };
-
 emailer.use('compile',hbs(handlebarsOptions));
-
 */
 
 // my personal database connection.
@@ -105,8 +105,10 @@ app.post("/submission",upload.uploadFile);
 //app.get("/apply", apply.storeApplications);
 //app.post("/apply", apply.storeApplications);
 
-app.get("/apply",user.apply);
-app.post("/apply",user.apply);
+app.get("/getActiveCalls",activeCalls.viewActiveCalls);
+
+app.get("/apply",apply.storeApplications);
+app.post("/apply",apply.storeApplications);
 
 app.get("/funding",funding.funding);
 app.post("/funding",funding.funding);
@@ -139,7 +141,21 @@ app.get("/funderViewApplications",funderActions.funderViewApplications);
 
 app.get("/funderViewReviews",funderActions.funderViewReviews);
 
+app.post("/decideOnForm",funderActions.funderSubmitDecision);
+
+app.get("/funderAssignReviewers",funderActions.getFunderAssignReviewers);
+
+app.post("/assignReviewerPost",funderActions.assignReviewerPost);
+
+app.get("/reviewerAssignedCalls",reviewApplication.viewAssignedCalls);
+
 app.post("/saveReview",reviewApplication.saveReviewDraft);
+
+app.get("/userActions",userActions.getUserActions);
+
+app.get("/funderCreateCall",funderActions.getCallCreation);
+app.post("/postCallCreate",funderActions.postCallCreation);
+
 app.listen('3001', () => {
   console.log("Server started on port 3001");
 });

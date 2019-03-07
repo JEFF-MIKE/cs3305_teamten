@@ -695,6 +695,15 @@ exports.register=(req,res) =>{
                if (err) throw err;
                //var tempUserID = null;
                message = "Your account has been created! Please login now." ;
+               
+
+               var e_message = 'Hello, '+ fname +'. Thank you for creating an account with Science Foundation Ireland.\n You can log in at the link here: https://team10.netsoc.co/login';
+               var subject = "Thank you for registering with SFI";
+
+               sendEmail(email, subject, e_message);
+                
+
+
                let idData = {email: email};
                fetchId(idData,(err,id_num) => {
                 if (err){
@@ -796,7 +805,9 @@ exports.logout=(req,res)=>{
 
 /**************************** apply for founding ********************************/
 exports.apply=(req, res) => {
-
+    if (req.session.user_id === undefined && req.session.user_name === undefined){
+        res.send("You must be logged in to continue...");
+    }
     if (req.method=="POST"){
         let post = req.body
 
@@ -828,14 +839,7 @@ exports.apply=(req, res) => {
         });
 
     } else {
-        var userID = req.session.userId;
-        if (userID === undefined){
-            res.send('You need to login first...');
-            return
-        }
-        else {
-            return res.render("apply.ejs");
-        }
+        return res.render("apply.ejs");
     }
 }
 

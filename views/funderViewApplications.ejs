@@ -22,7 +22,7 @@
     <% include mainNav %>
     <main>
         <% if (applicationDetails.length === 0) { %>
-            <p>No applications have been made for this call.</p>
+            <p>There are no pending applications for this call...</p>
         <% } %>
         <% if (applicationDetails.length){ %>
             <% for(let i=0;i<applicationDetails.length;i++) { %>
@@ -37,6 +37,8 @@
                 <a class="btn btn-lg btn-primary btn-block p2" role="button" href="<%= '/funderViewReviews?application=' + applicationDetails[i].application_id %>">View Reviews for application</a>
                 </div>
             <% } %>
+            <a class="btn btn-lg btn-primary btn-block p2" role="button" href="<%= '/funderViewCalls?call_id=' + applicationDetails[0].call_id %>">Back to Calls</a>
+
         <% } %>
     </main>
     <% include mainFooter %>

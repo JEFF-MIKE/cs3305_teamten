@@ -2,6 +2,8 @@ exports.storeApplications = (req,res) => {
     if (req.session.user_id === undefined && req.session.user_name === undefined) {
         return res.send("You must be logged in first to continue");
     }
+  
+    var sendEmail = require('./sendEmail');
 
     let status = "";
     let success = "";
@@ -39,12 +41,24 @@ exports.storeApplications = (req,res) => {
         res.end()
     })
     */
+
+   var app_id;
+   var sql3 = 'SELECT application_id FROM applications WHERE application_id = (SELECT MAX(application_id) FROM applications)';
+   db.query(sql3, function(err, result, fields){
+       if (err) throw err;
+           console.log(result);
+           console.log(result[0]);
+           console.log(result[0].application_id);
+           app_id = result[0].application_id + 1;
+           //console.log(application_id);
+   });
+
     var sql = "INSERT INTO `applications` (applicant_id, call_id, time_of_submission,amount_requested, cover_note, submission_version,group_id) VALUES (?,?,?,?,?,?,?);";
     db.query(sql,[applicant_id, call_id, time_of_submission,amount_requested,cover_note,submission_version,group_name] ,function(err, result) {
     if (err) throw err;
         console.log("Successfully entered in data");
 
-        var sql1 = "SELECT * FROM users WHERE id = (SELECT funder_user_id FROM calls WHERE call_id = (SELECT call_id FROM applications WHERE application_id = 3))";
+        var sql1 = 'SELECT * FROM users WHERE id = (SELECT funder_user_id FROM calls WHERE call_id = (SELECT call_id FROM applications WHERE application_id = "'+ app_id +'"))';
         db.query(sql1, function(err, result, fields){
         if (err) throw err;
             console.log(result);
@@ -60,7 +74,9 @@ exports.storeApplications = (req,res) => {
         });
 
         status = "Thank you for submitting your application. It has been sent to the reviewers and they will be in touch with you soon."
-        return res.send("Successfully applied!");
+
+        //return res.send("Thank you for submitting your application. It has been sent to the reviewers and they will be in touch with you soon.");
+        return res.render('apply1.ejs',{status:status,success:success});
         });
     } else {
         if (req.query === {}){
@@ -79,7 +95,5 @@ exports.storeApplications = (req,res) => {
             return res.render('apply1.ejs',{status:status,success:success,userName:req.session.user_name,fullName:fullName,call_id:call_id});
         });
     }
-
-    //Provide functionality to email the funder that this proposal is related to
 }
     
